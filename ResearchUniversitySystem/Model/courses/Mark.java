@@ -26,10 +26,15 @@ public class Mark {
     }
 
     public void setFirstAttestation(Double hiddenPoints) {
-    	if (hiddenPoints != null) {	
-    		firstAttestation = sumSecondAttestation() + hiddenPoints;
-    	}
-    	firstAttestation = sumSecondAttestation();
+	    if (hiddenPoints != null && hiddenPoints > 0) {
+	        firstAttestation = sumFirstAttestation() + hiddenPoints;
+	    } else {
+	        firstAttestation = sumFirstAttestation();
+	    }
+	
+	    if (firstAttestation > 60) {
+	        firstAttestation = 60;
+	    }
     }
 
     public double sumSecondAttestation() {
@@ -41,13 +46,14 @@ public class Mark {
     }
 
     public void setSecondAttestation(Double hiddenPoints) {
-    	if (hiddenPoints != null) {	
-    		secondAttestation = sumSecondAttestation() + hiddenPoints;
-    		if (secondAttestation + firstAttestation > 60) {
-    			secondAttestation = 60 - firstAttestation;
-    		}
-    	}
-    	secondAttestation = sumSecondAttestation();
+	    if (hiddenPoints != null && hiddenPoints > 0) {
+	        secondAttestation = sumSecondAttestation() + hiddenPoints;
+	        if (secondAttestation + firstAttestation > 60) {
+	            secondAttestation = 60 - firstAttestation;
+	        }
+	    } else {
+	        secondAttestation = sumSecondAttestation();
+	    }
     }
     
     public double getFinalExamMark() {
@@ -55,9 +61,13 @@ public class Mark {
 	}
 
     public void setFinalExamMark(double finalExam) {
-        if (finalExam <= 40) {
-            this.finalExam = finalExam;
-        }
+	checkValidMark(finalExam);
+        if (finalExam > 40) {
+            this.finalExam = 40;
+        } 
+	else {
+	    this.finalExam = finalExam;
+	}
     }
 
     public double getOverallPoints() {
@@ -74,11 +84,19 @@ public class Mark {
         return gpa.getNumericValue();
     }
 
+    private void checkValidMark(double mark) {
+	if (mark < 0) {
+		throw new IllegalArgumentException("Mark must be positive, but received: " + mark);
+	}
+    }
+
     public void addFirstAttestationMark(double mark) {
+	checkValidMark(mark);
         firstAttMarks.add(mark);
     }
 
     public void addSecondAttestationMark(double mark) {
+	checkValidMark(mark);
         secondAttMarks.add(mark);
     }
     
