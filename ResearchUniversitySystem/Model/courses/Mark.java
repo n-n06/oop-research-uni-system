@@ -2,77 +2,78 @@ package courses;
 
 import java.util.Vector;
 
-import enums.Grade;
-
 /**
- * 
+ * @author eva
  */
+
 public class Mark {
+    private Vector<Double> firstAttMarks = new Vector<>();
+    private Vector<Double> secondAttMarks = new Vector<>();
+    
+    private double firstAttestation = 0;
+    private double secondAttestation = 0;
+    private double finalExam = 0;
 
-    /**
-     * Default constructor
-     */
-    public Mark() {
-    }
+    public Mark() {}
 
-    /**
-     * 
-     */
-    private Vector<Double> firstAttestation;
-
-    /**
-     * 
-     */
-    private Vector<Double> secondAttestation;
-
-    /**
-     * 
-     */
-    private double finalExam;
-
-    /**
-     * 
-     */
-    private String courseName;
-
-    /**
-     * @return
-     */
     public double sumFirstAttestation() {
-        // TODO implement here
-        return 0.0d;
+        double sum = 0;
+        for (double mark : firstAttMarks) {
+            sum += mark;
+        }
+        return sum;
     }
 
-    /**
-     * @return
-     */
+    public void setFirstAttestation(Double hiddenPoints) {
+    	if (hiddenPoints != null) {	
+    		firstAttestation = sumSecondAttestation() + hiddenPoints;
+    	}
+    	firstAttestation = sumSecondAttestation();
+    }
+
     public double sumSecondAttestation() {
-        // TODO implement here
-        return 0.0d;
+        double sum = 0;
+        for (double mark : secondAttMarks) {
+            sum += mark;
+        }
+        return sum;
     }
 
-    /**
-     * @return
-     */
+    public void setSecondAttestation(Double hiddenPoints) {
+    	if (hiddenPoints != null) {	
+    		secondAttestation = sumSecondAttestation() + hiddenPoints;
+    		if (secondAttestation + firstAttestation > 60) {
+    			secondAttestation = 60 - firstAttestation;
+    		}
+    	}
+    	secondAttestation = sumSecondAttestation();
+    }
+
+    public void setFinalExamMark(double finalExam) {
+        if (finalExam <= 40) {
+            this.finalExam = finalExam;
+        }
+    }
+
     public double getOverallPoints() {
-        // TODO implement here
-        return 0.0d;
+        return firstAttestation + secondAttestation + finalExam;
     }
 
-    /**
-     * @return
-     */
-    public Grade getLetterGrade() {
-        // TODO implement here
-        return null;
+    public String getGPALetter() {
+        GPA gpa = new GPA(getOverallPoints(), finalExam, firstAttestation, secondAttestation);
+        return gpa.getLetter();
     }
 
-    /**
-     * @return
-     */
-    public GPA getGPA() {
-        // TODO implement here
-        return null;
+    public double getGPANumeric() {
+        GPA gpa = new GPA(getOverallPoints(), finalExam, firstAttestation, secondAttestation);
+        return gpa.getNumericValue();
     }
 
+    public void addFirstAttestationMark(double mark) {
+        firstAttMarks.add(mark);
+    }
+
+    public void addSecondAttestationMark(double mark) {
+        secondAttMarks.add(mark);
+    }
 }
