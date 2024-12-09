@@ -1,12 +1,12 @@
 package menuInfo;
 
-import java.io.*;
 import java.util.*;
 
-//import Database
+import database.Database;
 import research.ResearchPaper;
-import research.Researcher;
+//import research.Researcher;
 import users.User;
+import utilities.social.JournalNotification;
 import enums.Language;
 
 /**
@@ -15,33 +15,28 @@ import enums.Language;
 public class Journal {
 
     /**
-     * Default constructor
+     * Unique identifier
      */
-    public Journal() {
-    }
+    public int journalId;
 
     /**
-     * 
-     */
-    public int id;
-
-    /**
-     * 
+     * Name
      */
     private String name;
 
     /**
-     * 
+     * EN, KZ or RU
      */
     private Language language;
 
     /**
-     * 
+     * Scientific field that is covered by
+     * the articles in this journal
      */
     private String topic;
 
     /**
-     * 
+     * Short summary of the journal
      */
     private String description;
 
@@ -55,20 +50,67 @@ public class Journal {
      */
     private Vector<User> subscribers;
     
+    {
+    	journalId = Database.instance.getJournalRepo().getJournalId();
+    }
+
+    /**
+     * Default constructor
+     */
+    public Journal() {
+    }
+    
+    public Journal(String name) {
+    	this.name = name;
+    }
+    
+    public Journal(String name, Language l) {
+    	this.name = name;
+    	this.language = l;
+    }
+    
+    public Journal(String name, String topic) {
+    	this(name);
+    	this.topic = topic;
+    }
+    
+    public Journal(String name, String topic, Language l) {
+    	this(name, topic);
+    	this.language = l;
+    }
+    
+    public Journal(String name, String topic, String description) {
+    	this(name, topic);
+    	this.description = description;
+    }
+    
+    public Journal(String name, String topic, String description, Language l) {
+    	this(name, topic, description);
+    	this.language = l;
+    }
+    
     public String getName() {
 		return name;
 	}
     
     public int getId() {
-		return id;
+		return journalId;
 	}
     
     public Language getLanguage() {
 		return language;
 	}
     
+    public void setLanguage(Language language) {
+		this.language = language;
+	}
+    
     public String getDescription() {
 		return description;
+	}
+    
+    public void setDescription(String description) {
+		this.description = description;
 	}
    
     public Vector<ResearchPaper> getArticles() {
@@ -82,57 +124,112 @@ public class Journal {
     public String getTopic() {
 		return topic;
 	}
+    
+    public void setTopic(String topic) {
+		this.topic = topic;
+	}
 
     /**
+     * Displays all of the articles in the terminal
+     * 
      * @return
      */
     public void displayArticles() {
-        // TODO implement here
+    	for (ResearchPaper art : articles) {
+    		System.out.println(art); //TODO: add stuff later ig)
+    	}
         return;
     }
 
     /**
-     * @param article 
-     * @return
+     * Publishes an article
+     * 
+     * @param	article 	an article to publish
+     * @return	null		nothing
      */
     public void publishArticle(ResearchPaper article) {
-        
-        return;
+        articles.add(article);
+        notifyAllSubscribers(article);
     }
 
     /**
-     * @param article 
-     * @return
+     * Removes an article from a journal
+     * 
+     * @param 	article 	an article to remove 
+     * @return	true 		if removed
+     * 			false 		if not found and not removed
      */
     public boolean removeArticle(ResearchPaper article) {
-        // TODO implement here
-        return false;
+        return articles.remove(article);
     }
 
     /**
-     * @param user 
-     * @return
+     * Adds subscriber (Observer pattern)
+     * 
+     * @param	user	new subscriber 
+     * @return	null	nothing
      */
     public void addSubscriber(User user) {
         subscribers.add(user);
     }
 
     /**
-     * @param user 
-     * @return
+     * Removes a subscriber from a subs list
+     * 
+     * @param 	user 	subscriber to remove
+     * @return	true	if removed
+     * 			false	if not found and not removed
      */
     public void removeSubscriber(User user) {
     	subscribers.remove(user);
     }
 
     /**
+     * Sends jounral notifications to all of the
+     * subscribers
      * 
-     * @return
+     * @param 	article		article that trigerred 
+     * 						the notification
+     * @return	null		nothing
      */
-    public void notifyAllSubscribers() {
+    public void notifyAllSubscribers(ResearchPaper article) {
     	for (User subscriber: subscribers) {
-    		
+    		Database.instance
+    			.getMessageRepo()
+    			.addMessage(subscriber, new JournalNotification(subscriber, this, article));
     	}	
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	/**
+    	 * Check equality based on the unique ID
+    	 * 
+    	 * @param 	obj		another journal to check for equality
+    	 * 
+    	 * @return 	true	if the same journal
+    	 * 			false 	if not the same
+    	 * */
+    	if (this == obj) return true;
+    	if (obj == null) return false;
+    	if (this.getClass() != obj.getClass()) return false;
+    	
+    	Journal j = (Journal) obj;
+    	return j.journalId == this.journalId; 
+    }
+    
+    @Override
+    public int hashCode() {
+    	return Objects.hash(journalId, name, topic, description, subscribers, articles);
+    }
+    
+    @Override
+    public String toString() {
+    	return String.format("Journal №%d: \'%s\'", journalId, name) + "\n" + 
+    			"Topic: " + topic + "\n" + "Description" + description + "\n" + 
+    			"Number of articles: " + articles.size();
+    }
+    
+    
 
 }

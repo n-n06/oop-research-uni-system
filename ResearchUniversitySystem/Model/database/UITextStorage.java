@@ -3,14 +3,13 @@ package database;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import users.UsersRepository;
+import users.UserRepository;
 import enums.Language;
 
 /**
  * 
  */
 public class UITextStorage implements Serializable {
-	public UserRepository uP = new UserRepository();
     /**
      * 
      */

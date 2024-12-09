@@ -6,12 +6,13 @@ package database;
 
 import java.io.*;
 
-import users.UsersRepository;
+import users.UserRepository;
+import utilities.social.MessageRepository;
 import utilities.social.RequestRepository;
 import courses.CourseRepository;
 import courses.CourseRegistrationService;
 import menuInfo.NewsRepository;
-import menuInfo.JournalsRepository;
+import menuInfo.JournalRepository;
 
 
 /**
@@ -26,7 +27,7 @@ public class Database implements Serializable {
     /**
      * Repository to interact (CRUD operations) with the storage of All Users
      */
-    private UsersRepository usersRepo;
+    private UserRepository usersRepo;
 
     /**
      * 
@@ -36,7 +37,7 @@ public class Database implements Serializable {
     /**
      * Repository to interact with the storage of All Journals
      */
-    private JournalsRepository journalRepo;
+    private JournalRepository journalRepo;
 
     /**
      * Repository to interact with the storage of All News
@@ -59,6 +60,11 @@ public class Database implements Serializable {
     private CourseRegistrationService registration;
     
     /**
+     * Repository to interact with the storage of All Messages
+     */
+    private MessageRepository messageRepo;
+    
+    /**
      *Static init block to create the instance on load 
      */
     static {
@@ -73,12 +79,53 @@ public class Database implements Serializable {
     	}
     }
     
+    
     /**
-     * 
+     * Private constr to ensure Singleton
      */
     private Database() {
         
     }
+    
+    
+    /**
+     * 
+     * Getters
+     * */
+    
+    public JournalRepository getJournalRepo() {
+		return journalRepo;
+	}
+    
+    public MessageRepository getMessageRepo() {
+		return messageRepo;
+	}
+    
+    public CourseRepository getCourseRepo() {
+		return courseRepo;
+	}
+    
+    public NewsRepository getNewsRepo() {
+		return newsRepo;
+	}
+    
+    public CourseRegistrationService getRegistration() {
+		return registration;
+	}
+    
+    public RequestRepository getReqeustRepo() {
+		return reqeustRepo;
+	}
+    
+    public UITextStorage getUIText() {
+		return UIText;
+	}
+    
+    public UserRepository getUsersRepo() {
+		return usersRepo;
+	}
+    
+    
 
     /**
      * Deserializes a database from a 'data' file

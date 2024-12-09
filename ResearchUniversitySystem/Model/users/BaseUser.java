@@ -3,6 +3,7 @@ package users;
 import java.io.*;
 import java.util.*;
 
+import database.Database;
 import enums.Gender;
 import enums.Language;
 import menuInfo.*;
@@ -23,6 +24,10 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     private Language preferredLanguage;
     private boolean isResearcher;
     
+    public BaseUser() {
+    	
+    }
+    
     
 	public BaseUser(String firstName, String lastName, String email, int age, Gender gender) {
 	    this.firstName = firstName;
@@ -31,11 +36,13 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
 	    this.isActive = false;
 	}
 	
-    public void login(String email, String password, UsersRepository userRepo) {
+    public boolean login(String email, String password, UserRepository userRepo) {
         if (userRepo.login(email, password)) {
 //        	System.out.println("Success login")
         	this.isActive = true;
+        	return true;
         };
+        return false;
     }
     
     public void logout() {
@@ -77,7 +84,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     }
 
 
-    public void viewJournals(JournalsRepository journals) {
+    public void viewJournals(JournalRepository journals) {
         journals.displayJournals();
     }
 
@@ -95,8 +102,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
 
     @Override
     public void viewMessages() {
-    	// TODO Auto-generated method stub
-    	
+    	Database.instance.getMessageRepo().viewMessages(this);
     } 
 
     @Override

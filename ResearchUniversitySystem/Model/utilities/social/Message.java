@@ -5,7 +5,9 @@ package utilities.social;
  * */
 
 import java.util.Date;
+import java.util.Objects;
 
+import menuInfo.Journal;
 import users.User;
 
 /**
@@ -74,15 +76,38 @@ public abstract class Message implements Comparable<Message> {
 		this.content = content;
 	}
     
+    @Override
+    public boolean equals(Object obj) {
+    	/**
+    	 * Check equality based on the unique ID
+    	 * 
+    	 * @param 	obj		another message to check for equality
+    	 * 
+    	 * @return 	true	if the same message
+    	 * 			false 	if not the same
+    	 * */
+    	if (this == obj) return true;
+    	if (obj == null) return false;
+    	if (this.getClass() != obj.getClass()) return false;
+    	
+    	Message j = (Message) obj;
+    	return j.messageId == this.messageId; 
+    }
+    
     
     @Override
     public String toString() {
     	return String.format("Message №%d: \n", messageId) + content + "\nSent: " + date;
     }
     
+    @Override
+    public int hashCode() {
+    	return Objects.hash(messageId, receiver, content, date);
+    }
+    
     public int compareTo(Message m) {
     	/**
-    	 * Comparison in reverse order
+    	 * Comparison in non-decreasing order of dates
     	 * */
     	return -1 * this.date.compareTo(m.date);
     }

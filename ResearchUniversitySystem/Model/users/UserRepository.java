@@ -2,9 +2,9 @@ package users;
 
 import java.util.HashMap;
 
-public class UsersRepository {
+public class UserRepository {
 	
-    public UsersRepository() {
+    public UserRepository() {
     	users = new HashMap<>();
     }
 

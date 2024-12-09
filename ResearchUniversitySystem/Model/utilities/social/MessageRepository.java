@@ -7,6 +7,11 @@ import users.User;
 import utilities.social.Message;
 
 public class MessageRepository {
+    /**
+     * Map from a user to a sorted set of unique messages
+     * 
+     */
+    private HashMap<User, TreeSet<Message>> userMessages;
 	
 	
     /**
@@ -14,11 +19,6 @@ public class MessageRepository {
      */
     public MessageRepository() {
     }
-
-    /**
-     * 
-     */
-    private HashMap<User, TreeSet<Message>> userMessages;
 
     /**
      * @param	user	receiver of the message	 
@@ -37,7 +37,7 @@ public class MessageRepository {
      * @return	true if message was removed successfully,
      * 			false otherwise
      */
-    public boolean removeRequest(User user, Message message) {
+    public boolean removeMessage(User user, Message message) {
         return userMessages.get(user).remove(message);
     }
 
@@ -45,42 +45,18 @@ public class MessageRepository {
      * @param request 
      * @return
      */
-    public Request getRequest(Request request) {
-        // TODO implement here
-        return null;
+    public TreeSet<Message> getMessages(User user) {
+        return userMessages.get(user);
     }
 
     /**
      * @return
      */
-    public void displayRequests() {
-        // TODO implement here
-        return ;
+    public void viewMessages(User user) {
+        for (Message m : getMessages(user)) {
+        	System.out.println(m);
+        };
     }
 
-    /**
-     * @return
-     */
-    public void acceptRequest() {
-        // TODO implement here
-        return ;
-    }
 
-    /**
-     * @return
-     */
-    public void declineRequest() {
-        // TODO implement here
-        return ;
-    }
-
-    /**
-     * @return
-     */
-    public void signRequest() {
-        // TODO implement here
-        return ;
-    }
-
-}
 }

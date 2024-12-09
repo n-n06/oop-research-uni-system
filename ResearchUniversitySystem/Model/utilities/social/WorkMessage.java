@@ -5,6 +5,7 @@ package utilities.social;
  * */
 
 import java.util.Date;
+import java.util.Objects;
 
 import users.User;
 
@@ -31,11 +32,16 @@ public class WorkMessage extends Message {
     
     
     /*
-     * Main constructorw 
+     * Main constructor uwu
      * */
     public WorkMessage(User sender, User receiver, String content) {
     	this(receiver, content);
     	this.sender = sender;
+    }
+    
+    @Override
+    public int hashCode() {
+    	return super.hashCode() + Objects.hash(sender);
     }
     
     @Override

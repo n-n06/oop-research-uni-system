@@ -10,15 +10,22 @@ import enums.Language;
 public abstract class BaseDecorator implements User {
 
 	private User user;
+
+    public BaseDecorator() {
+    }
 	
 	
     public BaseDecorator(User user) {
     	this.user = user;
     }
+    
+    @Override
+    public String getName() {
+    	return user.getName();
+    }
 
-
-    public boolean login(String email, String password) {
-        return false;
+    public boolean login(String email, String password, UserRepository userRepo) {
+    	return user.login(email, password, userRepo);
     }
 
     public void changePassword(String password) {
@@ -41,8 +48,12 @@ public abstract class BaseDecorator implements User {
     public void viewPersonalProfile() {
         user.viewPersonalProfile();
     }
+    
+    public void viewMessages() {
+        user.viewMessages();
+    }
 
-    public void viewJournals(JournalsRepository journals) {
+    public void viewJournals(JournalRepository journals) {
         user.viewJournals(journals);
     }
 

@@ -6,7 +6,7 @@ import enums.Language;
 
 public interface User {
 
-    public boolean login(String email, String password);
+    public boolean login(String email, String password, UserRepository userRepo);
 
     public void changePassword(String password);
 
@@ -24,7 +24,7 @@ public interface User {
 
     public boolean getIsActive();
     
-    public void viewJournals(JournalsRepository journals);
+    public void viewJournals(JournalRepository journals);
    
     public void subscribeToJournal(Journal journal);
 

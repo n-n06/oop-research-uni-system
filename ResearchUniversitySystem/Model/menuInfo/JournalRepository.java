@@ -5,25 +5,30 @@ import java.util.Vector;
 /**
  * 
  */
-public class JournalsRepository {
-
+public class JournalRepository {
     /**
      * Default constructor
      */
-    public JournalsRepository() {
+    public JournalRepository() {
     }
 
     /**
      * 
      */
     private Vector<Journal> journals;
+    
+    
+    
+    public int getJournalId() {
+		return journals.size() + 1;
+	}
 
     /**
      * @param journal 
      * @return
      */
     public void addJournal(Journal journal) {
-        // TODO implement here
+        
         return;
     }
 
