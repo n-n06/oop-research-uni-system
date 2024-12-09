@@ -4,23 +4,23 @@ import java.util.Comparator;
 import users.students.Student;
 
 /**
- * Comparator to sort Student objects alphabetically by their names
+ * Comparator to sort Student objects by their GPA in ascending order
  */
 
-public class StudentAlphabetComparator extends StudentsComparator {
+public class StudentGpaComparator extends StudentsComparator {
 
     /**
-     * Compares two Student objects alphabetically by their names
+     * Compares two Student objects numerically by their GPA
      *
      * @param s1 - the first student
      * @param s2 - the second student
-     * @return a negative integer, zero, or a positive integer as the name of s1
-     *         is lexicographically less than, equal to, or greater than the name of s2
+     * @return a negative integer, zero, or a positive integer as the GPA of s1
+     *         is less than, equal to, or greater than the GPA of s2
      */
 	
     @Override
     public int compare(Student s1, Student s2) {
-        return s1.getName().compareTo(s2.getName()); // sorting in asccending order: 'Alice', 'Bob', ...
+        return Double.compare(s1.getGPA(), s2.getGPA()); // sorting in ascending order: 0.17, 1.15, ...
     }
     
 }
