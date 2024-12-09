@@ -5,6 +5,7 @@ import users.students.Student;
 
 /**
  * Comparator to sort Student objects by their GPA in ascending order
+ * @author eva
  */
 
 public class StudentGpaComparator extends StudentsComparator {
