@@ -1,33 +1,44 @@
 package courses;
 
+import enums.Grade;
 import java.util.*;
 
-import enums.Grade;
-
-/**
- * 
+/*
+ * @author eva
  */
-public class GPA implements Comparable {
 
-    /**
-     * Default constructor
-     */
-    public GPA() {
+public class GPA implements Comparable<GPA> {
+    private Grade grade;
+
+    public GPA(double overallPoints, double finalExam, double firstAttestation, double secondAttestation) {
+	// gracefully handling F case:
+        if (finalExam < 9.5 || firstAttestation + secondAttestation < 30) {
+            this.grade = Grade.F;
+        }
+	// gracefully handling FX case:
+        else if (finalExam < 20) {
+            this.grade = Grade.FX;
+        }
+        else {
+            this.grade = Grade.fromPoints(overallPoints);
+        }
     }
 
-    /**
-     * 
-     */
-    private Grade letterGrade;
+    public String getLetter() {
+        return grade.getLetter();
+    }
 
-    /**
-     * 
-     */
-    public Grade numberGrade;
+    public double getNumericValue() {
+        return grade.getNumericValue();
+    }
 
-	@Override
-	public int compareTo(Object o) {
-		return 0;
-	}
+    @Override
+    public int compareTo(GPA other) {
+        return Double.compare(this.getNumericValue(), other.getNumericValue());
+    }
 
+    @Override
+    public String toString() {
+        return "GPA: " + getNumericValue() + ", Letter Grade: " + getLetter();
+    }
 }
