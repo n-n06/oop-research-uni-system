@@ -9,10 +9,14 @@ import enums.Language;
 
 public abstract class BaseDecorator implements User {
 
+	private User user;
+	
+	
+	
     public BaseDecorator() {
     }
 
-    private User user;
+    
 
     public BaseDecorator(User user) {
     }

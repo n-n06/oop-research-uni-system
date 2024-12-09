@@ -63,7 +63,7 @@ public class NewsRepository {
      * @param news 
      * @return
      */
-    public News getNews(News news) {
+    public News getNews(int newsID) {  //нужно прописать логику поиска по айди 
         // TODO implement here
         return null;
     }

@@ -59,6 +59,10 @@ public class News implements Comparable<News> {
     public void filterByType() {
         // TODO implement here
     }
+    
+    public void addCommentToNews(Comment comment) {
+    	comments.add(comment);
+    }
 
 	@Override
 	public int compareTo(News o) {

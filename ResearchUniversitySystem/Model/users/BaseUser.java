@@ -12,11 +12,6 @@ import research.CanBecomeResearcher;
 
 
 public abstract class BaseUser implements CanBecomeResearcher, User {
-
-
-    public BaseUser() {
-    }
-
     private String userID;
     private String firstName;
     private String lastName;
@@ -29,13 +24,21 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     private Language preferredLanguage;
     private boolean isResearcher;
     
+    
+	public BaseUser(String userID, String firstName, String lastName, String email, int age, Gender gender) {
+	    this.userID = userID;
+	    this.firstName = firstName;
+	    this.lastName = lastName;
+	    this.email = email;
+	    this.isActive = false;
+	}
+    
     public boolean getIsActive() {
-        return false;
+        return isActive;
     }
 
-
     public void selectLanguage(Language language) {
-        return ;
+        this.preferredLanguage = language;
     }
 
     public void viewNews(NewsRepository newsRepo) {
