@@ -12,6 +12,9 @@ public class Admin extends Employee {
      */
     public Admin() {
     }
+    public Admin(String lastName, String firstName){
+        super(lastName, firstName);
+    }
 
     /**
      * @param user 
