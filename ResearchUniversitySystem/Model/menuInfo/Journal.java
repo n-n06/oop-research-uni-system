@@ -3,6 +3,7 @@ package menuInfo;
 import java.io.*;
 import java.util.*;
 
+//import Database
 import research.ResearchPaper;
 import research.Researcher;
 import users.User;
@@ -32,11 +33,6 @@ public class Journal {
     /**
      * 
      */
-    public Researcher author;
-
-    /**
-     * 
-     */
     private Language language;
 
     /**
@@ -58,6 +54,34 @@ public class Journal {
      * 
      */
     private Vector<User> subscribers;
+    
+    public String getName() {
+		return name;
+	}
+    
+    public int getId() {
+		return id;
+	}
+    
+    public Language getLanguage() {
+		return language;
+	}
+    
+    public String getDescription() {
+		return description;
+	}
+   
+    public Vector<ResearchPaper> getArticles() {
+		return articles;
+	}
+    
+    public Vector<User> getSubscribers() {
+		return subscribers;
+	}
+    
+    public String getTopic() {
+		return topic;
+	}
 
     /**
      * @return
@@ -68,18 +92,11 @@ public class Journal {
     }
 
     /**
-     * 
-     */
-    public void Operation2() {
-        // TODO implement here
-    }
-
-    /**
      * @param article 
      * @return
      */
     public void publishArticle(ResearchPaper article) {
-        // TODO implement here
+        
         return;
     }
 
@@ -93,19 +110,11 @@ public class Journal {
     }
 
     /**
-     * 
-     */
-    public void Operation1() {
-        // TODO implement here
-    }
-
-    /**
      * @param user 
      * @return
      */
     public void addSubscriber(User user) {
-        // TODO implement here
-        return;
+        subscribers.add(user);
     }
 
     /**
@@ -113,16 +122,17 @@ public class Journal {
      * @return
      */
     public void removeSubscriber(User user) {
-        // TODO implement here
-        return;
+    	subscribers.remove(user);
     }
 
     /**
+     * 
      * @return
      */
     public void notifyAllSubscribers() {
-        // TODO implement here
-        return;
+    	for (User subscriber: subscribers) {
+    		
+    	}	
     }
 
 }

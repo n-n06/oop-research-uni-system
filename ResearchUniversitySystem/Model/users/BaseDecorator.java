@@ -12,59 +12,55 @@ public abstract class BaseDecorator implements User {
 	private User user;
 	
 	
-	
-    public BaseDecorator() {
-    }
-
-    
-
     public BaseDecorator(User user) {
+    	this.user = user;
     }
+
 
     public boolean login(String email, String password) {
         return false;
     }
 
     public void changePassword(String password) {
-        return;
+        user.changePassword(password);
     }
 
     public void selectLanguage(Language language) {
-        return;
+        user.selectLanguage(language);;
     }
 
 
     public void viewNews(NewsRepository newsRepo) {
-        return;
+        user.viewNews(newsRepo);
     }
 
-    public void addComment(News news, Comment comment) {
-        return;
+    public void addComment(NewsRepository newsRepo, Comment comment, int newsID) {
+        user.addComment(newsRepo, comment, newsID);
     }
 
     public void viewPersonalProfile() {
-        return;
+        user.viewPersonalProfile();
     }
 
     public void viewJournals(JournalsRepository journals) {
-        return;
+        user.viewJournals(journals);
     }
 
     public void subscribeToJournal(Journal journal) {
-        return;
+        user.subscribeToJournal(journal);
     }
 
     public void unsubscribeFromJournal(Journal journal) {
-        return;
+        user.unsubscribeFromJournal(journal);
     }
 
 
     public void accessResearcherAccount() {
-        return;
+        user.accessResearcherAccount();
     }
 
     public void becomeResearcher() {
-        return;
+        user.becomeResearcher();
     }
 
 }

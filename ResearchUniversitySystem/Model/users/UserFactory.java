@@ -10,17 +10,24 @@ public class UserFactory {
 
     public UserFactory() {
     }
-    
+
     public BaseUser makeUser(String firstName, String lastName, String email, UserType type) {
-        return null;
-    }
-
-    public Student makeUser(String firstName, String lastName, String email, UserType type, Degree studentType) {
-        return null;
+        switch (type) {
+            case STUDENT:
+                return new Student();
+            case TEACHER:
+                return new Teacher();
+            default:
+                throw new IllegalArgumentException("Unknown user type: " + type);
+        }
     }
     
-    public Teacher makeUser(String firstName, String lastName, String email, UserType type, TeacherType teacherType) {
-        return null;
+    public Student makeUser(String firstName, String lastName, String email, UserType type, Degree studentDegree) {
+
+        return new Student();
     }
 
+    public Teacher makeUser(String firstName, String lastName, String email, UserType type, TeacherType teacherType) {
+        return new Teacher();
+    }
 }

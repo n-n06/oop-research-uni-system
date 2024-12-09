@@ -50,7 +50,6 @@ public class GPA implements Comparable<GPA> {
     	
     	GPA g = (GPA) o;
     	return this.grade.equals(g.grade);
-    	return super.equals(o);
     }
     
     @Override

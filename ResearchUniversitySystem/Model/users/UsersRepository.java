@@ -1,40 +1,55 @@
 package users;
 
-import java.util.TreeSet;
 import java.util.HashMap;
 
 public class UsersRepository {
 	
     public UsersRepository() {
+    	users = new HashMap<>();
     }
 
-    private TreeSet<User> users;
-
-    private HashMap<User, Boolean> verified;
+    private HashMap<String, User> users;
 
     public void addUser(BaseUser user) {
-        return;
+    	if (user == null) throw new IllegalArgumentException("User cannot be null");
+        users.put(user.getUserEmail(), user);
     }
 
     public boolean removeUser(User user) {
+    	if (user == null) return false;
+    	
+    	String userEmail = user.getUserEmail();
+    	if (users.remove(userEmail) != null) {
+            return true;
+        }
         return false;
     }
 
-    public void updateUser() {
-        return;
+    public void updateUser(User updatedUser) {
+        if (updatedUser == null) throw new IllegalArgumentException("User cannot be null");
+        
+        String userEmail = updatedUser.getUserEmail();
+        if (users.containsKey(userEmail)) {
+            users.put(userEmail, updatedUser); 
+        } else {
+            throw new IllegalArgumentException("User with Email " + userEmail + " does not exist");
+        }
     }
 
-
-    public User getUser(User user) {
-        return null;
+    public User getUser(String userEmail) {
+        return users.get(userEmail);
     }
 
-    public boolean isVerified(User user) {
-        return false;
+    public boolean checkIsActiveUser(String userEmail) {
+        return getUser(userEmail).getIsActive();
     }
 
     public boolean login(String email, String password) {
-        return false;
+        User user = getUser(email);  
+        if (user != null) {
+            return user.getPassword().equals(password);
+        }
+        return false; 
     }
 
 }

@@ -14,10 +14,16 @@ public interface User {
 
     public void viewNews(NewsRepository newsRepo);
 
-    public void addComment(News news, Comment comment);
+    public void addComment(NewsRepository newsRepo, Comment comment, int newsID);
 
     public void viewPersonalProfile();
+    
+    public String getUserEmail();
+    
+    public String getPassword();
 
+    public boolean getIsActive();
+    
     public void viewJournals(JournalsRepository journals);
    
     public void subscribeToJournal(Journal journal);

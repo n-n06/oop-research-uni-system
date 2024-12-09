@@ -12,7 +12,6 @@ import research.CanBecomeResearcher;
 
 
 public abstract class BaseUser implements CanBecomeResearcher, User {
-    private String userID;
     private String firstName;
     private String lastName;
     private String email;
@@ -25,16 +24,34 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     private boolean isResearcher;
     
     
-	public BaseUser(String userID, String firstName, String lastName, String email, int age, Gender gender) {
-	    this.userID = userID;
+	public BaseUser(String firstName, String lastName, String email, int age, Gender gender) {
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.email = email;
 	    this.isActive = false;
 	}
+	
+    public void login(String email, String password, UsersRepository userRepo) {
+        if (userRepo.login(email, password)) {
+//        	System.out.println("Success login")
+        	this.isActive = true;
+        };
+    }
+    
+    public void logout() {
+    	this.isActive = false;
+    }
     
     public boolean getIsActive() {
         return isActive;
+    }
+    
+    public String getUserEmail() {
+    	return email;
+    }
+    
+    public String getPassword() {
+    	return password;
     }
 
     public void selectLanguage(Language language) {
@@ -42,29 +59,34 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     }
 
     public void viewNews(NewsRepository newsRepo) {
-        return;
+        System.out.println("News:");
+        newsRepo.displayAllNews();
     }
 
-    public void addComment(News news, Comment comment) {
-        return;
+    public void addComment(NewsRepository newsRepo, Comment comment, int newsID) {
+        newsRepo.getNews(newsID).addCommentToNews(comment);
     }
 
 
     public void viewPersonalProfile() {
-        return;
+        System.out.println("Email : " + email);
+        System.out.println("Firstname : " + firstName);
+        System.out.println("Lastname : " + lastName);
+        System.out.println("Gender : " + gender);
+        System.out.println("Researcher : " + isResearcher);
     }
 
 
     public void viewJournals(JournalsRepository journals) {
-        return;
+        journals.displayJournals();
     }
 
     public void subscribeToJournal(Journal journal) {
-        return;
+        journal.addSubscriber(this);
     }
 
     public void unsubscribeFromJournal(Journal journal) {
-        return;
+        journal.removeSubscriber(this);
     }
 
     public void accessResearcherAccount() {
@@ -73,15 +95,12 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
 
 
     public void becomeResearcher() {
-        return;
+        this.isResearcher = true;
     }
 
-    public boolean login(String email, String password) {
-        return false;
-    }
 
     public void changePassword(String password) {
-        return;
+        this.password = password;
     }
 
 }
