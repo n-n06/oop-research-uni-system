@@ -50,6 +50,12 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     public void viewPersonalProfile() {
         return;
     }
+    
+    @Override
+    public void viewMessages() {
+    	// TODO Auto-generated method stub
+    	
+    }
 
 
     public void viewJournals(JournalsRepository journals) {
@@ -80,5 +86,13 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     public void changePassword(String password) {
         return;
     }
+    
+    @Override
+    public String getName() {
+    	// TODO Auto-generated method stub
+    	return null;
+    }
+    
+    
 
 }

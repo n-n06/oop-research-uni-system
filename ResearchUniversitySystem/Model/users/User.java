@@ -17,6 +17,8 @@ public interface User {
     public void addComment(News news, Comment comment);
 
     public void viewPersonalProfile();
+    
+    public void viewMessages();
 
     public void viewJournals(JournalsRepository journals);
    
@@ -27,5 +29,7 @@ public interface User {
     public void accessResearcherAccount();
 
     public void becomeResearcher();
+
+	public String getName();
 
 }
