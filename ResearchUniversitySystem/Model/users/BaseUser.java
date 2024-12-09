@@ -93,6 +93,18 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
         return;
     }
 
+    @Override
+    public void viewMessages() {
+    	// TODO Auto-generated method stub
+    	
+    } 
+
+    @Override
+    public String getName() {
+    	// TODO Auto-generated method stub
+    	return null;
+    }
+
 
     public void becomeResearcher() {
         this.isResearcher = true;
