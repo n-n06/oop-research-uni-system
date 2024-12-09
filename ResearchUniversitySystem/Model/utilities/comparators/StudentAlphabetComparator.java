@@ -5,6 +5,7 @@ import users.students.Student;
 
 /**
  * Comparator to sort Student objects alphabetically by their names
+ * @author eva
  */
 
 public class StudentAlphabetComparator extends StudentsComparator {
