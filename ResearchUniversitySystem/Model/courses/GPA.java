@@ -41,4 +41,20 @@ public class GPA implements Comparable<GPA> {
     public String toString() {
         return "GPA: " + getNumericValue() + ", Letter Grade: " + getLetter();
     }
+
+    @Override
+    public boolean equals(Object o) {
+    	if (o == null) return false;
+    	if (this == o) return true;
+    	if (this.getClass() != o.getClass()) return false;
+    	
+    	GPA g = (GPA) o;
+    	return this.grade.equals(g.grade);
+    	return super.equals(o);
+    }
+    
+    @Override
+    public int hashCode() {
+    	return Objects.hash(getNumericValue());
+    }
 }

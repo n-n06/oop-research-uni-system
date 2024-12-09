@@ -1,5 +1,6 @@
 package courses;
 
+import java.util.Objects;
 import java.util.Vector;
 
 /**
@@ -48,6 +49,10 @@ public class Mark {
     	}
     	secondAttestation = sumSecondAttestation();
     }
+    
+    public double getFinalExamMark() {
+		return finalExam;
+	}
 
     public void setFinalExamMark(double finalExam) {
         if (finalExam <= 40) {
@@ -76,4 +81,29 @@ public class Mark {
     public void addSecondAttestationMark(double mark) {
         secondAttMarks.add(mark);
     }
+    
+    @Override
+	public String toString() {
+		return String.format("1st att: %.2f", sumFirstAttestation()) 
+				+ String.format(", 2nd att: %.2f", sumSecondAttestation()) 
+				+ String.format(", Final: %.2f", finalExam)
+				+ String.format("\tOverall: %.2f", getOverallPoints());
+	}
+    
+    @Override
+	public boolean equals(Object o) {
+    	if (o == null) return false;
+    	if (this == o) return true;
+    	if (this.getClass() != o.getClass()) return false;
+    	Mark m = (Mark) o;
+    	
+		return this.firstAttestation == m.finalExam &&
+				this.secondAttestation == m.secondAttestation &&
+				this.finalExam == m.finalExam;
+	}
+    
+    @Override
+	public int hashCode() {
+		return Objects.hash(firstAttestation, secondAttestation, finalExam);
+	}
 }
