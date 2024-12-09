@@ -1,29 +1,26 @@
 package utilities.comparators;
 
 import java.util.Comparator;
-
 import users.students.Student;
+
 /**
- * 
+ * Comparator to sort Student objects alphabetically by their names
  */
-public class StudentGpaComparator extends StudentsComparator {
+
+public class StudentAlphabetComparator extends StudentsComparator {
 
     /**
-     * Default constructor
+     * Compares two Student objects alphabetically by their names
+     *
+     * @param s1 - the first student
+     * @param s2 - the second student
+     * @return a negative integer, zero, or a positive integer as the name of s1
+     *         is lexicographically less than, equal to, or greater than the name of s2
      */
-    public StudentGpaComparator() {
-    }
-
-    /**
-     * @param Student s1 
-     * @param Student s2 
-     * @return
-     */
+	
+    @Override
     public int compare(Student s1, Student s2) {
-        // TODO implement here
-        return 0;
+        return s1.getName().compareTo(s2.getName()); // sorting in asccending order: 'Alice', 'Bob', ...
     }
-
-
-
+    
 }
