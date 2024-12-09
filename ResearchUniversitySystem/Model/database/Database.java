@@ -1,6 +1,6 @@
 package database;
 
-import java.io.Serializable;
+import java.io.*
 
 import users.UsersRepository;
 import utilities.social.RequestRepository;
@@ -9,19 +9,15 @@ import courses.CourseRegistrationService;
 import menuInfo.NewsRepository;
 import menuInfo.JournalsRepository;
 
+import UITextStorage.uP;
 /**
  * 
  */
 public class Database implements Serializable {
-
-    /**
-     * Default constructor
-     */
-
     /**
      * 
      */
-    private static Database instance;
+    public static Database instance;
 
     /**
      * 
@@ -57,7 +53,19 @@ public class Database implements Serializable {
      * 
      */
     private CourseRegistrationService registration;
-
+    
+    static {
+    	if (new File("data").exists()) {
+    		try {
+    			
+    		} catch (Exception e) {
+    			System.err.println(e.getMessage());
+    		}
+    	} else {
+    		instance = new Database()
+    	}
+    }
+    
     /**
      * 
      */
@@ -68,17 +76,24 @@ public class Database implements Serializable {
     /**
      * @return
      */
-    public static Database read() {
-        // TODO implement here
-        return null;
+    public static Database read() throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream("data");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        return (Database) ois.readObject();
     }
 
     /**
      * @return
      */
-    public static void write() {
-        // TODO implement here
-        return;
+    public static void write() throws IOException {
+    	FileOutputStream fos = new FileOutputStream("data");
+    	ObjectOutputStream ous = new ObjectOutputStream(fos);
+    	ous.writeObject(instance);
+    	ous.close();
+    }
+    
+    public static int getUserId() {
+    	return instance.userRepo.users.size() + 1;
     }
 
 }
