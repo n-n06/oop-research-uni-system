@@ -1,24 +1,36 @@
 package courses;
 
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 /**
- * 
+ * @author eva
  */
+// essential class for scheduling a lesson properly (its time)
 public class TimeWindow {
+	private LocalTime startTime;
+	private LocalTime endTime;
 
     /**
      * Default constructor
      */
-    public TimeWindow() {
+    public TimeWindow(LocalTime startTime, LocalTime endTime) {
+    	if (startTime.isAfter(endTime)) {
+    		throw new IllegalArgumentException("Start time must be before end time!"); // ensuring consistency in time
+    	}
+    	this.startTime = startTime.truncatedTo(ChronoUnit.MINUTES);
+    	this.endTime = endTime.truncatedTo(ChronoUnit.MINUTES); // ensuring we get only hours and minutes
+    }
+    
+    public LocalTime getStartTime() {
+    	return this.startTime;
+    }
+    
+    public LocalTime getEndTime() {
+    	return this.endTime;
     }
 
-    /**
-     * 
-     */
-    private int startTime;
-
-    /**
-     * 
-     */
-    public int endTime;
+    public String toString() {
+    	return "(" + this.startTime + "-" + this.endTime + ")";
+    }
 
 }
