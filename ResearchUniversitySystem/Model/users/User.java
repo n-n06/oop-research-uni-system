@@ -18,12 +18,6 @@ public interface User {
 
     public void viewPersonalProfile();
     
-    public String getUserEmail();
-    
-    public String getPassword();
-
-    public boolean getIsActive();
-    
     public void viewJournals(JournalRepository journals);
    
     public void subscribeToJournal(Journal journal);
