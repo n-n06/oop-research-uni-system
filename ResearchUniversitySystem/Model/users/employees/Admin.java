@@ -1,9 +1,10 @@
 package users.employees;
 
+import enums.Gender;
 import users.User;
 
 /**
- * 
+ * @author ExpertBook
  */
 public class Admin extends Employee {
 
@@ -12,8 +13,8 @@ public class Admin extends Employee {
      */
     public Admin() {
     }
-    public Admin(String lastName, String firstName){
-        super(lastName, firstName);
+    public Admin(String firstName, String lastName, String email, int age, Gender gender) {
+    	super(firstName, lastName, email, age, gender);
     }
 
     /**
