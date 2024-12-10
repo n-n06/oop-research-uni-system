@@ -1,20 +1,22 @@
 package users.employees;
 
 import users.BaseUser;
+
+import java.util.TreeSet;
+
 import enums.Gender;
 import research.CanBecomeResearcher;
 import utilities.social.Message;
 import utilities.social.MessageRepository;
 import utilities.social.Request;
+import utilities.social.WorkMessage;
 
 /**
  * 
  */
 public class Employee extends BaseUser {
 	private MessageRepository messageRepo;
-    /**
-     * Default constructor
-     */
+
     public Employee() {
     }
     
@@ -33,18 +35,23 @@ public class Employee extends BaseUser {
         }
         return ;
     }
-
-    /**
-     * @return
-     */
     public void readWorkMessage() {
-        // TODO implement here
-        return ;
+    	try {
+    		System.out.println("Work Messages for "+ this.getName());
+    		TreeSet<Message> messages = messageRepo.getMessages(this);
+    		if (messages == null || messages.isEmpty()) {
+    			System.out.println("No messages available");
+    			return;
+            }
+    		for (Message message : messages) {
+    			if (message instanceof WorkMessage) {
+    				System.out.println(message);
+    			}
+    		}
+    	} catch (Exception e) {
+             System.out.println("Failed to read " + e.getMessage());
+         }
     }
-
-    /**
-     * @param request
-     */
     public void sendRequest(Request request) {
         // TODO implement here
     }
