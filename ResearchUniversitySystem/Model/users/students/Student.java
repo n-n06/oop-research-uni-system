@@ -148,7 +148,8 @@ public abstract class Student extends BaseUser {
         return ;
     }
 
-    /**
+    /**\
+     * @deprecated
      * @return
      */
     public void viewFinancialInfo() {
