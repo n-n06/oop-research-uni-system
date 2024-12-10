@@ -56,7 +56,7 @@ public class Database implements Serializable {
     /**
      * Repository to interact with the storage of All Requests(excluding registration requests)
      */
-    private RequestRepository reqeustRepo;
+    private RequestRepository requestRepo;
 
     /**
      * Repository to interact with the storage of All Registration Requests
@@ -82,13 +82,22 @@ public class Database implements Serializable {
     		instance = new Database();
     	}
     }
-    
+  
+    private void initRepos() {
+    	usersRepo = new UserRepository();
+    	courseRepo = new CourseRepository();
+    	journalRepo = new JournalRepository();
+    	newsRepo = new NewsRepository();
+    	messageRepo = new MessageRepository();
+    	requestRepo = new RequestRepository();
+    	registration = new CourseRegistrationService();
+    }
     
     /**
      * Private constr to ensure Singleton
      */
     private Database() {
-        
+		initRepos();
     }
     
     
@@ -118,7 +127,7 @@ public class Database implements Serializable {
 	}
     
     public RequestRepository getReqeustRepo() {
-		return reqeustRepo;
+		return requestRepo;
 	}
     
     public UITextStorage getUIText() {

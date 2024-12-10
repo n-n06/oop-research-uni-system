@@ -73,5 +73,20 @@ public abstract class BaseDecorator implements User {
     public void becomeResearcher() {
         user.becomeResearcher();
     }
+    
+    @Override
+    public String getUserEmail() {
+    	return user.getUserEmail();
+    }
+    
+    @Override
+    public String getPassword() {
+    	return user.getPassword();
+    }
+    
+    @Override
+    public boolean getIsActive() {
+    	return user.getIsActive();
+    }
 
 }
