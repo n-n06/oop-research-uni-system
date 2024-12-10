@@ -1,28 +1,36 @@
 package users.employees;
 
 import users.BaseUser;
+import enums.Gender;
 import research.CanBecomeResearcher;
 import utilities.social.Message;
+import utilities.social.MessageRepository;
 import utilities.social.Request;
 
 /**
  * 
  */
 public class Employee extends BaseUser {
-
+	private MessageRepository messageRepo;
     /**
      * Default constructor
      */
     public Employee() {
     }
+    
+    public Employee(String firstName, String lastName, String email, int age, Gender gender) {
+    	super(firstName, lastName, email, age, gender);
+    }
 
-    /**
-     * @param employee 
-     * @param message 
-     * @return
-     */
+  
     public void sendWorkMessage(Employee employee, Message message) {
-        // TODO implement here
+        try {
+        	message.setReceiver(employee);
+        	messageRepo.addMessage(employee, message);
+        	System.out.println("Message sent to"+ employee.getName());
+        } catch (Exception e) {
+        	System.out.println("Fail!");
+        }
         return ;
     }
 
