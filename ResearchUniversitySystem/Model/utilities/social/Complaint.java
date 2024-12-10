@@ -19,6 +19,9 @@ public class Complaint {
     /**
      * 
      */
+    public void sendComplaint() {
+    	
+    }
     private UrgencyLevel urgencyLevel;
 
     /**
