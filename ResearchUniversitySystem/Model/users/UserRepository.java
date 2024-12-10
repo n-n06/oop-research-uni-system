@@ -2,14 +2,13 @@ package users;
 
 import java.util.HashMap;
 
+import users.employees.Admin;
+
 public class UserRepository {
-	
-	{
-		
-	}
 	
     public UserRepository() {
     	users = new HashMap<>();
+    	users.put("admin@admin.com", new Admin());
     }
 
     private HashMap<String, User> users;

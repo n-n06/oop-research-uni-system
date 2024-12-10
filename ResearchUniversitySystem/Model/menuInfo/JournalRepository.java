@@ -22,7 +22,7 @@ public class JournalRepository {
      * 
      * @return
      */
-    public void displayAllNews() {
+    public void displayJournals() {
         for (Journal j : journals) {
         	System.out.println(j + "\n");
         }
