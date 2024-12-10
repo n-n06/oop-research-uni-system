@@ -40,33 +40,42 @@ public class DemoSystem {
 				System.out.println("Choose you action:\n0. Quit\n1. View news\n2. View journals\n3. ViewProfile\n4. Add User\5. View users");
 				choice = Integer.parseInt(br.readLine());
 				
-				switch (choice) {
-				case 1:
-					Database.instance.getNewsRepo().displayAllNews();
-					break;
-				case 2:
-					Database.instance.getJournalRepo().displayJournals();
-				case 3:
-					Database.instance.getUsersRepo().getUser(stringInput1).viewPersonalProfile();
-				case 4:
-					UserFactory uf = new UserFactory();
-					String firstName, lastName, email, pass;
-					System.out.println("First name: ");
-					firstName = br.readLine();
-					System.out.println("Last name: ");
-					lastName = br.readLine();
-					email = firstName.toLowerCase() + lastName.toLowerCase() + "@kbtu.kz";
-					Database.instance.getUsersRepo().addUser(uf.makeUser(firstName, lastName, email, UserType.ADMIN));
-					break;
-				
-				case 0:
-					break;
+				try {
+					switch (choice) {
+					case 1:
+						Database.instance.getNewsRepo().displayAllNews();
+						break;
+					case 2:
+						Database.instance.getJournalRepo().displayJournals();
+						break;
+					case 3:
+						Database.instance.getUsersRepo().getUser(stringInput1).viewPersonalProfile();
+						break;
+					case 4:
+						UserFactory uf = new UserFactory();
+						String firstName, lastName, email, pass;
+						System.out.println("First name: ");
+						firstName = br.readLine();
+						System.out.println("Last name: ");
+						lastName = br.readLine();
+						email = firstName.toLowerCase() + lastName.toLowerCase() + "@kbtu.kz";
+						Database.instance.getUsersRepo().addUser(uf.makeUser(firstName, lastName, email, UserType.ADMIN));
+						break;
+					
+					case 0:
+						break;
+					}
+				} catch (Exception e) {
+					System.err.println(e.getMessage());
 				}
+				
+
 			}
 
+		
 			
-			
-		}catch(Exception e) {
+		}
+		catch(Exception e) {
 			System.out.println(e.getMessage());
 		}finally {
 			Database.write();

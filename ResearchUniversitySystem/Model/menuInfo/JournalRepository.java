@@ -16,6 +16,7 @@ public class JournalRepository implements Serializable {
      * Default constructor
      */
     public JournalRepository() {
+    	journals = new Vector<>();
     }
 
     /**

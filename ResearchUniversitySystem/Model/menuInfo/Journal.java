@@ -57,6 +57,10 @@ public class Journal {
     /**
      * Default constructor
      */
+    {
+    	this.articles = new Vector<>();
+    }
+    
     public Journal() {
     }
     

@@ -17,6 +17,7 @@ public class NewsRepository  implements Serializable {
      * Default constructor
      */
     public NewsRepository() {
+    	news = new Vector<>();
     }
 
     /**
