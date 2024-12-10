@@ -7,6 +7,7 @@ package utilities.social;
 import java.util.Date;
 import java.util.Objects;
 
+import database.Database;
 import menuInfo.Journal;
 import users.User;
 
@@ -35,6 +36,10 @@ public abstract class Message implements Comparable<Message> {
      */
     private Date date;
 	
+    {
+    	date = new Date();
+    	messageId = Database.generateJournalId();
+    }
 
     /**
      * Default constructor

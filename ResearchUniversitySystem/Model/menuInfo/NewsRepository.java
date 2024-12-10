@@ -3,9 +3,14 @@ package menuInfo;
 import java.util.Vector;
 
 /**
- * 
+ * @author nurs
  */
 public class NewsRepository {
+
+    /**
+     * 
+     */
+    private Vector<News> news;
 
     /**
      * Default constructor
@@ -14,58 +19,49 @@ public class NewsRepository {
     }
 
     /**
+     * Prints all news to std output
      * 
-     */
-    private Vector<News> news;
-
-    /**
      * @return
      */
     public void displayAllNews() {
-        // TODO implement here
-        return;
+        for (News n : news) {
+        	System.out.println(n + "\n");
+        }
     }
 
     /**
-     * @return
-     */
-    public void displayNewsByType() {
-        // TODO implement here
-        return;
-    }
-
-    /**
+     * Adds news to the repository
      * 
+     * @param 	n	news instance 
+     * @return
      */
-    public void Operation1() {
-        // TODO implement here
+    public void addNews(News n) {
+        news.add(n);
     }
 
     /**
-     * @param news 
-     * @return
+     * Removes a news
+     * 
+     * @param	n	an instance of news created with
+     * 			minimum details (id)
+     * @return	true 	if removed
+     * 			false	if not remove
      */
-    public void addNews(News news) {
-        // TODO implement here
-        return;
+    public boolean removeNews(News n) {
+        return news.remove(n);
     }
 
     /**
-     * @param id 
-     * @return
+     * Returns news
+     * 
+     * @param 	n	an instance of news created with
+     * 			minimum details (id)
+     * @return	n	a concrete news instance
      */
-    public boolean removeNews(int id) {
-        // TODO implement here
-        return false;
+    public News getNews(News n) {
+        return news.get(news.indexOf(n));
     }
+    
 
-    /**
-     * @param news 
-     * @return
-     */
-    public News getNews(int newsID) {  //нужно прописать логику поиска по айди 
-        // TODO implement here
-        return null;
-    }
 
 }

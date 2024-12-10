@@ -19,6 +19,10 @@ import menuInfo.JournalRepository;
  * Singleton DB
  */
 public class Database implements Serializable {
+	private static int userId = 0;
+	private static int journalId = 0;
+	private static int newsId = 0;
+	private static int messageId = 0;
     /**
      * 
      */
@@ -156,8 +160,43 @@ public class Database implements Serializable {
      * 
      * @return	userId	a unique identifier of a user
      */
-    public static int getUserId() {
-    	return instance.usersRepo.getUsers().size() + 1;
+    public static int generateUserId() {
+    	userId++;
+    	return userId;
     }
+    
+    /**
+     * Produces an id for a new journal based on 
+     * the current number of journals in the system
+     * 
+     * @return	userId	a unique identifier of a journal
+     */
+    public static int generateJournalId() {
+    	journalId++;
+    	return journalId;
+    }
+    
+    /**
+     * Produces an id for a new news instance based on 
+     * the current number of news in the system
+     * 
+     * @return	userId	a unique identifier of news
+     */
+    public static int generateNewsId() {
+    	newsId++;
+    	return newsId;
+    }
+    
+    /**
+     * Produces an id for a new message instance based on 
+     * the current number of mesage in the system
+     * 
+     * @return	userId	a unique identifier of a message
+     */
+    public static int generateMessageId() {
+    	messageId++;
+    	return messageId;
+    }
+
 
 }

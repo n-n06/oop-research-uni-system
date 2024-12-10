@@ -3,9 +3,14 @@ package menuInfo;
 import java.util.Vector;
 
 /**
- * 
+ * @author nurs
  */
 public class JournalRepository {
+    /**
+     * 
+     */
+    private Vector<Journal> journals;
+	
     /**
      * Default constructor
      */
@@ -13,40 +18,49 @@ public class JournalRepository {
     }
 
     /**
+     * Prints all news to std output
      * 
+     * @return
      */
-    private Vector<Journal> journals;
-    
-    
-    
-    public int getJournalId() {
-		return journals.size() + 1;
-	}
+    public void displayAllNews() {
+        for (Journal j : journals) {
+        	System.out.println(j + "\n");
+        }
+    }
 
     /**
-     * @param journal 
+     * Adds a journals to the repository
+     * 
+     * @param 	journals	Journal instance 
      * @return
      */
     public void addJournal(Journal journal) {
-        
-        return;
+    	journals.add(journal);;
     }
 
     /**
-     * @param journal 
-     * @return
+     * Removes a journal
+     * 
+     * @param	journal	an instance of Journal created with
+     * 			minimum details (id)
+     * @return	true 	if removed
+     * 			false	if not remove
      */
     public boolean removeJournal(Journal journal) {
-        // TODO implement here
-        return false;
+        return journals.add(journal);
     }
 
     /**
-     * @return
+     * Returns journal
+     * 
+     * @param 	j	an instance of journal created with
+     * 			minimum details (id)
+     * @return	j	a concrete journal instance
      */
-    public void displayJournals() {
-        // TODO implement here
-        return;
+    public Journal getJournal(Journal j) {
+        return journals.get(journals.indexOf(j));
     }
+    
+
 
 }

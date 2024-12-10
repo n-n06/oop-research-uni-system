@@ -51,7 +51,7 @@ public class Journal {
     private Vector<User> subscribers;
     
     {
-    	journalId = Database.instance.getJournalRepo().getJournalId();
+    	journalId = Database.generateJournalId();
     }
 
     /**
