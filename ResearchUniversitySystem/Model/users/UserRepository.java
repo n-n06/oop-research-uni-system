@@ -4,6 +4,10 @@ import java.util.HashMap;
 
 public class UserRepository {
 	
+	{
+		
+	}
+	
     public UserRepository() {
     	users = new HashMap<>();
     }

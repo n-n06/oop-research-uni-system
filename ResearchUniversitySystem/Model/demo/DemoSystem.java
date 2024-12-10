@@ -19,7 +19,9 @@ public class DemoSystem {
 				stringInput1 = br.readLine();
 				System.out.println("Enter your password:");
 				stringInput2 = br.readLine();
-				if () {
+				if (Database.instance.getUsersRepo().login(stringInput1, stringInput2)) {
+					
+					
 					loggedUser=null;
 					loggedUser=Database.DATA.getUsers().get(new Credentials(strIn, strIn1));
 					System.out.println("You've logged succesfully");
