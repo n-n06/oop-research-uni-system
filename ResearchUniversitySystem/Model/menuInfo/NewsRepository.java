@@ -1,11 +1,12 @@
 package menuInfo;
 
 import java.util.Vector;
+import java.io.Serializable;
 
 /**
  * @author nurs
  */
-public class NewsRepository {
+public class NewsRepository  implements Serializable {
 
     /**
      * 

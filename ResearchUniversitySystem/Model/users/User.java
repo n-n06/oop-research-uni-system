@@ -1,10 +1,12 @@
 package users;
 
+import java.io.Serializable;
+
 import menuInfo.*;
 import enums.Language;
 
 
-public interface User {
+public interface User extends Serializable {
 
     public boolean login(String email, String password, UserRepository userRepo);
 

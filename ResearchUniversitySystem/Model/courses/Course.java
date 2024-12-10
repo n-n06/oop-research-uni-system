@@ -23,7 +23,7 @@ public class Course extends Subject {
      * Default constructor
      */
     public Course(String subjectID, String subjectName, int courseID) {
-    	super(subjectID), subjectName);
+    	super(subjectID, subjectName);
     	this.courseID = subjectID + courseID;
     	addCourse(this);
     }

@@ -1,13 +1,15 @@
 package courses;
 
 import java.util.Vector;
+import java.io.Serializable;
 
 import courses.RegistrationRequest;
+
 
 /**
  * 
  */
-public class CourseRegistrationService {
+public class CourseRegistrationService implements Serializable {
 
     /**
      * Default constructor

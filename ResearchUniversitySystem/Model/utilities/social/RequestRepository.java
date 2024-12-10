@@ -2,11 +2,12 @@ package utilities.social;
 
 
 import java.util.Vector;
+import java.io.Serializable;
 
 /**
  * 
  */
-public class RequestRepository {
+public class RequestRepository implements Serializable {
 
     /**
      * Default constructor

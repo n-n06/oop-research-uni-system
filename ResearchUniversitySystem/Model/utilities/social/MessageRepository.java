@@ -1,12 +1,13 @@
 package utilities.social;
 
 import java.util.HashMap;
+import java.io.Serializable;
 import java.util.TreeSet;
 
 import users.User;
 import utilities.social.Message;
 
-public class MessageRepository {
+public class MessageRepository implements Serializable{
     /**
      * Map from a user to a sorted set of unique messages
      * 

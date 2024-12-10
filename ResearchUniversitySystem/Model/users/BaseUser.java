@@ -16,10 +16,9 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     private String firstName;
     private String lastName;
     private String email;
-    private String password;
+    private String password = "root";
     private boolean isActive;
     private Gender gender;
-    public String login;
     private int age;
     private Language preferredLanguage;
     private boolean isResearcher;
@@ -60,6 +59,10 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     public String getPassword() {
     	return password;
     }
+    
+    public void setEmail(String email) {
+		this.email = email;
+	}
 
     public void selectLanguage(Language language) {
         this.preferredLanguage = language;
@@ -71,7 +74,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     }
 
     public void addComment(NewsRepository newsRepo, Comment comment, int newsID) {
-        newsRepo.getNews(newsID).addCommentToNews(comment);
+        newsRepo.getNews(new News(newsID)).addComment(comment);
     }
 
 
@@ -96,9 +99,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
         journal.removeSubscriber(this);
     }
 
-    public void accessResearcherAccount() {
-        return;
-    }
+
 
     @Override
     public void viewMessages() {
@@ -107,8 +108,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
 
     @Override
     public String getName() {
-    	// TODO Auto-generated method stub
-    	return null;
+    	return firstName;
     }
 
 

@@ -13,6 +13,11 @@ public class Admin extends Employee {
      */
     public Admin() {
     }
+    
+    public Admin(String email) {
+    	setEmail(email);
+    }
+    
     public Admin(String firstName, String lastName, String email, int age, Gender gender) {
     	super(firstName, lastName, email, age, gender);
     }

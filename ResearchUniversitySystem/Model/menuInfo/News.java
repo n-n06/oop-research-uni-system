@@ -45,15 +45,14 @@ public class News implements Comparable<News> {
      */
     private Vector<Comment> comments;
     
-    {
-    	newsId = Database.generateNewsId();
-    	date = new Date();
-    }
+
     
     /**
      * Default constructor
      */
     public News() {
+    	newsId = Database.generateNewsId();
+    	date = new Date();
     }
     
     /**
@@ -64,12 +63,12 @@ public class News implements Comparable<News> {
     }
     
     public News(String title) {
+    	this();
     	this.title = title;
     }
     
     public News(String title, String content) {
-    	this.title = title;
-    	this.content = content;
+    	this(title);
     }
     
     public News(String title, NewsType newsT) {
@@ -123,7 +122,15 @@ public class News implements Comparable<News> {
 		this.content = content;
 	}
 
-    
+    /**
+     *Adds comment to news 
+     * 
+     * @param 	c	comment
+     * @return	null
+     */
+    public void addComment(Comment c) {
+    	this.comments.add(c);
+    }
     
     /**
      * Prints all of the comment to std output

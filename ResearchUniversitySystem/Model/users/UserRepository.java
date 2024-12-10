@@ -1,14 +1,15 @@
 package users;
 
 import java.util.HashMap;
+import java.io.Serializable;
 
 import users.employees.Admin;
 
-public class UserRepository {
+public class UserRepository implements Serializable {
 	
     public UserRepository() {
     	users = new HashMap<>();
-    	users.put("admin@admin.com", new Admin());
+    	addUser(new Admin("admin@admin.com"));
     }
 
     private HashMap<String, User> users;

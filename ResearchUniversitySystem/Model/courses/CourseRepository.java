@@ -6,11 +6,13 @@ import users.User;
 import java.io.*;
 import java.util.Vector;
 import java.util.TreeSet;
+import java.io.Serializable;
+
 
 /**
  * 
  */
-public class CourseRepository {
+public class CourseRepository implements Serializable {
 
     /**
      * Default constructor
