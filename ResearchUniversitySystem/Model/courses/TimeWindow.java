@@ -18,7 +18,7 @@ public class TimeWindow {
     		throw new IllegalArgumentException("Start time must be before end time!"); // ensuring consistency in time
     	}
     	this.startTime = startTime.truncatedTo(ChronoUnit.MINUTES);
-    	this.endTime = endTime.truncatedTo(ChronoUnit.MINUTES); // ensuring we get only hours and minutes (seconds and miliseconds are not included)
+    	this.endTime = endTime.truncatedTo(ChronoUnit.MINUTES); // ensuring we get only hours and minutes
     }
     
     public LocalTime getStartTime() {
@@ -30,7 +30,7 @@ public class TimeWindow {
     }
 
     public String toString() {
-    	return this.startTime + "-" + this.endTime;
+    	return "(" + this.startTime + "-" + this.endTime + ")";
     }
 
 }
