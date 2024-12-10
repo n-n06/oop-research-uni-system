@@ -32,4 +32,9 @@ public interface User {
     
     public String getName();
 
+    public String getUserEmail();
+    
+    public String getPassword();
+    
+    public boolean getIsActive();
 }
