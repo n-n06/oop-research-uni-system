@@ -2,6 +2,8 @@ package users.employees;
 
 import users.students.Student;
 import courses.*;
+import enums.Gender;
+import enums.TeacherType;
 import utilities.social.Complaint;
 
 import java.io.*;
@@ -11,35 +13,50 @@ import java.util.*;
  * 
  */
 public class Teacher extends Employee {
-
+	private double rating;
+	private TeacherType teacherType;
     /**
      * Default constructor
      */
     public Teacher() {
+    	super();
     }
-
-    /**
-     * @param course 
-     * @return
-     */
+    public Teacher(String firstName, String lastName, String email, int age, Gender gender, double rating, TeacherType teacherType) {
+    	super(firstName, lastName, email, age, gender);
+    	this.rating = rating;
+    	this.teacherType = teacherType;
+    	if(teacherType == TeacherType.PROFESSOR) {
+    		becomeResearcher();
+    	}
+    }
+    
+    public void setTeacherType(TeacherType teacherType) {
+    	this.teacherType = teacherType;
+    }
+    public TeacherType getTeacherType() {
+    	return teacherType;
+    }
     public void viewCourse(Course course) {
-        // TODO implement here
-        return ;
+        System.out.println
     }
 
     /**
      * @return
      */
     public void viewOwnCourses() {
-        // TODO implement here
-        return ;
+        TreeSet<Course> ownCourses = CourseRepository.getCoursesOfAUser(this);
+        if(ownCourses == null || ownCourses.isEmpty()) {
+        	System.out.println("No courses assigned to "+getName());
+        	return;
+        }
+        	
     }
 
     /**
      * @param coures 
      * @return
      */
-    public void viewStudentList(Course coures) {
+    public void viewStudentList(Course coures) {?????
         // TODO implement here
         return ;
     }
@@ -62,23 +79,10 @@ public class Teacher extends Employee {
         return ;
     }
 
-    /**
-     * @param c 
-     * @param s 
-     * @param m 
-     * @return
-     */
     public void putMarkToStudent(Course c, Student s, Mark m) {
-        // TODO implement here
-        return ;
+        c.assignMark(s, m);
     }
 
-    /**
-     * @param l 
-     * @param s 
-     * @param m 
-     * @return
-     */
     public void putAttendance(Lesson l, Student s, Mark m) {
         // TODO implement here
         return ;
@@ -104,17 +108,6 @@ public class Teacher extends Employee {
         return ;
     }
 
-    /**
-     * @return
-     */
-    public void setRating() {
-        // TODO implement here
-        return ;
-    }
-
-    /**
-     * @return
-     */
     public void checkRating() {
         // TODO implement here
         return ;
