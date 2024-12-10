@@ -6,6 +6,7 @@ import database.Database;
 import enums.Gender;
 import enums.TeacherType;
 import utilities.social.Complaint;
+import users.employees.TeacherRating;
 
 import java.io.*;
 import java.util.*;
@@ -27,6 +28,7 @@ public class Teacher extends Employee {
     	if(teacherType == TeacherType.PROFESSOR) {
     		becomeResearcher();
     	}
+    	TeacherRating.addTeacherToRating(this);
     }
     
     public void setTeacherType(TeacherType teacherType) {
@@ -61,7 +63,7 @@ public class Teacher extends Employee {
     }
 
     public void sendComplaint(Complaint complaint) {
-    	
+    	complaint.sendComplaint();
     }
 
     public void putMarkToStudent(Course c, Student s, Mark m) {
@@ -79,12 +81,11 @@ public class Teacher extends Employee {
      * @param time 
      * @return
      */
-    public void putLessonTime(Course course, TimeWindow time) {
-        // TODO implement here
+ /* public void putLessonTime(Course course, TimeWindow time) {
+    	
         return ;
     }
 
-    /**
      * @param course 
      * @param room 
      * @return
@@ -95,8 +96,8 @@ public class Teacher extends Employee {
     }
 
     public void checkRating() {
-        // TODO implement here
-        return ;
+    	double rating = TeacherRating.getRating(this);
+        System.out.printf("Current average rating: " + rating);
     }
 
 }
