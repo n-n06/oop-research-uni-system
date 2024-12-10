@@ -2,6 +2,7 @@ package users.employees;
 
 import users.students.Student;
 import courses.*;
+import database.Database;
 import enums.Gender;
 import enums.TeacherType;
 import utilities.social.Complaint;
@@ -15,9 +16,7 @@ import java.util.*;
 public class Teacher extends Employee {
 	private double rating;
 	private TeacherType teacherType;
-    /**
-     * Default constructor
-     */
+
     public Teacher() {
     	super();
     }
@@ -37,46 +36,32 @@ public class Teacher extends Employee {
     	return teacherType;
     }
     public void viewCourse(Course course) {
-        System.out.println
+    	
     }
 
-    /**
-     * @return
-     */
     public void viewOwnCourses() {
-        TreeSet<Course> ownCourses = CourseRepository.getCoursesOfAUser(this);
+        TreeSet<Course> ownCourses = Database.instance.getCourseRepo().getCoursesOfAUser(this);
         if(ownCourses == null || ownCourses.isEmpty()) {
-        	System.out.println("No courses assigned to "+getName());
-        	return;
+        	System.out.println("No courses assigned to "+ getName());
+        } else {
+        	for (Course c : ownCourses) {
+        		System.out.println(c);
+        	}
         }
         	
     }
-
-    /**
-     * @param coures 
-     * @return
-     */
-    public void viewStudentList(Course coures) {?????
-        // TODO implement here
+    public void viewStudentList(Course coures) {
+        
         return ;
     }
 
-    /**
-     * @param student 
-     * @return
-     */
-    public void viewStudentInfo(Student student) {
-        // TODO implement here
-        return ;
+    public void viewStudentInfo(Course course, Student student) {
+        System.out.println(student.toString());
+        student.viewMarks(course);
     }
 
-    /**
-     * @param complaint 
-     * @return
-     */
     public void sendComplaint(Complaint complaint) {
-        // TODO implement here
-        return ;
+    	
     }
 
     public void putMarkToStudent(Course c, Student s, Mark m) {
@@ -87,6 +72,7 @@ public class Teacher extends Employee {
         // TODO implement here
         return ;
     }
+    //
 
     /**
      * @param course 
