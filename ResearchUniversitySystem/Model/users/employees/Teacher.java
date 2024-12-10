@@ -97,7 +97,7 @@ public class Teacher extends Employee {
 
     public void checkRating() {
     	double rating = TeacherRating.getRating(this);
-        System.out.printf("Current average rating: " + rating);
+        System.out.println("Current average rating: " + rating);
     }
 
 }
