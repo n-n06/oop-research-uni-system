@@ -27,8 +27,11 @@ public class UserFactory {
     public Student makeUser(String firstName, String lastName, String email, UserType type, Degree studentDegree) {
     	if (studentDegree == Degree.BACHELOR) {
     		return new BachelorStudent();
-    	}
-        return new Student();
+    	} 
+    	if (studentDegree == Degree.MASTER) {
+    		return new MastersStudent();
+    	} 
+    	return new PhDStudent();
     }
 
     public Teacher makeUser(String firstName, String lastName, String email, UserType type, TeacherType teacherType) {

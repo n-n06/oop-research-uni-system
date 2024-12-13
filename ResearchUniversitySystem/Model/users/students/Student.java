@@ -12,6 +12,7 @@ import utilities.social.RequestRepository;
 
 import courses.Course;
 import courses.Transcript;
+import courses.GPA;
 
 import research.ResearchProject;
 
@@ -96,6 +97,13 @@ public abstract class Student extends BaseUser {
     public Transcript getTranscript() {
         // TODO implement here
         return null;
+    }
+    
+    /**
+     * @return GPA 
+     */
+    public GPA getGPA() {
+    	return null;
     }
 
     /**

@@ -33,7 +33,7 @@ public class StudentOrganization {
     
     public void listAllMembers() {
 		for (Student s : members) {
-			System.out.println(s.firstName + " " + s.lastName);
+			System.out.println(s.getName());
 		}
     }
     
@@ -48,11 +48,11 @@ public class StudentOrganization {
     			           "Press '2' to remove a student\n" +
     					   "Press '3' to add a student\n" + 
     			           "Press '4' to change the head of organisation\n" +
-    					   "Press '0' to exit the management system.")
+    					   "Press '0' to exit the management system.");
     	
     	int operator = in.nextInt();
     	if (operator > 4) {
-    		System.out.println("Invalid Command!";
+    		System.out.println("Invalid Command!");
     		
     	}
     	
@@ -61,13 +61,13 @@ public class StudentOrganization {
     		listAllMembers();
     		break;
     	case 2:
-    		removeStudent(Student s);
+    		removeStudent(s);
     		break;
     	case 3: 
-    		addStudent(Student s);
+    		addStudent(s);
     		break;
     	case 4: 
-    		changeHead(Student s);
+    		changeHead(s);
     		break;
     	//add default case
     	}

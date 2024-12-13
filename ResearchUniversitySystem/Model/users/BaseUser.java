@@ -108,7 +108,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
 
     @Override
     public String getName() {
-    	return firstName;
+    	return firstName + " " + lastName;
     }
 
 

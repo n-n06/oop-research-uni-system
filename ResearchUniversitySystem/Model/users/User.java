@@ -3,10 +3,11 @@ package users;
 import java.io.Serializable;
 
 import menuInfo.*;
+import research.CanBecomeResearcher;
 import enums.Language;
 
 
-public interface User extends Serializable {
+public interface User extends Serializable, CanBecomeResearcher {
 
     public boolean login(String email, String password, UserRepository userRepo);
 
@@ -26,8 +27,9 @@ public interface User extends Serializable {
 
     public void unsubscribeFromJournal(Journal journal);
 
-    public void accessResearcherAccount();
-
+//    public void accessResearcherAccount();
+    
+    @Override
     public void becomeResearcher();
 
     public void viewMessages();

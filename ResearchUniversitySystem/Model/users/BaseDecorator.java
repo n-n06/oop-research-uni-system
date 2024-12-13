@@ -66,9 +66,9 @@ public abstract class BaseDecorator implements User {
     }
 
 
-    public void accessResearcherAccount() {
-        user.accessResearcherAccount();
-    }
+//    public void accessResearcherAccount() {
+//        user.accessResearcherAccount();
+//    }
 
     public void becomeResearcher() {
         user.becomeResearcher();
