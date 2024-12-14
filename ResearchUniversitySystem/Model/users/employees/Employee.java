@@ -20,6 +20,10 @@ public class Employee extends BaseUser {
     public Employee() {
     }
     
+    public Employee(String firstName, String lastName, String email) {
+    	super(firstName, lastName, email);
+    }
+    
     public Employee(String firstName, String lastName, String email, int age, Gender gender) {
     	super(firstName, lastName, email, age, gender);
     }

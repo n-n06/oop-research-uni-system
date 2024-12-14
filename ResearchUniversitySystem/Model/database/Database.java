@@ -72,13 +72,15 @@ public class Database implements Serializable {
      *Static init block to create the instance on load 
      */
     static {
-    	if (new File("data").exists() && instance != null) {
+    	if (new File("data").exists()) {
+    		System.out.println("pls");
     		try {
-    			read();
+    			instance = read();
     		} catch (Exception e) {
-    			System.err.println(e.getMessage());
+    			System.err.println(e.getMessage());;
     		}
     	} else {
+    		
     		instance = new Database();
     	}
     }

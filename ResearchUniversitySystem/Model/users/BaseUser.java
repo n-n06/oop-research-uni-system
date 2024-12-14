@@ -12,7 +12,7 @@ import research.Researcher;
 import research.CanBecomeResearcher;
 
 
-public abstract class BaseUser implements CanBecomeResearcher, User {
+public abstract class BaseUser implements CanBecomeResearcher, User, Serializable {
     private String firstName;
     private String lastName;
     private String email;
@@ -27,11 +27,15 @@ public abstract class BaseUser implements CanBecomeResearcher, User {
     	
     }
     
-    
-	public BaseUser(String firstName, String lastName, String email, int age, Gender gender) {
+	public BaseUser(String firstName, String lastName, String email) {
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.email = email;
+	}
+    
+    
+	public BaseUser(String firstName, String lastName, String email, int age, Gender gender) {
+	    this(firstName, lastName, email);
 	    this.isActive = false;
 	}
 	

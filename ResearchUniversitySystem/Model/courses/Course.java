@@ -3,6 +3,7 @@ package courses;
 import java.util.Vector;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.io.Serializable;
 
 import enums.CourseType;
 import enums.Semester;
@@ -16,7 +17,7 @@ import users.employees.Teacher;
 // problem: cant have duplicate subjects (with the same id) but can have courses that belong to one subjects
 // add credit system (2/0/1 - 2 lectures, 0 labs, 1 practice)
 // add formula for calculating how many lessons are being held - add a system to calculate lessons
-public class Course extends Subject {
+public class Course extends Subject implements Serializable {
 	private String courseID;
 	private static HashMap<String, String> courses = new HashMap<>(); 
     /**

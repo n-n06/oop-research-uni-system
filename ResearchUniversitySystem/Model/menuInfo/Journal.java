@@ -1,5 +1,6 @@
 package menuInfo;
 
+import java.io.Serializable;
 import java.util.*;
 
 import database.Database;
@@ -12,7 +13,7 @@ import enums.Language;
 /**
  * 
  */
-public class Journal {
+public class Journal implements Serializable {
 
     /**
      * Unique identifier

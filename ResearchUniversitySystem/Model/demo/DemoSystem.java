@@ -3,11 +3,17 @@ package demo;
 import java.io.*;
 
 import database.Database;
+
 import enums.NewsType;
 import enums.UserType;
+
 import menuInfo.Journal;
 import menuInfo.News;
+
 import users.UserFactory;
+import users.User;
+
+import users.employees.*;
 
 public class DemoSystem {
 
@@ -17,27 +23,35 @@ public class DemoSystem {
 		String stringInput1;
 		String stringInput2;
 		
+		User currentUser = new Admin();
+		
 		try {
 			
+			
 			System.out.println("🏛Welcome!🏛");	
-			System.out.println("Enter your username:");
-			stringInput1 = br.readLine();
-			System.out.println("Enter your password:");
-			stringInput2 = br.readLine();
-			
-			
-			Database.instance.getNewsRepo().addNews(new News("Test  general news!", NewsType.GENERAL));
-			Database.instance.getNewsRepo().addNews(new News("Test  research news!", NewsType.RESEARCH));
-			Database.instance.getJournalRepo().addJournal(new Journal("Test Journal"));
-			
-			
-			if (Database.instance.getUsersRepo().login(stringInput1, stringInput2)) {
-				System.out.println("You've logged succesfully");
-			}else {
-				System.out.println("Incorrect username of password. Please, try again.");
-			}
 			while (true) {
-				System.out.println("Choose you action:\n0. Quit\n1. View news\n2. View journals\n3. ViewProfile\n4. Add User\5. View users");
+				
+				System.out.println("Enter your username:");
+				stringInput1 = br.readLine();
+				System.out.println("Enter your password:");
+				stringInput2 = br.readLine();
+				
+
+				
+				
+				if (Database.instance.getUsersRepo().login(stringInput1, stringInput2)) {
+					System.out.println("You've logged succesfully");
+					currentUser = Database.instance.getUsersRepo().getUser(stringInput1);
+					break;
+				}else {
+					System.out.println("Incorrect username of password. Please, try again.");
+					
+				}
+			}
+
+			
+			main: while (true) {
+				System.out.println("Choose you action:\n0. Quit\n1. View news\n2. View journals\n3. ViewProfile\n4. Add User\n5. View users");
 				choice = Integer.parseInt(br.readLine());
 				
 				try {
@@ -49,7 +63,7 @@ public class DemoSystem {
 						Database.instance.getJournalRepo().displayJournals();
 						break;
 					case 3:
-						Database.instance.getUsersRepo().getUser(stringInput1).viewPersonalProfile();
+						currentUser.viewPersonalProfile();
 						break;
 					case 4:
 						UserFactory uf = new UserFactory();
@@ -62,8 +76,12 @@ public class DemoSystem {
 						Database.instance.getUsersRepo().addUser(uf.makeUser(firstName, lastName, email, UserType.ADMIN));
 						break;
 					
-					case 0:
+					case 5:
+						Database.instance.getUsersRepo().viewAllUsers((Admin)currentUser);
 						break;
+						
+					case 0:
+						break main;
 					}
 				} catch (Exception e) {
 					System.err.println(e.getMessage());

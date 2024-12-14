@@ -1,6 +1,8 @@
 package users;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.io.Serializable;
 
 import users.employees.Admin;
@@ -38,6 +40,12 @@ public class UserRepository implements Serializable {
         } else {
             throw new IllegalArgumentException("User with Email " + userEmail + " does not exist");
         }
+    }
+    
+    public void viewAllUsers(Admin a) {
+    	for (User u : users.values()) {
+    		System.out.println(u);
+    	};
     }
 
     public User getUser(String userEmail) {

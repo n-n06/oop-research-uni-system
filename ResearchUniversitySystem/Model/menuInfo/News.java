@@ -1,11 +1,11 @@
 package menuInfo;
 
 import java.util.Vector;
-
-import database.Database;
-
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+
+import database.Database;
 
 import enums.NewsType;
 import menuInfo.Comment;
@@ -13,7 +13,7 @@ import menuInfo.Comment;
 /**
  * @author nurs
  */
-public class News implements Comparable<News> {
+public class News implements Comparable<News>, Serializable {
 
     /**
      * Unique identifier

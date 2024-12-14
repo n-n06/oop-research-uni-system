@@ -18,6 +18,10 @@ public class Admin extends Employee {
     	setEmail(email);
     }
     
+    public Admin(String firstName, String lastName, String email) {
+    	super(firstName, lastName, email);
+    }
+    
     public Admin(String firstName, String lastName, String email, int age, Gender gender) {
     	super(firstName, lastName, email, age, gender);
     }

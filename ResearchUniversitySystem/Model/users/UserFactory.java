@@ -14,7 +14,7 @@ public class UserFactory {
     public BaseUser makeUser(String firstName, String lastName, String email, UserType type) {
         switch (type) {
             case ADMIN:
-            	return new Admin();
+            	return new Admin(firstName, lastName, email);
             case DEAN:
             	return new Dean();
             case MANAGER:

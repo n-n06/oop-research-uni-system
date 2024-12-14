@@ -1,11 +1,12 @@
 package utilities.social;
 
 import java.util.Date;
+import java.io.Serializable;
 
 /**
  * 
  */
-public class Request {
+public class Request implements Serializable {
 
     /**
      * Default constructor

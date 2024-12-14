@@ -1,21 +1,22 @@
 package utilities.social;
-
 /**
  * @author nurs
  * */
 
 import java.util.Date;
 import java.util.Objects;
+import java.io.Serializable;
 
 import database.Database;
 import menuInfo.Journal;
 import users.User;
 
+
 /**
  * Abstract Message / Notification class 📬
  * Extended by work messages and jounral notifications
  */
-public abstract class Message implements Comparable<Message> {
+public abstract class Message implements Comparable<Message>, Serializable {
     /**
      * User to whom the message was sent
      */

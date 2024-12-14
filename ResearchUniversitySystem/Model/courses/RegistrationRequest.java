@@ -1,11 +1,13 @@
 package courses;
 
+import java.io.Serializable;
+
 import users.students.Student;
 
 /**
  * 
  */
-public class RegistrationRequest {
+public class RegistrationRequest implements Serializable {
 
     /**
      * Default constructor
