@@ -69,16 +69,6 @@ public class Teacher extends Employee {
         // TODO implement here
         return ;
     }
-    //
-
-    public void putLessonTime(Course course, TimeWindow time) {
-        return ;
-    }
-
-    public void putLessonClassroom(Course course, int room) {
-        // TODO implement here
-        return ;
-    }
 
     public void checkRating() {
     	double rating = TeacherRating.getRating(this);
