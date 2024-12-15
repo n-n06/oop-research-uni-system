@@ -68,14 +68,16 @@ public class Manager extends Employee {
         return sortedStudents;
     }
 
-    public void orderTeachersByRate() {
-        // TODO implement here
-        return ;
+    public Vector<Teacher> orderTeachersByRate(Vector<Teacher> teachers) {
+    	Vector<Teacher> sortedTeachers = new Vector<>(teachers); 
+        sortedTeachers.sort(new TeacherRatingComparator());
+        return sortedTeachers;
     }
 
-    public void orderTeachersAlphabetically() {
-        // TODO implement here
-        return ;
+    public Vector<Teacher> orderTeachersAlphabetically(Vector<Teacher> teachers) {
+    	Vector<Teacher> sortedTeachers = new Vector<>(teachers); 
+        sortedTeachers.sort(new TeacherAlphabetComparator());
+        return sortedTeachers;
     }
 
  
