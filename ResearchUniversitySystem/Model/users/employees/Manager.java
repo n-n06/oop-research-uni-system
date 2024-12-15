@@ -4,6 +4,7 @@ import enums.Managers;
 import menuInfo.NewsRepository;
 import courses.Course;
 import courses.CourseRepository;
+import courses.TimeWindow;
 import courses.RegistrationRequest;
 import courses.CourseRegistrationService;
 import users.students.Student;
@@ -135,6 +136,17 @@ public class Manager extends Employee {
 
 
     public void declineRequest(Request request) {
+        // TODO implement here
+        return ;
+    }
+
+
+    public void putLessonTime(Course course, TimeWindow time) {
+    	
+        return ;
+    }
+
+    public void putLessonClassroom(Course course, int room) {
         // TODO implement here
         return ;
     }
