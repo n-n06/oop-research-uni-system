@@ -4,15 +4,13 @@ import enums.Managers;
 import menuInfo.NewsRepository;
 import courses.Course;
 import courses.CourseRepository;
+import courses.TimeWindow;
 import courses.CourseRegistrationService;
 import users.students.Student;
 import utilities.social.RequestRepository;
 import utilities.social.Request;
 import utilities.comparators.*;
 
-/**
- * 
- */
 public class Manager extends Employee {
 
     /**
@@ -21,16 +19,8 @@ public class Manager extends Employee {
     public Manager() {
     }
 
-    /**
-     * 
-     */
     private Managers managerType;
 
-
-
-    /**
-     * @return
-     */
     public void viewStudentsInfo() {
         // TODO implement here
         return ;
@@ -211,6 +201,16 @@ public class Manager extends Employee {
      * @return
      */
     public void declineRequest(Request request) {
+        // TODO implement here
+        return ;
+    }
+    
+    public void putLessonTime(Course course, TimeWindow time) {
+    	
+        return ;
+    }
+
+    public void putLessonClassroom(Course course, int room) {
         // TODO implement here
         return ;
     }

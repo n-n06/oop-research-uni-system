@@ -11,24 +11,19 @@ import users.employees.TeacherRating;
 import java.io.*;
 import java.util.*;
 
-/**
- * 
- */
 public class Teacher extends Employee {
-	private double rating;
 	private TeacherType teacherType;
 
     public Teacher() {
     	super();
     }
-    public Teacher(String firstName, String lastName, String email, int age, Gender gender, double rating, TeacherType teacherType) {
+    public Teacher(String firstName, String lastName, String email, int age, Gender gender, TeacherType teacherType) {
     	super(firstName, lastName, email, age, gender);
-    	this.rating = rating;
     	this.teacherType = teacherType;
     	if(teacherType == TeacherType.PROFESSOR) {
     		becomeResearcher();
     	}
-    	TeacherRating.addTeacherToRating(this);
+    	TeacherRating.addTeacherToRating(this);//changed addTeacherToRating into 'static' or create new instance of teacher everytime
     }
     
     public void setTeacherType(TeacherType teacherType) {
@@ -71,26 +66,6 @@ public class Teacher extends Employee {
     }
 
     public void putAttendance(Lesson l, Student s, Mark m) {
-        // TODO implement here
-        return ;
-    }
-    //
-
-    /**
-     * @param course 
-     * @param time 
-     * @return
-     */
- /* public void putLessonTime(Course course, TimeWindow time) {
-    	
-        return ;
-    }
-
-     * @param course 
-     * @param room 
-     * @return
-     */
-    public void putLessonClassroom(Course course, int room) {
         // TODO implement here
         return ;
     }

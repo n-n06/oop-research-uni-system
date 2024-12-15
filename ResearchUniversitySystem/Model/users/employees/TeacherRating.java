@@ -24,7 +24,7 @@ public class TeacherRating {
         return Math.round(avrg * 100.0) / 100.0;
     }
     
-    public void addTeacherToRating(Teacher t) {
+    public static void addTeacherToRating(Teacher t) {//keep static for method in Teacher???
     	 if (!ratings.containsKey(t)) {
              ratings.put(t, new Vector<>());
              System.out.println("Teacher " + t.getName() + " has been added to the rating system.");
