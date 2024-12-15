@@ -17,6 +17,8 @@ import java.util.*;
 public class Teacher extends Employee {
 	private double rating;
 	private TeacherType teacherType;
+	
+	HashSet<Course> assignedCourses = new HashSet<>();
 
     public Teacher() {
     	super();
@@ -37,23 +39,21 @@ public class Teacher extends Employee {
     public TeacherType getTeacherType() {
     	return teacherType;
     }
-    public void viewCourse(Course course) {
-    	
+    
+    public void addCourse(Course course) {
+    	assignedCourses.add(course);
     }
-
+    
     public void viewOwnCourses() {
-        TreeSet<Course> ownCourses = Database.instance.getCourseRepo().getCoursesOfAUser(this);
-        if(ownCourses == null || ownCourses.isEmpty()) {
-        	System.out.println("No courses assigned to "+ getName());
-        } else {
-        	for (Course c : ownCourses) {
-        		System.out.println(c);
-        	}
-        }
-        	
+    	System.out.println("Teacher's courses:");
+    	for (Course c : assignedCourses) {
+    		System.out.println(c);
+    	}
     }
+    
+    	
     public void viewStudentList(Course coures) {
-        
+    	// TODO implement here
         return ;
     }
 
@@ -66,30 +66,20 @@ public class Teacher extends Employee {
     	complaint.sendComplaint();
     }
 
-    public void putMarkToStudent(Course c, Student s, Mark m) {
-        c.assignMark(s, m);
+    public void putMarkToStudent(Course course, Student s, Mark m) {
+        course.assignMark(s, m);
     }
 
-    public void putAttendance(Lesson l, Student s, Mark m) {
+    public void putAttendance(Lesson lesson, Student student, Mark mark) {
         // TODO implement here
         return ;
     }
     //
 
-    /**
-     * @param course 
-     * @param time 
-     * @return
-     */
- /* public void putLessonTime(Course course, TimeWindow time) {
-    	
+    public void putLessonTime(Course course, TimeWindow time) {
         return ;
     }
 
-     * @param course 
-     * @param room 
-     * @return
-     */
     public void putLessonClassroom(Course course, int room) {
         // TODO implement here
         return ;
