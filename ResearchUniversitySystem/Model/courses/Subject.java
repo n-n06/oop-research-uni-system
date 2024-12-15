@@ -11,9 +11,7 @@ public class Subject {
     private String subjectName;
     private static HashMap<String, HashMap<String, Vector<Course>>> subjects = new HashMap<>(); // ensuring we have unique subject IDs BUT that subject can have MULTIPLE courses
 
-    /**
-     * Default constructor
-     */
+
     public Subject(String subjectID, String subjectName) {
     	this.subjectID = subjectID;
     	this.subjectName = subjectName;

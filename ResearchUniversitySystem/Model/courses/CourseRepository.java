@@ -5,82 +5,45 @@ import users.User;
 
 import java.io.*;
 import java.util.Vector;
+import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.TreeSet;
 import java.io.Serializable;
 
 
 /**
- * 
+ * @author Muslik
  */
 public class CourseRepository implements Serializable {
-
-    /**
-     * Default constructor
-     */
+	
+	private HashMap<String, Course> courses;
+	
     public CourseRepository() {
+    	this.courses = new HashMap<>();
     }
-
-    /**
-     * 
-     */
-    private TreeSet<Course> courses;
-
-    /**
-     * 
-     */
-    private double creditPrice;
-
-    /**
-     * @param course 
-     * @return
-     */
+    
     public void addCourse(Course course) {
-        // TODO implement here
-        return;
+        courses.put(course.getID(), course);
     }
-
-    /**
-     * @param course 
-     * @return
-     */
+    
     public boolean removeCourse(Course course) {
-        // TODO implement here
-        return false;
+        return courses.remove(course.getID()) != null;
     }
 
-    /**
-     * @return
-     */
+    public Course getCourseByID(String courseID) {
+        return courses.get(courseID);
+    }
+    
     public void displayCourses() {
-        // TODO implement here
-        return;
+    	System.out.println("Active courses to add:");
+    	for (Entry<String, Course> entry : courses.entrySet()) {
+    		System.out.println(entry.getValue());
+    	}
     }
 
-    /**
-     * @param course 
-     * @return
-     */
-    public Course getCourse(Course course) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param user 
-     * @return
-     */
-    public TreeSet<Course> getCoursesOfAUser(User user) {
-        // TODO implement here
-        return null;
-    }
-
-    /**
-     * @param courses 
-     * @return
-     */
-    public GradeReport getGradeReport(TreeSet<Course> courses) {
-        // TODO implement here
-        return null;
+    public GradeReport getGradeReport(HashMap<String, Course> courses) {
+		return null;
+        //TODO
     }
 
 }
