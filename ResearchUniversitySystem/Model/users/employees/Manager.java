@@ -2,6 +2,10 @@ package users.employees;
 
 import enums.Managers;
 import menuInfo.NewsRepository;
+
+import java.util.Comparator;
+import java.util.Vector;
+
 import courses.Course;
 import courses.CourseRepository;
 import courses.TimeWindow;
@@ -19,7 +23,11 @@ public class Manager extends Employee {
 	
 	private Managers managerType;
 
-    public Manager(Managers managerType) {
+	public Manager() {
+		
+	}
+    public Manager(String firstName, String lastName, String email, Managers managerType) {
+    	super(firstName, lastName, email);
     	this.managerType = managerType;
     }
 
@@ -29,7 +37,7 @@ public class Manager extends Employee {
         return ;
     }
 
-    public void viewStudetnsInfo(StudentsComparator comp) {
+    public void viewStudentsInfo(StudentsComparator comp) {
         // TODO implement here
         return ;
     }
@@ -44,15 +52,20 @@ public class Manager extends Employee {
         return ;
     }
 
-    public void orderStudentsByGPA() {
-        // TODO implement here
-        return ;
+    public Vector<Student> orderStudentsByGPA(Vector<Student> students) {
+    	Vector<Student> sortedStudents = new Vector<>(students); 
+        sortedStudents.sort(new StudentGpaComparator());
+        return sortedStudents;
+    	//Vector<Student> students = orderStudentsByGPA(compare);
+    	//students.sort(new StudentGpaComparator());
+       // return students;
     }
 
 
-    public void orderStudentsAlphabetically() {
-        // TODO implement here
-        return ;
+    public Vector<Student> orderStudentsAlphabetically(Vector<Student> students) {
+    	Vector<Student> sortedStudents = new Vector<>(students); 
+        sortedStudents.sort(new StudentAlphabetComparator());
+        return sortedStudents;
     }
 
     public void orderTeachersByRate() {
@@ -150,5 +163,4 @@ public class Manager extends Employee {
         // TODO implement here
         return ;
     }
-
 }
