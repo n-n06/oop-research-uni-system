@@ -4,6 +4,7 @@ import enums.Managers;
 import menuInfo.NewsRepository;
 import courses.Course;
 import courses.CourseRepository;
+import courses.RegistrationRequest;
 import courses.CourseRegistrationService;
 import users.students.Student;
 import utilities.social.RequestRepository;
@@ -11,205 +12,128 @@ import utilities.social.Request;
 import utilities.comparators.*;
 
 /**
- * 
+ * @author Muslik
  */
 public class Manager extends Employee {
+	
+	private Managers managerType;
 
-    /**
-     * Default constructor
-     */
-    public Manager() {
+    public Manager(Managers managerType) {
+    	this.managerType = managerType;
     }
 
-    /**
-     * 
-     */
-    private Managers managerType;
 
-
-
-    /**
-     * @return
-     */
     public void viewStudentsInfo() {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @param comp 
-     * @return
-     */
     public void viewStudetnsInfo(StudentsComparator comp) {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @param teacher 
-     * @return
-     */
     public void viewTeachersInfo(Teacher teacher) {
         // TODO implement here
         return;
     }
 
-    /**
-     * @param comp 
-     * @return
-     */
     public void viewTeachersInfo(TeachersComparator comp) {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @return
-     */
     public void orderStudentsByGPA() {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @return
-     */
+
     public void orderStudentsAlphabetically() {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @return
-     */
     public void orderTeachersByRate() {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @return
-     */
     public void orderTeachersAlphabetically() {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @param newsRepo 
-     * @return
-     */
+ 
     public void postNews(NewsRepository newsRepo) {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @return
-     */
     public void createStatisticalReport() {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @param course 
-     * @param teacher 
-     * @return
-     */
     public void assignCourseToTeacher(Course course, Teacher teacher) {
-        // TODO implement here
-        return ;
+        teacher.addCourse(course);
+        course.addTeacherToCourse(teacher);
     }
 
-    /**
-     * @param courseRepo 
-     * @return
-     */
-    public void addCourse(CourseRepository courseRepo) {
-        // TODO implement here
-        return ;
+
+    public void addCourse(CourseRepository courseRepo, Course course) {
+        courseRepo.addCourse(course);
     }
 
-    /**
-     * @param courseRepo 
-     * @return
-     */
-    public void deleteCourse(CourseRepository courseRepo) {
-        // TODO implement here
-        return ;
+    public void deleteCourse(CourseRepository courseRepo, Course course) {
+        courseRepo.removeCourse(course);
     }
 
-    /**
-     * @param crs 
-     * @return
-     */
     public void openRegistration(CourseRegistrationService crs) {
-        // TODO implement here
-        return ;
+        crs.openRegistration();
+    }
+    
+    public void closeRegistration(CourseRegistrationService crs) {
+        crs.closeRegistration();
     }
 
-    /**
-     * @param crs 
-     * @param student 
-     * @return
-     */
-    public boolean verifyRegistration(CourseRegistrationService crs, Student student) {
-        // TODO implement here
-        return false;
+    public void verifyRegistration(CourseRegistrationService crs, Integer id) {
+    	RegistrationRequest request = crs.getRegRequest(id);
+    	if(request.getCourse().checkPrerequesites(request.getStudent())) {
+    		System.out.println("Succes! Registration was accepted by manager");
+    		request.getStudent().addCourse(request.getCourse());
+    		request.setApproved(); 
+    	} else {
+    		System.out.println("Registration was declined by manager because prereq");
+    		
+    	}
+    }
+    
+    public void declineRegRequest(CourseRegistrationService crs, Integer id) {
+    	RegistrationRequest request = crs.getRegRequest(id);
+    	System.out.println("Registration was declined by manager");   
     }
 
-    /**
-     * @param crs 
-     * @return
-     */
-    public void viewRegistration(CourseRegistrationService crs) {
-        // TODO implement here
-        return ;
+    public void viewRegRequest(CourseRegistrationService crs, Integer id) {
+        System.out.println(crs.getRegRequest(id));
+    }
+    
+    public void viewAllRegRequest(CourseRegistrationService crs) {
+        crs.displayRegRequests();
     }
 
-    /**
-     * @param crs 
-     * @param student 
-     * @return
-     */
-    public void viewStudentRegistration(CourseRegistrationService crs, Student student) {
-        // TODO implement here
-        return ;
-    }
-
-    /**
-     * @param crs 
-     * @param student 
-     * @return
-     */
-    public void cancelRegistration(CourseRegistrationService crs, Student student) {
-        // TODO implement here
-        return ;
-    }
-
-    /**
-     * @param requestRepo 
-     * @return
-     */
+    
     public void viewRequest(RequestRepository requestRepo) {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @param request 
-     * @return
-     */
     public void acceptRequest(Request request) {
         // TODO implement here
         return ;
     }
 
-    /**
-     * @param request 
-     * @return
-     */
+
     public void declineRequest(Request request) {
         // TODO implement here
         return ;
