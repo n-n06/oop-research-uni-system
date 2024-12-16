@@ -13,6 +13,7 @@ import research.CanBecomeResearcher;
 
 
 public abstract class BaseUser implements CanBecomeResearcher, User, Serializable {
+	private int userId;
     private String firstName;
     private String lastName;
     private String email;
@@ -22,6 +23,10 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
     private int age;
     private Language preferredLanguage;
     private boolean isResearcher;
+    
+    {
+    	userId = Database.generateUserId();
+    }
     
     public BaseUser() {
     	
@@ -128,7 +133,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
     @Override
     public String toString() {
     	return "Email: " + email + ", First name: " + firstName + ", Last name: " + lastName 
-    			+ ", Gender: " + gender.toString().toLowerCase() + ", Age: " + age;
+    			+ ", Gender: " + gender + ", Age: " + age;
     }
 
 }

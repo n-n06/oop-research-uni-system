@@ -60,4 +60,10 @@ public class Employee extends BaseUser {
         // TODO implement here
     }
 
+	@Override
+	public void becomeResearcher() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -11,7 +11,6 @@ public class UserRepository implements Serializable {
 	
     public UserRepository() {
     	users = new HashMap<>();
-    	addUser(new Admin("admin@admin.com"));
     }
 
     private HashMap<String, User> users;
@@ -62,6 +61,10 @@ public class UserRepository implements Serializable {
             return user.getPassword().equals(password);
         }
         return false; 
+    }
+    
+    public void addRootAdmin() {
+    	addUser(new Admin("admin@admin.com"));
     }
 
 }

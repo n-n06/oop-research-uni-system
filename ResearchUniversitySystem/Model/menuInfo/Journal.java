@@ -53,14 +53,9 @@ public class Journal implements Serializable {
     
     {
     	journalId = Database.generateJournalId();
-    }
-
-    /**
-     * Default constructor
-     */
-    {
     	this.articles = new Vector<>();
     }
+    
     
     public Journal() {
     }
@@ -143,7 +138,6 @@ public class Journal implements Serializable {
     	for (ResearchPaper art : articles) {
     		System.out.println(art); //TODO: add stuff later ig)
     	}
-        return;
     }
 
     /**

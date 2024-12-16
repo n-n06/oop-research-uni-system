@@ -19,10 +19,10 @@ import menuInfo.JournalRepository;
  * Singleton DB
  */
 public class Database implements Serializable {
-	private static int userId = 0;
-	private static int journalId = 0;
-	private static int newsId = 0;
-	private static int messageId = 0;
+	private int userId = 0;
+	private int journalId = 0 ;
+	private int newsId = 0;
+	private int messageId = 0;
     /**
      * 
      */
@@ -68,40 +68,41 @@ public class Database implements Serializable {
      */
     private MessageRepository messageRepo;
     
+    
     /**
-     *Static init block to create the instance on load 
+     * Private constr to ensure Singleton
      */
-    static {
-    	if (new File("data").exists()) {
-    		System.out.println("pls");
-    		try {
-    			instance = read();
-    		} catch (Exception e) {
-    			System.err.println(e.getMessage());;
-    		}
-    	} else {
-    		
-    		instance = new Database();
-    	}
-    }
-  
+    
     private void initRepos() {
-    	usersRepo = new UserRepository();
     	courseRepo = new CourseRepository();
     	journalRepo = new JournalRepository();
     	newsRepo = new NewsRepository();
     	messageRepo = new MessageRepository();
     	requestRepo = new RequestRepository();
     	registration = new CourseRegistrationService();
+    	usersRepo = new UserRepository();
     }
     
-    /**
-     * Private constr to ensure Singleton
-     */
     private Database() {
 		initRepos();
     }
     
+    /**
+     *Static init block to create the instance on load 
+     */
+    static {
+    	if (new File("data").exists()) {
+    		System.out.println("Savepoint!");
+    		try {
+    			instance = read();
+    		} catch (Exception e) {
+    			System.err.println(e.getMessage());;
+    		}
+    	} else {
+    		instance = new Database();
+    		instance.usersRepo.addRootAdmin();
+    	}
+    }
     
     /**
      * 
@@ -172,8 +173,8 @@ public class Database implements Serializable {
      * @return	userId	a unique identifier of a user
      */
     public static int generateUserId() {
-    	userId++;
-    	return userId;
+    	instance.userId++;
+    	return instance.userId;
     }
     
     /**
@@ -183,8 +184,8 @@ public class Database implements Serializable {
      * @return	userId	a unique identifier of a journal
      */
     public static int generateJournalId() {
-    	journalId++;
-    	return journalId;
+    	instance.journalId++;
+    	return instance.journalId;
     }
     
     /**
@@ -194,8 +195,8 @@ public class Database implements Serializable {
      * @return	userId	a unique identifier of news
      */
     public static int generateNewsId() {
-    	newsId++;
-    	return newsId;
+    	instance.newsId++;
+    	return instance.newsId;
     }
     
     /**
@@ -205,8 +206,8 @@ public class Database implements Serializable {
      * @return	userId	a unique identifier of a message
      */
     public static int generateMessageId() {
-    	messageId++;
-    	return messageId;
+    	instance.messageId++;
+    	return instance.messageId;
     }
 
 

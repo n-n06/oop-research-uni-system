@@ -23,10 +23,11 @@ public class DemoSystem {
 		String stringInput1;
 		String stringInput2;
 		
+		
 		User currentUser = new Admin();
 		
 		try {
-			
+			Database.instance.getNewsRepo().addNews(new News("Test News", NewsType.GENERAL, "This is a test uwu"));
 			
 			System.out.println("🏛Welcome!🏛");	
 			while (true) {
@@ -35,9 +36,6 @@ public class DemoSystem {
 				stringInput1 = br.readLine();
 				System.out.println("Enter your password:");
 				stringInput2 = br.readLine();
-				
-
-				
 				
 				if (Database.instance.getUsersRepo().login(stringInput1, stringInput2)) {
 					System.out.println("You've logged succesfully");
