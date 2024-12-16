@@ -13,6 +13,7 @@ import courses.CourseRepository;
 import courses.CourseRegistrationService;
 import menuInfo.NewsRepository;
 import menuInfo.JournalRepository;
+import research.ResearchRepository;
 import research.ResearchProject;
 import research.Researcher;
 
@@ -25,6 +26,7 @@ public class Database implements Serializable {
 	private int newsId = 0;
 	private int messageId = 0;
 	private int organizationId = 0;
+	private int researchProjectId = 0;
     /**
      * 
      */
@@ -69,13 +71,13 @@ public class Database implements Serializable {
      * Repository to interact with the storage of All Messages
      */
     private MessageRepository messageRepo;
+
     
-    private Vector<Complaint> complaints = new Vector<>();
+    private ResearchRepository researchRepo;
     
-    private Vector<ResearchProject> researchProjects = new Vector<>();
+    private Vector<Complaint> complaints;
     
-    
-    private Vector<Researcher> researchers = new Vector<>();
+
     
 
     private void initRepos() {
@@ -86,6 +88,9 @@ public class Database implements Serializable {
     	requestRepo = new RequestRepository();
     	registration = new CourseRegistrationService();
     	usersRepo = new UserRepository();
+    	
+    	complaints = new Vector<>();
+    	researchRepo = new ResearchRepository();
     }
     
     /**
@@ -150,12 +155,8 @@ public class Database implements Serializable {
 		return usersRepo;
 	}
     
-    public Vector<Researcher> getResearchers() {
-		return researchers;
-	}
-    
-    public Vector<ResearchProject> getResearchProjects() {
-		return researchProjects;
+    public ResearchRepository getResearchRepo() {
+		return researchRepo;
 	}
     
 
@@ -197,7 +198,7 @@ public class Database implements Serializable {
      * Produces an id for a new journal based on 
      * the current number of journals in the system
      * 
-     * @return	userId	a unique identifier of a journal
+     * @return	journalId	a unique identifier of a journal
      */
     public static int generateJournalId() {
     	instance.journalId++;
@@ -208,7 +209,7 @@ public class Database implements Serializable {
      * Produces an id for a new news instance based on 
      * the current number of news in the system
      * 
-     * @return	userId	a unique identifier of news
+     * @return	newsId	a unique identifier of news
      */
     public static int generateNewsId() {
     	instance.newsId++;
@@ -219,7 +220,7 @@ public class Database implements Serializable {
      * Produces an id for a new message instance based on 
      * the current number of mesage in the system
      * 
-     * @return	userId	a unique identifier of a message
+     * @return	messageId	a unique identifier of a message
      */
     public static int generateMessageId() {
     	instance.messageId++;
@@ -230,11 +231,22 @@ public class Database implements Serializable {
      * Produces an id for a new organization instance based on 
      * the current number of organizations in the system
      * 
-     * @return	userId	a unique identifier of an organization
+     * @return	organizationId	a unique identifier of an organization
      */
     public static int generateOrganizationId() {
     	instance.organizationId++;
     	return instance.organizationId;
+    }
+    
+    /**
+     * Produces an id for a new research project instance based on 
+     * the current number of research projects in the system
+     * 
+     * @return	researchProjectId	a unique identifier of a research project
+     */
+    public static int generateResearchProjectId() {
+    	instance.researchProjectId++;
+    	return instance.researchProjectId;
     }
 
 }

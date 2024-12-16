@@ -46,6 +46,6 @@ public class WorkMessage extends Message {
     
     @Override
     public String toString() {
-    	return "Work " + super.toString() + "\nSender: " + sender.getName();
+    	return "Work " + super.toString() + "\nSender: " + sender.getFirstName() + " " + sender.getLastName();
     }
 }

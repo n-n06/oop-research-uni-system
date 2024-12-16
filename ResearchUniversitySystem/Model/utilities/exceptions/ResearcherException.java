@@ -6,12 +6,14 @@ import java.util.*;
 /**
  * 
  */
-public class ResearcherException {
+public class ResearcherException extends Exception {
 
     /**
      * Default constructor
-     */
-    public ResearcherException() {
+     */    
+    public ResearcherException(String message) {
+    	super(message);
     }
+    
 
 }

@@ -12,7 +12,7 @@ import research.Researcher;
 import research.CanBecomeResearcher;
 
 
-public abstract class BaseUser implements CanBecomeResearcher, User, Serializable {
+public abstract class BaseUser implements User, Serializable {
 	private int userId;
     private String firstName;
     private String lastName;

@@ -11,7 +11,9 @@ public class InvalidSupervisorException extends ResearcherException {
     /**
      * Default constructor
      */
-    public InvalidSupervisorException() {
+    public InvalidSupervisorException(String message) {
+    	super(message);
     }
+    
 
 }

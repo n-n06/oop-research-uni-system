@@ -58,7 +58,7 @@ public class ResearchProject {
      * @param supervisor 
      * @return
      */
-    public void setNewSupervisor(Researcher supervisor) {
+    public void setSupervisor(Researcher supervisor) {
         // TODO implement here
         return;
     }

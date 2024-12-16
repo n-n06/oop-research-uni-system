@@ -20,9 +20,6 @@ public class Employee extends BaseUser {
     public Employee() {
     }
     
-    public Employee(String firstName, String lastName, String email) {
-    	super(firstName, lastName, email);
-    }
     
     public Employee(String firstName, String lastName, String email, int age, Gender gender) {
     	super(firstName, lastName, email, age, gender);
@@ -33,7 +30,7 @@ public class Employee extends BaseUser {
         try {
         	message.setReceiver(employee);
         	messageRepo.addMessage(employee, message);
-        	System.out.println("Message sent to"+ employee.getName());
+        	System.out.println("Message sent to "+ employee.getFirstName() + " " + employee.getLastName());
         } catch (Exception e) {
         	System.out.println("Fail!");
         }
@@ -41,7 +38,7 @@ public class Employee extends BaseUser {
     }
     public void readWorkMessage() {
     	try {
-    		System.out.println("Work Messages for "+ this.getName());
+    		System.out.println("Work Messages for "+ this.getFirstName() + " " + this.getLastName());
     		TreeSet<Message> messages = messageRepo.getMessages(this);
     		if (messages == null || messages.isEmpty()) {
     			System.out.println("No messages available");

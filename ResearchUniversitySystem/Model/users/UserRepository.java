@@ -17,13 +17,13 @@ public class UserRepository implements Serializable {
 
     public void addUser(BaseUser user) {
     	if (user == null) throw new IllegalArgumentException("User cannot be null");
-        users.put(user.getUserEmail(), user);
+        users.put(user.getEmail(), user);
     }
 
     public boolean removeUser(User user) {
     	if (user == null) return false;
     	
-    	String userEmail = user.getUserEmail();
+    	String userEmail = user.getEmail();
     	if (users.remove(userEmail) != null) {
             return true;
         }
@@ -33,7 +33,7 @@ public class UserRepository implements Serializable {
     public void updateUser(User updatedUser) {
         if (updatedUser == null) throw new IllegalArgumentException("User cannot be null");
         
-        String userEmail = updatedUser.getUserEmail();
+        String userEmail = updatedUser.getEmail();
         if (users.containsKey(userEmail)) {
             users.put(userEmail, updatedUser); 
         } else {

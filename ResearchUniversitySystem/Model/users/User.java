@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 import menuInfo.*;
 import research.CanBecomeResearcher;
+import enums.Gender;
 import enums.Language;
 
 
 public interface User extends Serializable {
 
     public boolean login(String email, String password, UserRepository userRepo);
+    
+    public void logout(); 
 
     public void changePassword(String password);
 
@@ -42,4 +45,13 @@ public interface User extends Serializable {
     public String getPassword();
     
     public boolean getIsActive();
+    
+    public int getAge();
+    
+    public Gender getGender();
+    
+    public Language getPreferredLanguage();
+    
+    
+    public void becomeResearcher();
 }

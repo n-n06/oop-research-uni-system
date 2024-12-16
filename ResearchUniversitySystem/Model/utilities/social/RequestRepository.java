@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * 
  */
-public class RequestRepository implements Serializable {
+public class RequestRepository implements Serializable  {
 
     /**
      * Default constructor

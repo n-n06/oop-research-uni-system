@@ -3,10 +3,12 @@ package research;
 import java.io.*;
 import java.util.*;
 
+import users.User;
+
 /**
  * 
  */
-public interface CanBecomeResearcher {
+public interface CanBecomeResearcher extends User {
 
     /**
      * @return
