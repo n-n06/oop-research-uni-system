@@ -90,5 +90,19 @@ public class ResearchPaper implements Comparable {
         // TODO implement here
         return 0;
     }
+    
+    public Date getPublishedDate() {
+		return publishedDate;
+	}
+    
+    public int getPages() {
+		return pages;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

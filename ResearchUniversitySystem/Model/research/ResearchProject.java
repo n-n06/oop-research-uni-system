@@ -36,6 +36,11 @@ public class ResearchProject {
     /**
      * @return
      */
+    public Vector<ResearchPaper> getResearchPapers() {
+        // TODO implement here
+        return publishedPapers;
+    }
+    
     public Vector<ResearchPaper> printResearchPapers() {
         // TODO implement here
         return null;
