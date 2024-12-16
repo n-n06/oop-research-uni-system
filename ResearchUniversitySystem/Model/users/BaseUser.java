@@ -116,13 +116,19 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
     }
 
 
-    public void becomeResearcher() {
-        this.isResearcher = true;
-    }
+//    public void becomeResearcher() {
+//        this.isResearcher = true;
+//    }
 
 
     public void changePassword(String password) {
         this.password = password;
+    }
+    
+    @Override
+    public String toString() {
+    	return "Email: " + email + ", First name: " + firstName + ", Last name: " + lastName 
+    			+ ", Gender: " + gender.toString().toLowerCase() + ", Age: " + age;
     }
 
 }
