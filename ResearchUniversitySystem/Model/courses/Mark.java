@@ -61,13 +61,13 @@ public class Mark {
 	}
 
     public void setFinalExamMark(double finalExam) {
-	checkValidMark(finalExam);
+    	checkValidMark(finalExam);
         if (finalExam > 40) {
             this.finalExam = 40;
         } 
-	else {
-	    this.finalExam = finalExam;
-	}
+        else {
+        	this.finalExam = finalExam;
+        }
     }
 
     public double getOverallPoints() {
@@ -85,18 +85,18 @@ public class Mark {
     }
 
     private void checkValidMark(double mark) {
-	if (mark < 0) {
-		throw new IllegalArgumentException("Mark must be positive, but received: " + mark);
-	}
+		if (mark < 0) {
+			throw new IllegalArgumentException("Mark must be positive, but received: " + mark);
+		}
     }
 
     public void addFirstAttestationMark(double mark) {
-	checkValidMark(mark);
+    	checkValidMark(mark);
         firstAttMarks.add(mark);
     }
 
     public void addSecondAttestationMark(double mark) {
-	checkValidMark(mark);
+    	checkValidMark(mark);
         secondAttMarks.add(mark);
     }
     

@@ -5,15 +5,16 @@ package database;
  */
 
 import java.io.*;
+import java.util.Vector;
 
 import users.UserRepository;
-import utilities.social.MessageRepository;
-import utilities.social.RequestRepository;
+import utilities.social.*;
 import courses.CourseRepository;
 import courses.CourseRegistrationService;
 import menuInfo.NewsRepository;
 import menuInfo.JournalRepository;
-
+import research.ResearchProject;
+import research.Researcher;
 
 /**
  * Singleton DB
@@ -23,6 +24,7 @@ public class Database implements Serializable {
 	private int journalId = 0 ;
 	private int newsId = 0;
 	private int messageId = 0;
+	private int organizationId = 0;
     /**
      * 
      */
@@ -68,11 +70,14 @@ public class Database implements Serializable {
      */
     private MessageRepository messageRepo;
     
+    private Vector<Complaint> complaints = new Vector<>();
     
-    /**
-     * Private constr to ensure Singleton
-     */
+    private Vector<ResearchProject> researchProjects = new Vector<>();
     
+    
+    private Vector<Researcher> researchers = new Vector<>();
+    
+
     private void initRepos() {
     	courseRepo = new CourseRepository();
     	journalRepo = new JournalRepository();
@@ -82,6 +87,10 @@ public class Database implements Serializable {
     	registration = new CourseRegistrationService();
     	usersRepo = new UserRepository();
     }
+    
+    /**
+     * Private constr to ensure Singleton
+     */
     
     private Database() {
 		initRepos();
@@ -141,6 +150,13 @@ public class Database implements Serializable {
 		return usersRepo;
 	}
     
+    public Vector<Researcher> getResearchers() {
+		return researchers;
+	}
+    
+    public Vector<ResearchProject> getResearchProjects() {
+		return researchProjects;
+	}
     
 
     /**
@@ -210,5 +226,15 @@ public class Database implements Serializable {
     	return instance.messageId;
     }
 
+    /**
+     * Produces an id for a new organization instance based on 
+     * the current number of organizations in the system
+     * 
+     * @return	userId	a unique identifier of an organization
+     */
+    public static int generateOrganizationId() {
+    	instance.organizationId++;
+    	return instance.organizationId;
+    }
 
 }

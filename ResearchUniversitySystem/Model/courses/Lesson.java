@@ -4,11 +4,10 @@ import java.util.Date;
 
 import courses.TimeWindow;
 import enums.LessonType;
-/*
-import users.employees.Teacher;
 
+import users.employees.Teacher;
 import users.students.Student;
-*/
+
 // need to ensure one teacher can have only one lesson at time
 // need to ensure we have two lectures that go together as a two pack
 // need to ensure we cant have two lessons in the same room (maybe having a vector with room nums that are already assigned in the specific timewindow)

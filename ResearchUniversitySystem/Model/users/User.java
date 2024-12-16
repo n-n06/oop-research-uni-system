@@ -7,7 +7,7 @@ import research.CanBecomeResearcher;
 import enums.Language;
 
 
-public interface User extends Serializable, CanBecomeResearcher {
+public interface User extends Serializable {
 
     public boolean login(String email, String password, UserRepository userRepo);
 
@@ -15,11 +15,13 @@ public interface User extends Serializable, CanBecomeResearcher {
 
     public void selectLanguage(Language language);
 
+    public void viewPersonalProfile();
+    
+
     public void viewNews(NewsRepository newsRepo);
 
     public void addComment(NewsRepository newsRepo, Comment comment, int newsID);
 
-    public void viewPersonalProfile();
     
     public void viewJournals(JournalRepository journals);
    
@@ -27,16 +29,15 @@ public interface User extends Serializable, CanBecomeResearcher {
 
     public void unsubscribeFromJournal(Journal journal);
 
-//    public void accessResearcherAccount();
     
-    @Override
-    public void becomeResearcher();
-
     public void viewMessages();
     
-    public String getName();
+    
+    public String getFirstName();
+    
+    public String getLastName();
 
-    public String getUserEmail();
+    public String getEmail();
     
     public String getPassword();
     

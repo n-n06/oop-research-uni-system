@@ -22,7 +22,7 @@ public class CourseRegistrationService implements Serializable {
     }
 
     public void addRegRequest(RegistrationRequest regReq) {
-        registryRequests.put(regReq.getID(), regReq);
+        registryRequests.put(regReq.getRegRequestid(), regReq);
     }
 
     public RegistrationRequest getRegRequest(Integer id) {

@@ -5,6 +5,10 @@ package users.students;
  */
 public class BachelorStudent extends Student {
 	 public int year;
+	 
+	 public BachelorStudent() {
+		 
+	 }
 
  
     public BachelorStudent(String firstName, String lastName, String email, int year) {

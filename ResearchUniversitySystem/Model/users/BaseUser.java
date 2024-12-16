@@ -18,7 +18,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
     private String lastName;
     private String email;
     private String password = "root";
-    private boolean isActive;
+    private boolean isActive = false;;
     private Gender gender;
     private int age;
     private Language preferredLanguage;
@@ -32,16 +32,13 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
     	
     }
     
-	public BaseUser(String firstName, String lastName, String email) {
+    
+	public BaseUser(String firstName, String lastName, String email, int age, Gender gender) {
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.email = email;
-	}
-    
-    
-	public BaseUser(String firstName, String lastName, String email, int age, Gender gender) {
-	    this(firstName, lastName, email);
-	    this.isActive = false;
+	    this.age = age;
+	    this.gender = gender;
 	}
 	
     public boolean login(String email, String password, UserRepository userRepo) {
@@ -61,9 +58,29 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
         return isActive;
     }
     
-    public String getUserEmail() {
+    public String getEmail() {
     	return email;
     }
+    
+    public String getFirstName() {
+    	return firstName;
+    }
+    
+    public String getLastName() {
+    	return lastName;
+    }
+    
+    public int getAge() {
+		return age;
+	}
+    
+    public Gender getGender() {
+		return gender;
+	}
+    
+    public Language getPreferredLanguage() {
+		return preferredLanguage;
+	}
     
     public String getPassword() {
     	return password;
@@ -76,7 +93,17 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
     public void selectLanguage(Language language) {
         this.preferredLanguage = language;
     }
+    
 
+    public void changePassword(String password) {
+        this.password = password;
+    }
+
+    public void viewPersonalProfile() {
+        System.out.println(toString());
+    }
+    
+    //News stuff
     public void viewNews(NewsRepository newsRepo) {
         System.out.println("News:");
         newsRepo.displayAllNews();
@@ -86,16 +113,7 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
         newsRepo.getNews(new News(newsID)).addComment(comment);
     }
 
-
-    public void viewPersonalProfile() {
-        System.out.println("Email : " + email);
-        System.out.println("Firstname : " + firstName);
-        System.out.println("Lastname : " + lastName);
-        System.out.println("Gender : " + gender);
-        System.out.println("Researcher : " + isResearcher);
-    }
-
-
+    //Journal stuff
     public void viewJournals(JournalRepository journals) {
         journals.displayJournals();
     }
@@ -108,32 +126,21 @@ public abstract class BaseUser implements CanBecomeResearcher, User, Serializabl
         journal.removeSubscriber(this);
     }
 
-
-
+    //Social stuff
     @Override
     public void viewMessages() {
     	Database.instance.getMessageRepo().viewMessages(this);
-    } 
-
-    @Override
-    public String getName() {
-    	return firstName + " " + lastName;
     }
 
-
-//    public void becomeResearcher() {
-//        this.isResearcher = true;
-//    }
-
-
-    public void changePassword(String password) {
-        this.password = password;
+    //Researcher stuff
+    public void becomeResearcher() {
+        this.isResearcher = true;
     }
     
     @Override
     public String toString() {
-    	return "Email: " + email + ", First name: " + firstName + ", Last name: " + lastName 
-    			+ ", Gender: " + gender + ", Age: " + age;
+    	return "Email: " + email + "\nFirst name: " + firstName + "\nLast name: " + lastName 
+    			+ "\nGender: " + gender + "\nAge: " + age + "\n";
     }
 
 }

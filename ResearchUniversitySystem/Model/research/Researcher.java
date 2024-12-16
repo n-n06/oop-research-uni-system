@@ -14,6 +14,7 @@ import research.CanBecomeResearcher;
 public class Researcher extends BaseDecorator implements Comparable<Researcher> {
 	
 	private CanBecomeResearcher user;
+	
     /**
      * 
      */
@@ -23,12 +24,14 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
      * Default constructor
      */
     public Researcher() {
+    	
     }
     
     /**
      * @param user
      */
     public Researcher(CanBecomeResearcher user) {
+    	this();
         this.user = user;
     }
 

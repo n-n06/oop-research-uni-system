@@ -5,8 +5,7 @@ import java.util.*;
 import users.BaseUser;
 import users.employees.Teacher;
 
-import enums.Degree;
-import enums.School;
+import enums.*;
 
 import utilities.social.RequestRepository;
 
@@ -21,14 +20,6 @@ import research.ResearchProject;
  * 
  */
 public abstract class Student extends BaseUser {
-	
-	public Student() {
-		super();
-	}
-
-    public Student(String firstName, String lastName, String email) {
-    	super(firstName, lastName, email);
-    }
 
     private int year;
     private Degree degree;
@@ -37,6 +28,15 @@ public abstract class Student extends BaseUser {
     private Vector<StudentOrganization> studentOrganizations;
     private HashSet<Course> completedCourses = new HashSet<>();
     private HashSet<Course> currentCourses = new HashSet<>();
+    
+	
+	public Student() {
+		super();
+	}
+
+    public Student(String firstName, String lastName, String email, int age, Gender gender) {
+    	super(firstName, lastName, email, age, gender);
+    }
     
     public HashSet<Course> getCompletedCourses() {
     	return completedCourses;
