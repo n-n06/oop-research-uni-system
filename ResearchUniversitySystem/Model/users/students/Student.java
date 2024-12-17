@@ -6,15 +6,13 @@ import users.BaseUser;
 import users.employees.Teacher;
 
 import enums.*;
-
-import utilities.social.RequestRepository;
-
 import courses.Course;
 import courses.CourseRegistrationService;
 import courses.Transcript;
 import courses.GPA;
 import courses.RegistrationRequest;
 import research.ResearchProject;
+import social.messages.RequestRepository;
 
 /**
  * 
@@ -93,7 +91,7 @@ public abstract class Student extends BaseUser {
     }
     
     public void registerForCourse(int id, CourseRegistrationService crs, Course course) {
-    	RegistrationRequest rq = new RegistrationRequest(id, course, this);
+    	RegistrationRequest rq = new RegistrationRequest(course, this);
         crs.addRegRequest(rq);
         System.out.println("Request for registration to " + course.getID());
     }

@@ -1,4 +1,4 @@
-package menuInfo;
+package social.updates;
 
 import java.util.Date;
 

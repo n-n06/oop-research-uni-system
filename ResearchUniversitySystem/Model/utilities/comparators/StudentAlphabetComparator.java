@@ -21,7 +21,7 @@ public class StudentAlphabetComparator extends StudentsComparator {
 	
     @Override
     public int compare(Student s1, Student s2) {
-        return s1.getName().compareTo(s2.getName()); // sorting in asccending order: 'Alice', 'Bob', ...
+        return s1.getFirstName().compareTo(s2.getFirstName()); // sorting in asccending order: 'Alice', 'Bob', ...
     }
     
 }

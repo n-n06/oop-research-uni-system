@@ -1,4 +1,4 @@
-package utilities.social;
+package social.messages;
 
 /**
  * @author nurs

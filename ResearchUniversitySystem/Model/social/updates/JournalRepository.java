@@ -1,4 +1,4 @@
-package menuInfo;
+package social.updates;
 
 import java.util.Vector;
 import java.io.Serializable;

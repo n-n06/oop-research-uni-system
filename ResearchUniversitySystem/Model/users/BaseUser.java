@@ -6,9 +6,14 @@ import java.util.*;
 import database.Database;
 import enums.Gender;
 import enums.Language;
-import menuInfo.*;
 import research.ResearchProject;
 import research.Researcher;
+import social.*;
+import social.updates.Comment;
+import social.updates.Journal;
+import social.updates.JournalRepository;
+import social.updates.News;
+import social.updates.NewsRepository;
 import research.CanBecomeResearcher;
 
 

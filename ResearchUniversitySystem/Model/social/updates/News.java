@@ -1,4 +1,4 @@
-package menuInfo;
+package social.updates;
 
 import java.util.Vector;
 import java.io.Serializable;
@@ -8,7 +8,6 @@ import java.util.Objects;
 import database.Database;
 
 import enums.NewsType;
-import menuInfo.Comment;
 
 /**
  * @author nurs

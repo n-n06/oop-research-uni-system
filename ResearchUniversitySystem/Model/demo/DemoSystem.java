@@ -6,10 +6,8 @@ import database.Database;
 
 import enums.NewsType;
 import enums.UserType;
-
-import menuInfo.Journal;
-import menuInfo.News;
-
+import social.updates.Journal;
+import social.updates.News;
 import users.UserFactory;
 import users.User;
 

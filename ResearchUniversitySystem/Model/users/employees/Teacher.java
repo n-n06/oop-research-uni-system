@@ -5,7 +5,7 @@ import courses.*;
 import database.Database;
 import enums.Gender;
 import enums.TeacherType;
-import utilities.social.Complaint;
+import social.messages.Complaint;
 import users.employees.TeacherRating;
 
 import java.io.*;

@@ -11,7 +11,8 @@ public class NotAResearcherException extends ResearcherException {
     /**
      * Default constructor
      */
-    public NotAResearcherException() {
+    public NotAResearcherException(String message) {
+    	super(message);
     }
 
 }

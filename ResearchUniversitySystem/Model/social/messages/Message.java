@@ -1,4 +1,4 @@
-package utilities.social;
+package social.messages;
 /**
  * @author nurs
  * */
@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.io.Serializable;
 
 import database.Database;
-import menuInfo.Journal;
+import social.updates.Journal;
 import users.User;
 
 

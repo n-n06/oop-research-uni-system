@@ -1,4 +1,4 @@
-package utilities.social;
+package social.messages;
 
 import java.util.Date;
 import java.io.Serializable;

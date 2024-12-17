@@ -11,13 +11,11 @@ import courses.RegistrationRequest;
 import courses.CourseRegistrationService;
 
 import enums.*;
-
-import menuInfo.*;
-
+import social.*;
+import social.messages.Request;
+import social.messages.RequestRepository;
+import social.updates.News;
 import users.students.Student;
-
-import utilities.social.RequestRepository;
-import utilities.social.Request;
 import utilities.comparators.*;
 
 /**

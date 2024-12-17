@@ -6,10 +6,10 @@ import java.util.TreeSet;
 
 import enums.Gender;
 import research.CanBecomeResearcher;
-import utilities.social.Message;
-import utilities.social.MessageRepository;
-import utilities.social.Request;
-import utilities.social.WorkMessage;
+import social.messages.Message;
+import social.messages.MessageRepository;
+import social.messages.Request;
+import social.messages.WorkMessage;
 
 /**
  * @author yasmin

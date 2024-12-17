@@ -8,14 +8,17 @@ import java.io.*;
 import java.util.Vector;
 
 import users.UserRepository;
-import utilities.social.*;
+
 import courses.CourseRepository;
 import courses.CourseRegistrationService;
-import menuInfo.NewsRepository;
-import menuInfo.JournalRepository;
+
 import research.ResearchRepository;
-import research.ResearchProject;
-import research.Researcher;
+
+import social.messages.Complaint;
+import social.messages.MessageRepository;
+import social.messages.RequestRepository;
+import social.updates.JournalRepository;
+import social.updates.NewsRepository;
 
 /**
  * Singleton DB

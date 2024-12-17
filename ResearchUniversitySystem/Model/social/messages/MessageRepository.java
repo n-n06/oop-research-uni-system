@@ -1,11 +1,10 @@
-package utilities.social;
+package social.messages;
 
 import java.util.HashMap;
 import java.io.Serializable;
 import java.util.TreeSet;
 
 import users.User;
-import utilities.social.Message;
 
 public class MessageRepository implements Serializable{
     /**
