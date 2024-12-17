@@ -2,6 +2,7 @@ package users;
 
 import enums.UserType;
 import enums.Degree;
+import enums.Gender;
 import enums.TeacherType;
 import users.students.*;
 import users.employees.*;
@@ -11,10 +12,10 @@ public class UserFactory {
     public UserFactory() {
     }
 
-    public BaseUser makeUser(String firstName, String lastName, String email, UserType type) {
+    public BaseUser makeUser(String firstName, String lastName, String email, int age, Gender gender, UserType type) {
         switch (type) {
             case ADMIN:
-            	return new Admin();
+            	return new Admin(firstName, lastName, email, age, gender);
             case DEAN:
             	return new Dean();
             case MANAGER:
