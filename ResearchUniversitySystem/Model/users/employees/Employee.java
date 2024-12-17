@@ -12,7 +12,7 @@ import utilities.social.Request;
 import utilities.social.WorkMessage;
 
 /**
- * 
+ * @author yasmin
  */
 public class Employee extends BaseUser {
 	private MessageRepository messageRepo;
@@ -53,14 +53,12 @@ public class Employee extends BaseUser {
              System.out.println("Failed to read " + e.getMessage());
          }
     }
+    
+    
     public void sendRequest(Request request) {
         // TODO implement here
     }
 
-	@Override
-	public void becomeResearcher() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

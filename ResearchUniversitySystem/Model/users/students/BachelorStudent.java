@@ -18,10 +18,7 @@ public class BachelorStudent extends Student {
     	this.year = year;
     }
     
-    @Override
-    public boolean login(String email, String password, UserRepository userRepo) {
-    	return super.login(getEmail(), getPassword(), userRepo);
-    }
+
 
   
    

@@ -142,5 +142,20 @@ public abstract class BaseUser implements User, Serializable {
     	return "Email: " + email + "\nFirst name: " + firstName + "\nLast name: " + lastName 
     			+ "\nGender: " + gender + "\nAge: " + age + "\n";
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (this == obj) return true;
+    	if (obj == null) return false;
+    	if (this.getClass() != obj.getClass()) return false;
+    	
+    	BaseUser u = (BaseUser) obj;
+    	return this.userId == u.userId;
+    }
+    
+    @Override
+    public int hashCode() {
+    	return Objects.hash(userId, firstName, lastName, age, gender, email);
+    }
 
 }

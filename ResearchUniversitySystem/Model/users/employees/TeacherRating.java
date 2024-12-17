@@ -13,7 +13,7 @@ public class TeacherRating {
     public static double getRating(Teacher t) {
     	Vector <Double> teacherRating = ratings.get(t);
     	if (ratings == null || ratings.isEmpty()) {
-            System.out.println("No ratings available for teacher " + t.getName());
+            System.out.println("No ratings available for teacher " + t.getFirstName() + " " + t.getLastName());
             return -1.0;
         }
     	double sum = 0;
@@ -27,7 +27,7 @@ public class TeacherRating {
     public static void addTeacherToRating(Teacher t) {//keep static for method in Teacher???
     	 if (!ratings.containsKey(t)) {
              ratings.put(t, new Vector<>());
-             System.out.println("Teacher " + t.getName() + " has been added to the rating system.");
+             System.out.println("Teacher " + t.getFirstName() + " " + t.getLastName() +  " has been added to the rating system.");
          }
     }
     public static void displayRating() {
@@ -37,7 +37,7 @@ public class TeacherRating {
         } else {
             for (Teacher t : ratings.keySet()) {
                 double averageRating = getRating(t);
-                System.out.printf("Teacher: " + t.getName() + "\nAverage Rating: " + averageRating);
+                System.out.printf("Teacher: " + t.getFirstName() + " " + t.getLastName() + "\nAverage Rating: " + averageRating);
             }
         }
     }

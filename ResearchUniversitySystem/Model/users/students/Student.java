@@ -25,6 +25,7 @@ public abstract class Student extends BaseUser {
     private Degree degree;
     private School school;
     private int credits;
+    
     private Vector<StudentOrganization> studentOrganizations;
     private HashSet<Course> completedCourses = new HashSet<>();
     private HashSet<Course> currentCourses = new HashSet<>();
@@ -38,6 +39,8 @@ public abstract class Student extends BaseUser {
     	super(firstName, lastName, email, age, gender);
     }
     
+    
+    
     public HashSet<Course> getCompletedCourses() {
     	return completedCourses;
     }
@@ -46,11 +49,16 @@ public abstract class Student extends BaseUser {
         // TODO implement here
         return ;
     }
-
-    public void viewJournal() {
+    
+    public Transcript getTranscript() {
         // TODO implement here
-        return ;
+        return null;
     }
+
+//    public void viewJournal() {
+//        // TODO implement here
+//        return ;
+//    }
 
 
     public void makeRequest(RequestRepository reqRepo) {
@@ -58,18 +66,11 @@ public abstract class Student extends BaseUser {
         return ;
     }
 
-
     public void viewMarks(Course course) {
         // TODO implement here
         return;
     }
-
-    public Transcript getTranscript() {
-        // TODO implement here
-        return null;
-    }
     
-
     public GPA getGPA() {
     	// TODO implement here
     	return null;
@@ -80,10 +81,7 @@ public abstract class Student extends BaseUser {
         return ;
     }
 
-    public void rateTeachers(Teacher teacher, int rating) {
-        // TODO implement here
-        return ;
-    }
+
     
     public void addCourseToCompleted(Course course) {
     	completedCourses.add(course);
@@ -101,32 +99,42 @@ public abstract class Student extends BaseUser {
     }
     
     public void displayOwnCourses() {
-    	System.out.println("Student's active courses:");
+    	System.out.println("Student's active courses: ");
     	for (Course c : currentCourses) {
     		System.out.println(c);
     	}
     }
 
+    //Teacher rating
+    public void rateTeachers(Teacher teacher, int rating) {
+        // TODO implement here
+        return ;
+    }
+
+    //Student orgs
+    public void startOrganization() {
+        // TODO implement here
+        return ;
+    }
+    
     public void joinOrganization() {
         // TODO implement here
         return ;
     }
 
 
-    public void startOrganization() {
-        // TODO implement here
-        return ;
-    }
-
-
+    //TODO: Research based - nurs
     public ResearchProject getDiplomaProject() {
-        // TODO implement here
         return null;
     }
 
 
-
-
+    @Override
+    public String toString() {
+    	// TODO Auto-generated method stub
+    	return super.toString();
+    }
+     
     
     
 

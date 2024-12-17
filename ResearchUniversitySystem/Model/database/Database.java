@@ -25,6 +25,7 @@ public class Database implements Serializable {
 	private int journalId = 0 ;
 	private int newsId = 0;
 	private int messageId = 0;
+	private int regRequestId = 0;
 	private int organizationId = 0;
 	private int researchProjectId = 0;
     /**
@@ -226,6 +227,17 @@ public class Database implements Serializable {
     	instance.messageId++;
     	return instance.messageId;
     }
+    
+    /**
+     * Produces an id for a new registration request instance based on 
+     * the current number of registration requests in the system
+     * 
+     * @return	regRequestId	a unique identifier of a registration request
+     */
+    public static int generateRegRequestId() {
+    	instance.regRequestId++;
+    	return instance.regRequestId;
+    }
 
     /**
      * Produces an id for a new organization instance based on 
@@ -248,5 +260,7 @@ public class Database implements Serializable {
     	instance.researchProjectId++;
     	return instance.researchProjectId;
     }
+    
+    
 
 }

@@ -22,24 +22,39 @@ public class CourseRegistrationService implements Serializable {
     }
 
     public void addRegRequest(RegistrationRequest regReq) {
-        registryRequests.put(regReq.getRegRequestid(), regReq);
+    	if (isOpen) {
+            registryRequests.put(regReq.getRegRequestid(), regReq);
+    	}
+    }
+    
+    public boolean removeRegRequest(Integer id) {
+    	if (isOpen) {
+            return registryRequests.remove(id) != null; 
+    	}
+    	return false;
+    }
+    
+    public void clearAllRequests() {
+    	if (isOpen) {
+            registryRequests.clear();
+    	}
     }
 
     public RegistrationRequest getRegRequest(Integer id) {
-        return registryRequests.get(id); 
-    }
-
-    public boolean removeRegRequest(Integer id) {
-        return registryRequests.remove(id) != null; 
+    	if (isOpen) {
+            return registryRequests.get(id); 
+    	}
+		return null; 
     }
 
     public boolean hasRegRequest(Integer id) {
-        return registryRequests.containsKey(id);
+    	if (isOpen) {
+            return registryRequests.containsKey(id);
+    	}
+    	return false;
     }
 
-    public void clearAllRequests() {
-        registryRequests.clear();
-    }
+
     
     public void openRegistration() {
         if (isOpen) {
@@ -58,6 +73,8 @@ public class CourseRegistrationService implements Serializable {
             System.out.println("Registration closed.");
         }
     }
+    
+    
     
     public void displayRegRequests() {
     	System.out.println("All registration requests:");
