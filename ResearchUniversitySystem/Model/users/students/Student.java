@@ -15,34 +15,39 @@ import research.ResearchProject;
 import social.messages.RequestRepository;
 
 /**
- * 
+ * @author eva
  */
 public abstract class Student extends BaseUser {
-
+	// 1. FIELDS
     private int year;
     private Degree degree;
     private School school;
     private int credits;
+    // some field for gpa
     
     private Vector<StudentOrganization> studentOrganizations;
     private HashSet<Course> completedCourses = new HashSet<>();
     private HashSet<Course> currentCourses = new HashSet<>();
     
-	
+	// 2. CONSTRUCTORS: 
 	public Student() {
 		super();
 	}
 
-    public Student(String firstName, String lastName, String email, int age, Gender gender) {
+    public Student(String firstName, String lastName, String email, int age, Gender gender, Degree degree, School school) {
     	super(firstName, lastName, email, age, gender);
-    }
-    
-    
-    
-    public HashSet<Course> getCompletedCourses() {
-    	return completedCourses;
+    	this.degree = degree;
+    	this.school = school;
+    	this.year = 1; // by default, gonna have a method to increase a year for ALL students???? And if so we can have a Graduate() method? but it will be too overcomplicated... but then again will we need to handle transfer students??
     }
 
+    // 3. WORKING WITH TEACHERS:
+    public void rateTeacher(Teacher teacher, int rating) {
+        teacher.getRatingMarks().add(rating);
+    }
+    
+    // 4. WORKING WITH COURSES AND GRADES: --- NOT FINISHED, gprobably gonna separate it in sections for courses/lessons and for marks and att (if its imlemented here)
+   
     public void viewTranscript() {
         // TODO implement here
         return ;
@@ -69,25 +74,27 @@ public abstract class Student extends BaseUser {
         return;
     }
     
-    public GPA getGPA() {
-    	// TODO implement here
-    	return null;
+    public void getGPA() {
+        // TODO implement here
+        return ;
     }
     
     public void viewSchedule() {
         // TODO implement here
         return ;
     }
-
-
     
     public void addCourseToCompleted(Course course) {
     	completedCourses.add(course);
     }
     
+    public HashSet<Course> getCompletedCourses() {
+    	return completedCourses;
+    }
+    
     public void addCourse(Course course) {
     	currentCourses.add(course);
-    	System.out.println("Course was added to Student's courses");
+    	System.out.println("Course was added to Student's courses.");
     }
     
     public void registerForCourse(int id, CourseRegistrationService crs, Course course) {
@@ -103,21 +110,18 @@ public abstract class Student extends BaseUser {
     	}
     }
 
-    //Teacher rating
-    public void rateTeachers(Teacher teacher, int rating) {
-        // TODO implement here
-        return ;
-    }
-
-    //Student orgs
-    public void startOrganization() {
-        // TODO implement here
-        return ;
+    // 5. STUDENT ORGANIZATIONS:
+    public StudentOrganization startOrganization(String name) {
+        return new StudentOrganization(name, this);
     }
     
-    public void joinOrganization() {
-        // TODO implement here
-        return ;
+    public void joinOrganization(StudentOrganization org) {
+        org.addStudent(this);
+        this.studentOrganizations.add(org);
+    }
+    
+    public void listAllOrganizations() {
+    	studentOrganizations.stream().forEach(org -> System.out.println(org.getName()));
     }
 
 
@@ -133,8 +137,4 @@ public abstract class Student extends BaseUser {
     	return super.toString();
     }
      
-    
-    
-
-
 }
