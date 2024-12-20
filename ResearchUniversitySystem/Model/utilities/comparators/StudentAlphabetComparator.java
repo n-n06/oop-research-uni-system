@@ -8,7 +8,7 @@ import users.students.Student;
  * @author eva
  */
 
-public class StudentAlphabetComparator extends StudentsComparator {
+public class StudentAlphabetComparator implements Comparator<Student> {
 
     /**
      * Compares two Student objects alphabetically by their names

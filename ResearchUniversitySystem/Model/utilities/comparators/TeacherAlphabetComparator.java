@@ -1,11 +1,13 @@
 package utilities.comparators;
 
+import java.util.Comparator;
+
 import users.employees.Teacher;
 
 /**
  * 
  */
-public class TeacherAlphabetComparator extends TeachersComparator {
+public class TeacherAlphabetComparator implements Comparator<Teacher> {
 
     /**
      * Default constructor

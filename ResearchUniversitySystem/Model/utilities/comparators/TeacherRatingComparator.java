@@ -7,7 +7,7 @@ import users.employees.Teacher;
 /**
  * 
  */
-public class TeacherRatingComparator  extends TeachersComparator {
+public class TeacherRatingComparator implements Comparator<Teacher> {
 
     /**
      * Default constructor
