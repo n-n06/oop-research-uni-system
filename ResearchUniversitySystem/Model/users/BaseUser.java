@@ -82,6 +82,10 @@ public abstract class BaseUser implements User, Serializable {
     public Gender getGender() {
 		return gender;
 	}
+
+    public Gender getFullName() {
+		return firstName + " " + lastName;
+	}	
     
     public Language getPreferredLanguage() {
 		return preferredLanguage;
