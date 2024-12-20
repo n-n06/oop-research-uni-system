@@ -50,7 +50,8 @@ public class News implements Comparable<News>, Serializable {
      * Default constructor
      */
     public News() {
-    	newsId = Database.generateNewsId();
+//    	newsId = Database.generateNewsId();
+    	newsId = Database.instance.getNewsRepo().generateNewsId();
     	date = new Date();
     }
     

@@ -11,7 +11,7 @@ import courses.RegistrationRequest;
  * @author Muslik
  */
 public class CourseRegistrationService implements Serializable {
-
+	private int regRequestId;
 	private HashMap<Integer, RegistrationRequest> registryRequests;
     private boolean isOpen;
     
@@ -19,6 +19,7 @@ public class CourseRegistrationService implements Serializable {
     public CourseRegistrationService() {
     	this.registryRequests = new HashMap<>();
     	this.isOpen = false;
+    	regRequestId = 0;
     }
 
     public void addRegRequest(RegistrationRequest regReq) {
@@ -81,6 +82,19 @@ public class CourseRegistrationService implements Serializable {
     	for (Entry<Integer, RegistrationRequest> rq : registryRequests.entrySet()) {
     		System.out.println(rq.getValue());
     	}
+    }
+    
+    
+    
+    /**
+     * Produces an id for a new registration request instance based on 
+     * the current number of registration requests in the system
+     * 
+     * @return	regRequestId	a unique identifier of a registration request
+     */
+    public int generateRegRequestId() {
+    	regRequestId++;
+    	return regRequestId;
     }
 
 }

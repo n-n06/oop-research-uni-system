@@ -6,14 +6,10 @@ import java.util.*;
 import database.Database;
 import enums.Gender;
 import enums.Language;
+import social.updates.*;
+
 import research.ResearchProject;
 import research.Researcher;
-import social.*;
-import social.updates.Comment;
-import social.updates.Journal;
-import social.updates.JournalRepository;
-import social.updates.News;
-import social.updates.NewsRepository;
 import research.CanBecomeResearcher;
 
 
@@ -30,11 +26,15 @@ public abstract class BaseUser implements User, Serializable {
     private boolean isResearcher;
     
     {
-    	userId = Database.generateUserId();
+    	userId = Database.instance.getUsersRepo().generateUserId();
     }
     
     public BaseUser() {
     	
+    }
+    
+    public BaseUser(int id) {
+    	this.userId = id;
     }
     
     
@@ -48,7 +48,6 @@ public abstract class BaseUser implements User, Serializable {
 	
     public boolean login(String email, String password, UserRepository userRepo) {
         if (userRepo.login(email, password)) {
-//        	System.out.println("Success login")
         	this.isActive = true;
         	return true;
         };
@@ -95,13 +94,17 @@ public abstract class BaseUser implements User, Serializable {
 		this.email = email;
 	}
 
+    
+    //Personal functions
     public void selectLanguage(Language language) {
         this.preferredLanguage = language;
     }
     
 
     public void changePassword(String password) {
-        this.password = password;
+    	if (isActive) {
+    		this.password = password;
+    	}
     }
 
     public void viewPersonalProfile() {

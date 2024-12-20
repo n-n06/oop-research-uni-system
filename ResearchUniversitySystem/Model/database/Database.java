@@ -8,7 +8,7 @@ import java.io.*;
 import java.util.Vector;
 
 import users.UserRepository;
-
+import users.students.StudentOrganization;
 import courses.CourseRepository;
 import courses.CourseRegistrationService;
 
@@ -24,13 +24,8 @@ import social.updates.NewsRepository;
  * Singleton DB
  */
 public class Database implements Serializable {
-	private int userId = 0;
-	private int journalId = 0 ;
-	private int newsId = 0;
-	private int messageId = 0;
-	private int regRequestId = 0;
 	private int organizationId = 0;
-	private int researchProjectId = 0;
+
     /**
      * 
      */
@@ -79,8 +74,8 @@ public class Database implements Serializable {
     
     private ResearchRepository researchRepo;
     
-    private Vector<Complaint> complaints;
     
+    private Vector<StudentOrganization> organizations;
 
     
 
@@ -92,8 +87,6 @@ public class Database implements Serializable {
     	requestRepo = new RequestRepository();
     	registration = new CourseRegistrationService();
     	usersRepo = new UserRepository();
-    	
-    	complaints = new Vector<>();
     	researchRepo = new ResearchRepository();
     }
     
@@ -186,61 +179,8 @@ public class Database implements Serializable {
     	ous.writeObject(instance);
     	ous.close();
     }
-    
-    /**
-     * Produces an id for a new user based on 
-     * the current number of users in the system
-     * 
-     * @return	userId	a unique identifier of a user
-     */
-    public static int generateUserId() {
-    	instance.userId++;
-    	return instance.userId;
-    }
-    
-    /**
-     * Produces an id for a new journal based on 
-     * the current number of journals in the system
-     * 
-     * @return	journalId	a unique identifier of a journal
-     */
-    public static int generateJournalId() {
-    	instance.journalId++;
-    	return instance.journalId;
-    }
-    
-    /**
-     * Produces an id for a new news instance based on 
-     * the current number of news in the system
-     * 
-     * @return	newsId	a unique identifier of news
-     */
-    public static int generateNewsId() {
-    	instance.newsId++;
-    	return instance.newsId;
-    }
-    
-    /**
-     * Produces an id for a new message instance based on 
-     * the current number of mesage in the system
-     * 
-     * @return	messageId	a unique identifier of a message
-     */
-    public static int generateMessageId() {
-    	instance.messageId++;
-    	return instance.messageId;
-    }
-    
-    /**
-     * Produces an id for a new registration request instance based on 
-     * the current number of registration requests in the system
-     * 
-     * @return	regRequestId	a unique identifier of a registration request
-     */
-    public static int generateRegRequestId() {
-    	instance.regRequestId++;
-    	return instance.regRequestId;
-    }
+
+
 
     /**
      * Produces an id for a new organization instance based on 
@@ -253,16 +193,7 @@ public class Database implements Serializable {
     	return instance.organizationId;
     }
     
-    /**
-     * Produces an id for a new research project instance based on 
-     * the current number of research projects in the system
-     * 
-     * @return	researchProjectId	a unique identifier of a research project
-     */
-    public static int generateResearchProjectId() {
-    	instance.researchProjectId++;
-    	return instance.researchProjectId;
-    }
+
     
     
 

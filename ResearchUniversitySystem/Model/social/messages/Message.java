@@ -39,7 +39,7 @@ public abstract class Message implements Comparable<Message>, Serializable {
 	
     {
     	date = new Date();
-    	messageId = Database.generateMessageId();
+    	messageId = Database.instance.getMessageRepo().generateMessageId();
     }
 
     /**

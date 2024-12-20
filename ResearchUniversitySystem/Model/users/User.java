@@ -2,12 +2,7 @@ package users;
 
 import java.io.Serializable;
 
-import research.CanBecomeResearcher;
-import social.*;
-import social.updates.Comment;
-import social.updates.Journal;
-import social.updates.JournalRepository;
-import social.updates.NewsRepository;
+import social.updates.*;
 import enums.Gender;
 import enums.Language;
 

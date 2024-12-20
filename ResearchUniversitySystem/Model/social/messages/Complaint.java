@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * 
  */
-public class Complaint implements Serializable {
+public class Complaint extends WorkMessage implements Serializable  {
     /**
      * 
      */

@@ -16,7 +16,7 @@ public class RegistrationRequest implements Serializable {
     private boolean approved = false;
 	
     {
-    	this.regRequestid = Database.generateRegRequestId();
+    	this.regRequestid = Database.instance.getRegistration().generateRegRequestId();
     }
 	
     public RegistrationRequest(Course course, Student student) {

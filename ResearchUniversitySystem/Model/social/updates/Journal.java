@@ -52,7 +52,7 @@ public class Journal implements Serializable {
     private Vector<User> subscribers;
     
     {
-    	journalId = Database.generateJournalId();
+    	journalId = Database.instance.getJournalRepo().generateJournalId();
     	this.articles = new Vector<>();
     }
     

@@ -7,6 +7,7 @@ import java.io.Serializable;
  * @author nurs
  */
 public class JournalRepository implements Serializable {
+	private int journalId;
     /**
      * 
      */
@@ -17,6 +18,7 @@ public class JournalRepository implements Serializable {
      */
     public JournalRepository() {
     	journals = new Vector<>();
+    	journalId = 0;
     }
 
     /**
@@ -63,6 +65,16 @@ public class JournalRepository implements Serializable {
         return journals.get(journals.indexOf(j));
     }
     
+    /**
+     * Produces an id for a new journal based on 
+     * the current number of journals in the system
+     * 
+     * @return	journalId	a unique identifier of a journal
+     */
+    public int generateJournalId() {
+    	journalId++;
+    	return journalId;
+    }
 
 
 }

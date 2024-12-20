@@ -19,12 +19,15 @@ public class ResearchRepository implements Serializable {
      */
 	private Vector<Researcher> researchers;
 	
+	private int researchProjectId;
+	
     /**
      * Default constructor
      */
 	public ResearchRepository() {
 		researchProjects = new Vector<>();
 		researchers = new Vector<>();
+		researchProjectId = 0;
 	}
 	
 	
@@ -71,4 +74,16 @@ public class ResearchRepository implements Serializable {
 		}
 		project.setSupervisor(r);
 	}
+	
+	
+    /**
+     * Produces an id for a new research project instance based on 
+     * the current number of research projects in the system
+     * 
+     * @return	researchProjectId	a unique identifier of a research project
+     */
+    public int generateResearchProjectId() {
+    	researchProjectId++;
+    	return researchProjectId;
+    }
 }

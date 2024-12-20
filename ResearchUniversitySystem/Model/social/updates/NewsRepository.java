@@ -7,7 +7,8 @@ import java.io.Serializable;
  * @author nurs
  */
 public class NewsRepository  implements Serializable {
-
+	
+	private int newsId;
     /**
      * 
      */
@@ -18,6 +19,7 @@ public class NewsRepository  implements Serializable {
      */
     public NewsRepository() {
     	news = new Vector<>();
+    	newsId = 0;
     }
 
     /**
@@ -64,6 +66,16 @@ public class NewsRepository  implements Serializable {
         return news.get(news.indexOf(n));
     }
     
+    /**
+     * Produces an id for a new news instance based on 
+     * the current number of news in the system
+     * 
+     * @return	newsId	a unique identifier of news
+     */
+    public int generateNewsId() {
+    	newsId++;
+    	return newsId;
+    }
 
 
 }
