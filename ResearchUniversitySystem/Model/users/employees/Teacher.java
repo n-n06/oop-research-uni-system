@@ -15,6 +15,7 @@ public class Teacher extends Employee {
 	private TeacherType teacherType;
 	
 	HashSet<Course> assignedCourses = new HashSet<>();
+	
 
     public Teacher() {
     	super();
@@ -46,6 +47,9 @@ public class Teacher extends Employee {
     	}
     }
     
+    public void viewOwnLessons(Course course) {
+    	course.viewLessons(course, this);
+    }
     	
     public void viewStudentList(Course coures) {
     	// TODO implement here

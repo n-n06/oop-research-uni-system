@@ -2,6 +2,8 @@ package courses;
 
 import java.util.Vector;
 import java.util.HashSet;
+import java.util.Date;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.io.Serializable;
 
@@ -23,9 +25,9 @@ public class Course implements Serializable {
 	private String courseID;
 	private String courseName;
     private String description;
-    private HashMap<LessonType, Integer> credits = new HashMap<>();   // its like (2/0/1 - 2 lectures, 0 labs, 1 practice)
+    private EnumMap<LessonType, Integer> credits = new EnumMap<>(LessonType.class);   // its like (2/0/1 - 2 lectures, 0 labs, 1 practice)
     private HashSet<Course> prerequesites = new HashSet<>();
-    private Vector<Lesson> courseLessons = new Vector<>();
+    private HashMap<Integer, Lesson> courseLessons = new HashMap<>();
     private Vector<Teacher> courseTeachers = new Vector<>();
     private Semester semester;
     private CourseType courseType;
@@ -56,15 +58,6 @@ public class Course implements Serializable {
     	return courseID;
     }
 
-    public void addLesson(Lesson lesson) {
-        // TODO implement here
-        return;
-    }
-
-    public void removeLesson(Lesson lesson) {
-        // TODO implement here
-        return;
-    }
 
     public HashMap<Student,Mark> getGradeBook() {
         // TODO implement here
@@ -89,6 +82,38 @@ public class Course implements Serializable {
         // TODO implement here
         return;
     }
+     
+    public void addCourseLesson(Lesson lesson) {
+    	courseLessons.put(lesson.getID(), lesson);
+    }
+    
+    public HashMap<Integer, Lesson> getCourseLessons() {
+    	return courseLessons;
+    }
+    
+    
+    public void viewLessons(Course course) {
+    	for (Lesson lesson : courseLessons.values()) {
+    		 System.out.println(lesson);
+    	}
+    }
+    
+    public void viewLessons(Course course, Teacher teacher) {
+    	for (Lesson lesson : courseLessons.values()) {
+    		if (lesson.getTeacher().equals(teacher)) {
+    			System.out.println(lesson);
+    		}
+    	}
+    }
+    
+    public void viewLessons(Course course, Date date) {
+    	for (Lesson lesson : courseLessons.values()) {
+    		if (lesson.getDate().equals(date)) {
+    			System.out.println(lesson);
+    		}
+    	}
+    }
+     
     
     //Setters
     public void setDescription(String description) {
@@ -99,7 +124,7 @@ public class Course implements Serializable {
         this.prerequesites = prerequesites;
     }
 
-    public void setCourseLessons(Vector<Lesson> courseLessons) {
+    public void setCourseLessons(HashMap<Integer, Lesson> courseLessons) {
         this.courseLessons = courseLessons;
     }
 
@@ -127,5 +152,10 @@ public class Course implements Serializable {
     public String toString() {
     	return "CourseID : " + courseID + " || courseName: " + courseName;
     }
+
+	public String getCourseName() {
+		return courseName;
+	}
+
 
 }
