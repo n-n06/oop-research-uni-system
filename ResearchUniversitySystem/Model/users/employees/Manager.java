@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import courses.Course;
 import courses.CourseRepository;
+import courses.Lesson;
 import courses.TimeWindow;
 import database.Database;
 import courses.RegistrationRequest;
@@ -144,7 +145,11 @@ public class Manager extends Employee {
         crs.displayRegRequests();
     }
     
-
+    public void addLessonToCourse(Lesson lesson, Course course) {
+    	course.addCourseLesson(lesson);
+    }
+    
+    
     //Requests - general ones
     public void viewRequest(RequestRepository requestRepo) {
         // TODO implement here

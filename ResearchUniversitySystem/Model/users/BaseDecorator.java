@@ -34,7 +34,11 @@ public abstract class BaseDecorator implements User {
     public String getLastName() {
     	return user.getLastName();
     }
-  
+
+    @Override
+    public String getFullName() {
+    	return user.getFullName();
+    }
     
     @Override
     public String getEmail() {
