@@ -46,6 +46,10 @@ public class StudentOrganization implements Comparable<StudentOrganization> {
     public Student getHead() {
 		return head;
 	}
+
+    public Student getName() {
+		return name;
+	}
     
     public void setDescription(String description) {
 		this.description = description;
