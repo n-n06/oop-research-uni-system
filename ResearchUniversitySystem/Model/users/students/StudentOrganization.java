@@ -43,17 +43,25 @@ public class StudentOrganization implements Comparable<StudentOrganization> {
 		return description;
 	}
     
+    public Student getHead() {
+		return head;
+	}
+
+    public Student getName() {
+		return name;
+	}
+    
     public void setDescription(String description) {
 		this.description = description;
 	}
     
     public void listAllMembers() {
-    	members.stream().forEach(s -> System.out.println(s.getFirstName() + " " + s.getLastName()));
+    	members.stream().forEach(s -> System.out.println(s.getFullName()));
     }
     
     @Override
     public String toString() {
-    	return "👥Organization: " + name + "\nAbout us: " + description + "\nMember count: " + members.size();
+    	return "👥 Organization: " + name + "\nHead: " + head.getFullName() + "\nAbout us: " + description + "\nMember count: " + members.size();
     }
     
     @Override
@@ -78,10 +86,7 @@ public class StudentOrganization implements Comparable<StudentOrganization> {
     
     
     
-    /**
-     * @return
-     */
-    // problem: manage exiting properly
+    // EXAMPLE OF (NON-COMPLETE) INTERACTION:
 //    public void manageMembers() {
 //    	Scanner in = new Scanner(System.in);
 //    	System.out.println("You entered the management system of " + name + ".");

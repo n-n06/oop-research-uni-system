@@ -44,6 +44,8 @@ public interface User extends Serializable {
     
     public String getLastName();
 
+    public String getFullName();
+
     public String getEmail();
     
     public String getPassword();
