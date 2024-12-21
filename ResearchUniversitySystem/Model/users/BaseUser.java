@@ -18,7 +18,7 @@ public abstract class BaseUser implements User, Serializable {
     private String firstName;
     private String lastName;
     private String email;
-    private String password = "root";
+    private String password;
     private boolean isActive = false;;
     private Gender gender;
     private int age;

@@ -10,6 +10,8 @@ out/g
 *.log
 /bin/
 
-data
+#database
+data*
+
 Test*.java
 

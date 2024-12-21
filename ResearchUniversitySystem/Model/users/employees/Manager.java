@@ -130,7 +130,6 @@ public class Manager extends Employee {
     		request.setApproved(); 
     	} else {
     		System.out.println("Registration was declined by manager because prereq");
-    		
     	}
     }
     

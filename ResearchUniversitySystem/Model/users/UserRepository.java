@@ -36,7 +36,6 @@ public class UserRepository implements Serializable {
             PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), passwordHashingSalt, 1024, 256);
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             byte[] hashedPassword = keyFactory.generateSecret(spec).getEncoded();
-            System.out.println(Base64.getEncoder().encodeToString(hashedPassword));
             return Base64.getEncoder().encodeToString(hashedPassword);
     	} catch (Exception e) {
     		System.err.println(e.getMessage());
