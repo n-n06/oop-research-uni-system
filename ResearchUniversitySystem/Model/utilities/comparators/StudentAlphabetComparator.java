@@ -5,7 +5,6 @@ import users.students.Student;
 
 /**
  * Comparator to sort Student objects alphabetically by their names
- * @author eva
  */
 
 public class StudentAlphabetComparator implements Comparator<Student> {
@@ -21,7 +20,8 @@ public class StudentAlphabetComparator implements Comparator<Student> {
 	
     @Override
     public int compare(Student s1, Student s2) {
-        return s1.getFirstName().compareTo(s2.getFirstName()); // sorting in asccending order: 'Alice', 'Bob', ...
+        return s1.getFullName().compareTo(s2.getFullName()); // sorting in asccending order: 'Alice Boba', 'Alice Mitchell', ...
     }
     
 }
+
