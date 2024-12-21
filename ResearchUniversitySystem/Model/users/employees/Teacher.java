@@ -1,11 +1,5 @@
-package users.employees;
-
-import users.students.Student;
-import courses.*;
-import database.Database;
-import enums.Gender;
 import enums.TeacherType;
-import utilities.social.Complaint;
+import social.messages.Complaint;
 import users.employees.TeacherRating;
 
 import java.io.*;
@@ -13,8 +7,11 @@ import java.util.*;
 
 public class Teacher extends Employee {
 	private TeacherType teacherType;
+	private double rating;
+	private Vector<Integer> ratingMarks = new Vector<>();
 	
 	HashSet<Course> assignedCourses = new HashSet<>();
+	
 
     public Teacher() {
     	super();
@@ -35,6 +32,10 @@ public class Teacher extends Employee {
     	return teacherType;
     }
     
+    public Vector<Integer> getRatingMarks() {
+    	return ratingMarks;
+    }
+    
     public void addCourse(Course course) {
     	assignedCourses.add(course);
     }
@@ -45,7 +46,11 @@ public class Teacher extends Employee {
     		System.out.println(c);
     	}
     }
-    
+
+    public void viewOwnLessons(Course course) {
+    	course.viewLessons(course, this);
+    }
+    	
     public void viewStudentList(Course coures) {
     	// TODO implement here
         return ;

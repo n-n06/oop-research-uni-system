@@ -8,7 +8,7 @@ import users.students.Student;
  * @author eva
  */
 
-public class StudentGpaComparator extends StudentsComparator {
+public class StudentGpaComparator implements Comparator<Student>  {
 
     /**
      * Compares two Student objects numerically by their GPA

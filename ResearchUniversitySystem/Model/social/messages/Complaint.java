@@ -1,4 +1,4 @@
-package utilities.social;
+package social.messages;
 
 import enums.UrgencyLevel;
 import users.User;
@@ -14,7 +14,7 @@ import java.util.*;
 /**
  * 
  */
-public class Complaint implements Serializable {
+public class Complaint extends WorkMessage implements Serializable  {
     /**
      * 
      */

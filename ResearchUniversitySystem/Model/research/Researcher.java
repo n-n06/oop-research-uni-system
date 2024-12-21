@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import database.Database;
-import menuInfo.Journal;
+import social.updates.Journal;
 import users.BaseDecorator;
 import users.User;
 

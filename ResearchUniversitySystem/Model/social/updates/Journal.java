@@ -1,13 +1,13 @@
-package menuInfo;
+package social.updates;
 
 import java.io.Serializable;
 import java.util.*;
 
 import database.Database;
 import research.ResearchPaper;
+import social.messages.JournalNotification;
 //import research.Researcher;
 import users.User;
-import utilities.social.JournalNotification;
 import enums.Language;
 
 /**
@@ -52,7 +52,7 @@ public class Journal implements Serializable {
     private Vector<User> subscribers;
     
     {
-    	journalId = Database.generateJournalId();
+    	journalId = Database.instance.getJournalRepo().generateJournalId();
     	this.articles = new Vector<>();
     }
     

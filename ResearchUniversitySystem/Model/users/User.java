@@ -2,8 +2,7 @@ package users;
 
 import java.io.Serializable;
 
-import menuInfo.*;
-import research.CanBecomeResearcher;
+import social.updates.*;
 import enums.Gender;
 import enums.Language;
 
@@ -39,6 +38,8 @@ public interface User extends Serializable {
     public String getFirstName();
     
     public String getLastName();
+
+    public String getFullName();
 
     public String getEmail();
     

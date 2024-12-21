@@ -11,7 +11,7 @@ import courses.RegistrationRequest;
  * @author Muslik
  */
 public class CourseRegistrationService implements Serializable {
-
+	private int regRequestId;
 	private HashMap<Integer, RegistrationRequest> registryRequests;
     private boolean isOpen;
     
@@ -19,27 +19,43 @@ public class CourseRegistrationService implements Serializable {
     public CourseRegistrationService() {
     	this.registryRequests = new HashMap<>();
     	this.isOpen = false;
+    	regRequestId = 0;
     }
 
     public void addRegRequest(RegistrationRequest regReq) {
-        registryRequests.put(regReq.getRegRequestid(), regReq);
+    	if (isOpen) {
+            registryRequests.put(regReq.getRegRequestid(), regReq);
+    	}
+    }
+    
+    public boolean removeRegRequest(Integer id) {
+    	if (isOpen) {
+            return registryRequests.remove(id) != null; 
+    	}
+    	return false;
+    }
+    
+    public void clearAllRequests() {
+    	if (isOpen) {
+            registryRequests.clear();
+    	}
     }
 
     public RegistrationRequest getRegRequest(Integer id) {
-        return registryRequests.get(id); 
-    }
-
-    public boolean removeRegRequest(Integer id) {
-        return registryRequests.remove(id) != null; 
+    	if (isOpen) {
+            return registryRequests.get(id); 
+    	}
+		return null; 
     }
 
     public boolean hasRegRequest(Integer id) {
-        return registryRequests.containsKey(id);
+    	if (isOpen) {
+            return registryRequests.containsKey(id);
+    	}
+    	return false;
     }
 
-    public void clearAllRequests() {
-        registryRequests.clear();
-    }
+
     
     public void openRegistration() {
         if (isOpen) {
@@ -59,11 +75,26 @@ public class CourseRegistrationService implements Serializable {
         }
     }
     
+    
+    
     public void displayRegRequests() {
     	System.out.println("All registration requests:");
     	for (Entry<Integer, RegistrationRequest> rq : registryRequests.entrySet()) {
     		System.out.println(rq.getValue());
     	}
+    }
+    
+    
+    
+    /**
+     * Produces an id for a new registration request instance based on 
+     * the current number of registration requests in the system
+     * 
+     * @return	regRequestId	a unique identifier of a registration request
+     */
+    public int generateRegRequestId() {
+    	regRequestId++;
+    	return regRequestId;
     }
 
 }

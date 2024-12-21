@@ -1,4 +1,4 @@
-package utilities.social;
+package social.messages;
 /**
  * @author nurs
  * */
@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.io.Serializable;
 
 import database.Database;
-import menuInfo.Journal;
+import social.updates.Journal;
 import users.User;
 
 
@@ -39,7 +39,7 @@ public abstract class Message implements Comparable<Message>, Serializable {
 	
     {
     	date = new Date();
-    	messageId = Database.generateMessageId();
+    	messageId = Database.instance.getMessageRepo().generateMessageId();
     }
 
     /**

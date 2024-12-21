@@ -8,14 +8,16 @@ import java.io.Serializable;
 import users.employees.Admin;
 
 public class UserRepository implements Serializable {
+	private int userId;
 	
     public UserRepository() {
     	users = new HashMap<>();
+    	userId = 0;
     }
 
     private HashMap<String, User> users;
 
-    public void addUser(BaseUser user) {
+    public void addUser(User user) {
     	if (user == null) throw new IllegalArgumentException("User cannot be null");
         users.put(user.getEmail(), user);
     }
@@ -63,8 +65,25 @@ public class UserRepository implements Serializable {
         return false; 
     }
     
+    
+    /**
+     * Produces an id for a new user based on 
+     * the current number of users in the system
+     * 
+     * @return	userId	a unique identifier of a user
+     */
+    public int generateUserId() {
+    	userId++;
+    	return userId;
+    }
+    
     public void addRootAdmin() {
     	addUser(new Admin("admin@admin.com"));
+    }
+    
+    @Override
+    public String toString() {
+    	return "Users: " + users;
     }
 
 }

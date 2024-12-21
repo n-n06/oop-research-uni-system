@@ -3,8 +3,8 @@ package research;
 import java.util.Vector;
 import java.util.Date;
 
-import menuInfo.Journal;
 import enums.CitationFormat;
+import social.updates.Journal;
 
 /**
  * 

@@ -6,7 +6,8 @@ import java.util.*;
 import database.Database;
 import enums.Gender;
 import enums.Language;
-import menuInfo.*;
+import social.updates.*;
+
 import research.ResearchProject;
 import research.Researcher;
 import research.CanBecomeResearcher;
@@ -25,11 +26,15 @@ public abstract class BaseUser implements User, Serializable {
     private boolean isResearcher;
     
     {
-    	userId = Database.generateUserId();
+    	userId = Database.instance.getUsersRepo().generateUserId();
     }
     
     public BaseUser() {
     	
+    }
+    
+    public BaseUser(int id) {
+    	this.userId = id;
     }
     
     
@@ -43,7 +48,6 @@ public abstract class BaseUser implements User, Serializable {
 	
     public boolean login(String email, String password, UserRepository userRepo) {
         if (userRepo.login(email, password)) {
-//        	System.out.println("Success login")
         	this.isActive = true;
         	return true;
         };
@@ -77,6 +81,10 @@ public abstract class BaseUser implements User, Serializable {
     public Gender getGender() {
 		return gender;
 	}
+
+    public String getFullName() {
+		return firstName + " " + lastName;
+	}	
     
     public Language getPreferredLanguage() {
 		return preferredLanguage;
@@ -90,13 +98,17 @@ public abstract class BaseUser implements User, Serializable {
 		this.email = email;
 	}
 
+    
+    //Personal functions
     public void selectLanguage(Language language) {
         this.preferredLanguage = language;
     }
     
 
     public void changePassword(String password) {
-        this.password = password;
+    	if (isActive) {
+    		this.password = password;
+    	}
     }
 
     public void viewPersonalProfile() {
@@ -141,6 +153,21 @@ public abstract class BaseUser implements User, Serializable {
     public String toString() {
     	return "Email: " + email + "\nFirst name: " + firstName + "\nLast name: " + lastName 
     			+ "\nGender: " + gender + "\nAge: " + age + "\n";
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (this == obj) return true;
+    	if (obj == null) return false;
+    	if (this.getClass() != obj.getClass()) return false;
+    	
+    	BaseUser u = (BaseUser) obj;
+    	return this.userId == u.userId;
+    }
+    
+    @Override
+    public int hashCode() {
+    	return Objects.hash(userId, firstName, lastName, age, gender, email);
     }
 
 }

@@ -1,4 +1,4 @@
-package utilities.social;
+package social.messages;
 
 /**
  * @author nurs
@@ -6,8 +6,8 @@ package utilities.social;
 
 import java.util.Date;
 
-import menuInfo.Journal;
 import research.ResearchPaper;
+import social.updates.Journal;
 import users.User;
 
 /**

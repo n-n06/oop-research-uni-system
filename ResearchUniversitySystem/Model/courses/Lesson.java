@@ -3,6 +3,7 @@ package courses;
 import java.util.Date;
 
 import courses.TimeWindow;
+import database.Database;
 import enums.LessonType;
 
 import users.employees.Teacher;
@@ -19,31 +20,56 @@ import users.students.Student;
  * @author eva
  */
 public class Lesson {
+	private int lessonID;
     public LessonType type;
+    public Course course;
     public Teacher teacher;
     public Date lessonDate;
     private TimeWindow lessonTime;
     private int lessonRoom;
     private LessonType lessonType;
 	
-    /**
-     * Default constructor
-     */
-    public Lesson(Teacher teacher, int lessonRoom, TimeWindow lessonTime, LessonType lessonType) {
-    	this.teacher = teacher;
+    
+    {
+//    	lessonID = Database.generateLessonId();
+    } 
+    
+    public Lesson(int id, Course course, int lessonRoom, TimeWindow lessonTime, LessonType lessonType) {
+    	this.lessonID = id;
+    	this.course = course;
     	this.lessonRoom = lessonRoom;
     	this.lessonTime = lessonTime;
     	this.lessonType = lessonType;
-    }
 
+    }
+    
+    public Lesson(int id, Course course, int lessonRoom, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
+    	this(id, course, lessonRoom, lessonTime, lessonType);
+    	this.teacher = teacher;
+    }
+    
     public void assignTeacher(Teacher newTeacher) { // because we often have 'Вакансия ағай'
     	this.teacher = newTeacher;
     }
     
     public String toString() {
-    	return this.teacher + " " + this.lessonType 
-    			+ " " + this.lessonRoom
-    			+ " " + this.lessonTime.toString(); 
+        return this.course.getCourseName() + " "
+        	   + (this.teacher != null ? this.teacher.getLastName() + " " + this.teacher.getFirstName().charAt(0) + "." : "Вакансия агай") + " "
+               + this.lessonType + " "
+               + this.lessonRoom
+               + " " + this.lessonTime;
     }
+
+	public Integer getID() {
+		return lessonID;
+	}
+
+	public Object getTeacher() {
+		return teacher;
+	}
+
+	public Date getDate() {
+		return lessonDate;
+	}
 
 }

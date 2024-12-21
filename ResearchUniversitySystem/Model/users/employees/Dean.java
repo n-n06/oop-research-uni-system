@@ -1,10 +1,10 @@
 package users.employees;
 
-import utilities.social.RequestRepository;
-import utilities.social.Request;
-
 import java.io.*;
 import java.util.*;
+
+import social.messages.Request;
+import social.messages.RequestRepository;
 
 /**
  * 

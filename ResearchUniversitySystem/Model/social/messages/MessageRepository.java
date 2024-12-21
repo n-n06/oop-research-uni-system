@@ -1,14 +1,14 @@
-package utilities.social;
+package social.messages;
 
 import java.util.HashMap;
 import java.io.Serializable;
 import java.util.TreeSet;
 
 import users.User;
-import utilities.social.Message;
 
 public class MessageRepository implements Serializable{
-    /**
+    private int messageId;
+	/**
      * Map from a user to a sorted set of unique messages
      * 
      */
@@ -19,6 +19,8 @@ public class MessageRepository implements Serializable{
      * Default constructor
      */
     public MessageRepository() {
+    	userMessages = new HashMap<>();
+    	messageId = 0;
     }
 
     /**
@@ -57,6 +59,17 @@ public class MessageRepository implements Serializable{
         for (Message m : getMessages(user)) {
         	System.out.println(m);
         };
+    }
+    
+    /**
+     * Produces an id for a new message instance based on 
+     * the current number of mesage in the system
+     * 
+     * @return	messageId	a unique identifier of a message
+     */
+    public int generateMessageId() {
+    	messageId++;
+    	return messageId;
     }
 
 

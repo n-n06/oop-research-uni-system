@@ -2,6 +2,7 @@ package courses;
 
 import java.io.Serializable;
 
+import database.Database;
 import users.students.Student;
 
 /**
@@ -14,20 +15,29 @@ public class RegistrationRequest implements Serializable {
     private Course course;
     private boolean approved = false;
 	
+    {
+    	this.regRequestid = Database.instance.getRegistration().generateRegRequestId();
+    }
 	
-    public RegistrationRequest(int id, Course course, Student student) {
-    	this.regRequestid = id;
+    public RegistrationRequest(Course course, Student student) {
     	this.course = course;
     	this.student = student;
     }
 
+    
     public int getRegRequestid() {
 		return regRequestid;
 	}
     
+    
+    public boolean getApproved() {
+    	return approved;
+    }
+    
     public void setApproved() {
     	this.approved = true;
     }
+    
     
     public Student getStudent() {
     	return student;
@@ -37,8 +47,12 @@ public class RegistrationRequest implements Serializable {
     	return course;
     }
     
+    
     public String toString() {
-    	return "requestID: " + regRequestid + " || " + course.toString() + " || Student: " + student.getEmail() + " || approved: " + approved;
+    	return "Registration request №" + regRequestid + 
+    			"\nCourse: " + course.toString() + 
+    			"\nStudent: " + student + 
+    			"\nStatus: " + (approved ? "Approved" : "Not Approved");
     }
 
 }
