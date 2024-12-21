@@ -6,6 +6,7 @@ import enums.*;
 import social.messages.Complaint;
 import users.students.*;
 import courses.*;
+import database.Database;
 
 public class Teacher extends Employee {
 	private TeacherType teacherType;
@@ -68,7 +69,7 @@ public class Teacher extends Employee {
     }
 
     public void sendComplaint(Complaint complaint) {
-    	complaint.sendComplaint();
+    	Database.instance.getComplaints().add(complaint);
     }
 
     public void putMarkToLesson(Lesson lesson, Student student, Double point, int attestation) {

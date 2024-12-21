@@ -3,8 +3,8 @@ package enums;
 /**
  * 
  */
-public enum UrgencyLevel {
+public enum UrgencyLevel{
+	LOW,
+	MEDIUM,
     HIGH,
-    MEDIUM,
-    LOW
 }

@@ -24,7 +24,9 @@ import social.updates.NewsRepository;
  * Singleton DB
  */
 public class Database implements Serializable {
+	
 	private int organizationId = 0;
+	private int complaintId;
 
     /**
      * 
@@ -77,6 +79,7 @@ public class Database implements Serializable {
     
     private Vector<StudentOrganization> organizations;
 
+    private Vector<Complaint> complaints;
     
 
     private void initRepos() {
@@ -88,6 +91,8 @@ public class Database implements Serializable {
     	registration = new CourseRegistrationService();
     	usersRepo = new UserRepository();
     	researchRepo = new ResearchRepository();
+    	organizations= new Vector<>();
+        complaints = new Vector<>();
     }
     
     /**
@@ -156,6 +161,9 @@ public class Database implements Serializable {
 		return researchRepo;
 	}
     
+    public Vector<Complaint> getComplaints() {
+		return complaints;
+	}
 
     /**
      * Deserializes a database from a 'data' file
@@ -193,7 +201,10 @@ public class Database implements Serializable {
     	return instance.organizationId;
     }
     
-
+    public static int generateComplaintId() {
+    	instance.complaintId++;
+    	return instance.complaintId;
+    }
     
     
 

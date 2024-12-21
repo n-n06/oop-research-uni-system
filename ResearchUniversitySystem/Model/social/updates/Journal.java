@@ -52,40 +52,24 @@ public class Journal implements Serializable {
     private Vector<User> subscribers;
     
     {
-    	journalId = Database.instance.getJournalRepo().generateJournalId();
     	this.articles = new Vector<>();
     }
     
     
     public Journal() {
+    	journalId = Database.instance.getJournalRepo().generateJournalId();
     }
     
-    public Journal(String name) {
-    	this.name = name;
+    public Journal(int id) {
+    	journalId = id;
     }
     
-    public Journal(String name, Language l) {
-    	this.name = name;
-    	this.language = l;
-    }
-    
-    public Journal(String name, String topic) {
-    	this(name);
-    	this.topic = topic;
-    }
-    
-    public Journal(String name, String topic, Language l) {
-    	this(name, topic);
-    	this.language = l;
-    }
-    
-    public Journal(String name, String topic, String description) {
-    	this(name, topic);
-    	this.description = description;
-    }
     
     public Journal(String name, String topic, String description, Language l) {
-    	this(name, topic, description);
+    	this();
+    	this.name = name;
+    	this.topic = topic;
+    	this.description = description;
     	this.language = l;
     }
     
