@@ -9,12 +9,6 @@ import enums.Semester;
 import users.students.Student;
 import users.employees.Teacher;
 
-/**
- * @author eva
- * @author Muslik
- */
-
-// add formula for calculating how many lessons are being held - add a system to calculate lessons
 
 public class Course implements Serializable {
 	
@@ -29,10 +23,12 @@ public class Course implements Serializable {
     private Semester semester;
     private CourseType courseType;
     
+    private GradeReport gradeReport;
     private HashMap<Student,Mark> gradeBook;
 
     {
     	lessonID = 0;
+    	gradeReport = new GradeReport(this);
     }
     
     public Course(String courseID, String courseName) {
@@ -65,27 +61,15 @@ public class Course implements Serializable {
 
 
     public HashMap<Student,Mark> getGradeBook() {
-        // TODO implement here
-        return null;
+        return gradeBook;
     }
 
     public GradeReport getGradeReport() {
-        // TODO implement here
-        return null;
+        return gradeReport;
     }
 
     public void addTeacherToCourse(Teacher teacher) {
     	courseTeachers.add(teacher);
-    }
-
-    public void assignRetake(CourseRepository cr, Student student) {
-        // TODO implement here
-        return;
-    }
-
-    public void assignMark(Student student, Mark mark) {
-        // TODO implement here
-        return;
     }
      
     public void addCourseLesson(Lesson lesson) {
