@@ -71,8 +71,8 @@ public class Teacher extends Employee {
     	complaint.sendComplaint();
     }
 
-    public void putMarkToLesson(Lesson lesson, Student student, Double point) {
-        lesson.putMark(student, point);
+    public void putMarkToLesson(Lesson lesson, Student student, Double point, int attestation) {
+        lesson.putMark(student, point, attestation);
     }
 
     public void putAttendance(Lesson lesson, Student student, Boolean isPresent) {

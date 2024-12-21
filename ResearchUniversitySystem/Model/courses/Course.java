@@ -67,6 +67,15 @@ public class Course implements Serializable {
     public GradeReport getGradeReport() {
         return gradeReport;
     }
+    
+    public void addMarkForStudent(Student student, double mark, int attestation) {
+    	if (attestation == 1) {
+    		gradeBook.get(student).addFirstAttestationMark(mark);        
+    	}
+    	else if (attestation == 2) {
+    		gradeBook.get(student).addSecondAttestationMark(mark);  
+    	}
+    }
 
     public void addTeacherToCourse(Teacher teacher) {
     	courseTeachers.add(teacher);
