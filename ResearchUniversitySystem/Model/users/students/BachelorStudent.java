@@ -13,8 +13,8 @@ public class BachelorStudent extends Student {
 	 }
 
  
-    public BachelorStudent(String firstName, String lastName, String email, int age, Gender gender, School school) {
-    	super(firstName, lastName, email, age, gender, Degree.BACHELOR, school);
+    public BachelorStudent(String firstName, String lastName, int age, Gender gender, School school) {
+    	super(firstName, lastName, age, gender, Degree.BACHELOR, school);
     }
     
 

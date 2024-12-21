@@ -21,8 +21,8 @@ public class Employee extends BaseUser {
     }
     
     
-    public Employee(String firstName, String lastName, String email, int age, Gender gender) {
-    	super(firstName, lastName, email, age, gender);
+    public Employee(String firstName, String lastName, int age, Gender gender) {
+    	super(firstName, lastName, age, gender);
     }
 
   

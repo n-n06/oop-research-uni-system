@@ -38,12 +38,16 @@ public abstract class BaseUser implements User, Serializable {
     }
     
     
-	public BaseUser(String firstName, String lastName, String email, int age, Gender gender) {
+	public BaseUser(String firstName, String lastName, int age, Gender gender) {
 	    this.firstName = firstName;
 	    this.lastName = lastName;
-	    this.email = email;
+	    this.email = generateEmail(firstName, lastName);
 	    this.age = age;
 	    this.gender = gender;
+	}
+	
+	private String generateEmail(String firstName, String lastName) {
+		return firstName.toLowerCase().strip().substring(0, 1) + lastName.toLowerCase().strip() + "@kbtu.kz";
 	}
 	
     public boolean login(String email, String password, UserRepository userRepo) {

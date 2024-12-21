@@ -34,8 +34,8 @@ public abstract class Student extends BaseUser {
 		super();
 	}
 
-    public Student(String firstName, String lastName, String email, int age, Gender gender, Degree degree, School school) {
-    	super(firstName, lastName, email, age, gender);
+    public Student(String firstName, String lastName, int age, Gender gender, Degree degree, School school) {
+    	super(firstName, lastName, age, gender);
     	this.degree = degree;
     	this.school = school;
     	this.year = 1; // by default, gonna have a method to increase a year for ALL students???? And if so we can have a Graduate() method? but it will be too overcomplicated... but then again will we need to handle transfer students??
