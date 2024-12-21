@@ -55,10 +55,6 @@ public class Mark {
 	        secondAttestation = sumSecondAttestation();
 	    }
     }
-    
-    public double getFinalExamMark() {
-		return finalExam;
-	}
 
     public void setFinalExamMark(double finalExam) {
     	checkValidMark(finalExam);
