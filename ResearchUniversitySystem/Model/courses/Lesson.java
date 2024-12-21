@@ -3,6 +3,7 @@ package courses;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 import courses.TimeWindow;
 import database.Database;
@@ -23,7 +24,7 @@ public class Lesson {
     private LessonType lessonType;
 	
     private HashMap<Student, Boolean> attendanceList = new HashMap<>();
-    private HashMap<Student, Double> markOfLesson = new HashMap<>();
+    private HashMap<Student, Double> marksOfLesson = new HashMap<>();
     
    
     public Lesson(Course course, int lessonRoom, LocalDate lessonDate, TimeWindow lessonTime, LessonType lessonType) {
@@ -34,7 +35,7 @@ public class Lesson {
     	this.lessonType = lessonType;
     }
     
-    public Lesson(Course course, int lessonRoom, TimeWindow lessonTime, LocalDate lessonDate, LessonType lessonType, Teacher teacher) {
+    public Lesson(Course course, int lessonRoom, LocalDate lessonDate, TimeWindow lessonTime,  LessonType lessonType, Teacher teacher) {
     	this(course, lessonRoom, lessonDate, lessonTime, lessonType);
     	this.teacher = teacher;
     }
@@ -56,8 +57,8 @@ public class Lesson {
     }
     
     public void putMark(Student student, Double point, int attestation) {
-    	markOfLesson.put(student, point);
-    	course.addMarkForStudent(student, point, attestation);
+    	marksOfLesson.put(student, point);
+//    	course.addMarkForStudent(student, point, attestation);    /// IT WILL WORK WHEN STUDENT WILL PICK LESSONS TO SCHEDULE
     }
 
 	public Integer getID() {
@@ -75,5 +76,28 @@ public class Lesson {
 	public LocalDate getDate() {
 		return lessonDate;
 	}
+	
+	
+    public void viewAttendanceList() {
+        if (attendanceList.isEmpty()) {
+            System.out.println("Attendance list is empty.");
+        } else {
+            System.out.println("Attendance List of lesson: ID" + this.getID());
+            for (Map.Entry<Student, Boolean> entry : attendanceList.entrySet()) {
+                System.out.println(entry.getKey().getFullName() + " - Present: " + entry.getValue());
+            }
+        }
+    }
+
+    public void viewMarksOfLesson() {
+        if (marksOfLesson.isEmpty()) {
+            System.out.println("Marks list is empty.");
+        } else {
+            System.out.println("Marks of Lesson: ID" + this.getID());
+            for (Map.Entry<Student, Double> entry : marksOfLesson.entrySet()) {
+                System.out.println(entry.getKey().getFullName() + " - Mark: " + entry.getValue());
+            }
+        }
+    }
 
 }

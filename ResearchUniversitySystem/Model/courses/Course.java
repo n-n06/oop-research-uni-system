@@ -28,6 +28,7 @@ public class Course implements Serializable {
 
     {
     	lessonID = 0;
+    	gradeBook = new HashMap<>();
     	gradeReport = new GradeReport(this);
     }
     
@@ -83,7 +84,7 @@ public class Course implements Serializable {
      
     public void addCourseLesson(Lesson lesson) {
     	lesson.setID(generateLessonID());
-    	courseLessons.put(generateLessonID(), lesson);
+    	courseLessons.put(lesson.getID(), lesson);
     }
     
     private Integer generateLessonID() {
