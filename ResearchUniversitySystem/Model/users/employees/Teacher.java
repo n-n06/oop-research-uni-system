@@ -1,9 +1,11 @@
-import enums.TeacherType;
-import social.messages.Complaint;
-import users.employees.TeacherRating;
+package users.employees;
 
-import java.io.*;
 import java.util.*;
+
+import enums.*;
+import social.messages.Complaint;
+import users.students.*;
+import courses.*;
 
 public class Teacher extends Employee {
 	private TeacherType teacherType;
@@ -16,6 +18,7 @@ public class Teacher extends Employee {
     public Teacher() {
     	super();
     }
+    
     public Teacher(String firstName, String lastName, String email, int age, Gender gender, TeacherType teacherType) {
     	super(firstName, lastName, email, age, gender);
     	this.teacherType = teacherType;
@@ -28,6 +31,7 @@ public class Teacher extends Employee {
     public void setTeacherType(TeacherType teacherType) {
     	this.teacherType = teacherType;
     }
+    
     public TeacherType getTeacherType() {
     	return teacherType;
     }
@@ -51,9 +55,9 @@ public class Teacher extends Employee {
     	course.viewLessons(course, this);
     }
     	
-    public void viewStudentList(Course coures) {
-    	// TODO implement here
-        return ;
+    public void viewStudentList(Course course) {
+    	System.out.println(course.getCourseName() + " students:");
+    	course.getStudents().stream().forEach(s->System.out.println(s));
     }
 
     public void viewStudentInfo(Course course, Student student) {

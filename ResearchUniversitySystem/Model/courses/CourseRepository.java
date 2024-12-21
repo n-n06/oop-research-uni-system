@@ -41,9 +41,8 @@ public class CourseRepository implements Serializable {
     	}
     }
 
-    public GradeReport getGradeReport(HashMap<String, Course> courses) {
+    public GradeReport getGradeReport(Course course) {
 		return null;
-        //TODO
     }
 
 }

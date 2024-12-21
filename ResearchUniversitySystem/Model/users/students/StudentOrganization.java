@@ -47,7 +47,7 @@ public class StudentOrganization implements Comparable<StudentOrganization> {
 		return head;
 	}
 
-    public Student getName() {
+    public String getName() {
 		return name;
 	}
     

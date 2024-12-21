@@ -1,10 +1,6 @@
 package courses;
 
-import java.util.Vector;
-import java.util.HashSet;
-import java.util.Date;
-import java.util.EnumMap;
-import java.util.HashMap;
+import java.util.*;
 import java.io.Serializable;
 
 import enums.CourseType;
@@ -57,6 +53,10 @@ public class Course implements Serializable {
     public String getID() {
     	return courseID;
     }
+    
+    public Set getStudents() {
+    	return gradeBook.keySet();
+	}
 
 
     public HashMap<Student,Mark> getGradeBook() {
@@ -150,7 +150,7 @@ public class Course implements Serializable {
 
   
     public String toString() {
-    	return "CourseID : " + courseID + " || courseName: " + courseName;
+    	return "Course ID : " + courseID + " || Course Name: " + courseName;
     }
 
 	public String getCourseName() {
