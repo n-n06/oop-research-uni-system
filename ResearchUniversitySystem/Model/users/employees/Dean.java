@@ -23,19 +23,11 @@ public class Dean extends Employee {
     	super(firstName, lastName, age, gender);
     }
 
-    /**
-     * @param requests 
-     * @return
-     */
-    public void viewEmployeeRequests(RequestRepository requests) {
+    public void viewEmployeeRequests(RequestRepository requests, Employee e) {
         // TODO implement here
         return;
     }
 
-    /**
-     * @param request 
-     * @return
-     */
     public void signRequest(Request request) {
         // TODO implement here
         return ;

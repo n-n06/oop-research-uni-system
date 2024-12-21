@@ -18,18 +18,12 @@ import social.updates.News;
 import users.students.Student;
 import utilities.comparators.*;
 
-
-
-/**
- * @author Muslik
- */
 public class Manager extends Employee {
-	
 	private ManagerType managerType;
-
 	public Manager() {
 		
 	}
+	
     public Manager(String firstName, String lastName, int age, Gender gender, ManagerType managerType) {
     	super(firstName, lastName, age, gender);
     	this.managerType = managerType;
@@ -140,18 +134,20 @@ public class Manager extends Employee {
     	}
     }
     
-    public void declineRegRequest(CourseRegistrationService crs, Integer id) {
-    	RegistrationRequest request = crs.getRegRequest(id);
+    public void declineRegRequest(Integer id) {
+    	Database.instance.getRegistration().getRegRequest(id);
+    	//RegistrationRequest request = crs.getRegRequest(id);
     	System.out.println("Registration was declined by manager");   
     }
 
-    public void viewRegRequest(CourseRegistrationService crs, Integer id) {
+    public void viewRegRequest(Integer id) {
         Database.instance.getRegistration().getRegRequest(id);
     	//System.out.println(crs.getRegRequest(id));
     }
     
-    public void viewAllRegRequest(CourseRegistrationService crs) {
-        crs.displayRegRequests();
+    public void viewAllRegRequest() {
+    	Database.instance.getRegistration().displayRegRequests();
+        //crs.displayRegRequests();
     }
     
     public void addLessonToCourse(Lesson lesson, Course course) {
@@ -160,17 +156,17 @@ public class Manager extends Employee {
     
     
     //Requests - general ones
-    public void viewRequest(Request request) {
-        Database.instance.getReqeustRepo().getRequest(request);
+    public void viewRequest(Request request, School school) {
+        System.out.println(Database.instance.getReqeustRepo().getRequest(school, request));
     }
 
-    public void acceptRequest() {
-    	Database.instance.getReqeustRepo().acceptRequest();
+    public void acceptRequest(Request request, School school) {
+    	Database.instance.getReqeustRepo().acceptRequest(school, request);
     }
 
 
-    public void declineRequest() {
-    	Database.instance.getReqeustRepo().declineRequest();
+    public void declineRequest(Request request, School school) {
+    	Database.instance.getReqeustRepo().declineRequest(school, request);
     }
 
     
