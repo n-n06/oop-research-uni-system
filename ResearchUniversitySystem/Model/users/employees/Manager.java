@@ -93,8 +93,6 @@ public class Manager extends Employee {
         return ;
     }
     
-    
-    
     //Courses
     public void assignCourseToTeacher(Course course, Teacher teacher) {
         teacher.addCourse(course);
@@ -151,20 +149,17 @@ public class Manager extends Employee {
     
     
     //Requests - general ones
-    public void viewRequest(RequestRepository requestRepo) {
-        // TODO implement here
-        return ;
+    public void viewRequest(RequestRepository requestRepo, Request request) {
+        requestRepo.getRequest(request);
     }
 
-    public void acceptRequest(Request request) {
-        // TODO implement here
-        return ;
+    public void acceptRequest(RequestRepository requestRepo) {
+    	requestRepo.acceptRequest();
     }
 
 
-    public void declineRequest(Request request) {
-        // TODO implement here
-        return ;
+    public void declineRequest(RequestRepository requestRepo) {
+        requestRepo.declineRequest();
     }
 
     
