@@ -1,9 +1,14 @@
 import enums.TeacherType;
 import social.messages.Complaint;
 import users.employees.TeacherRating;
+import users.students.Student;
 
 import java.io.*;
 import java.util.*;
+
+import courses.Course;
+import courses.Lesson;
+import courses.Mark;
 
 public class Teacher extends Employee {
 	private TeacherType teacherType;
