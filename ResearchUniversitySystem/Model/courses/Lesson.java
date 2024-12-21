@@ -45,13 +45,13 @@ public class Lesson {
     	this.teacher = teacher;
     }
     
-    public void assignTeacher(Teacher newTeacher) { // because we often have 'Вакансия ағай'
+    public void assignTeacher(Teacher newTeacher) { 
     	this.teacher = newTeacher;
     }
     
     public String toString() {
         return this.course.getCourseName() + " "
-        	   + (this.teacher != null ? this.teacher.getLastName() + " " + this.teacher.getFirstName().charAt(0) + "." : "Вакансия агай") + " "
+        	   + (this.teacher != null ? this.teacher.getLastName() + " " + this.teacher.getFirstName().charAt(0) + "." : "Vacancy") + " "
                + this.lessonType + " "
                + this.lessonRoom
                + " " + this.lessonTime;
@@ -69,7 +69,7 @@ public class Lesson {
 		this.lessonID = ID;
 	}
 
-	public Object getTeacher() {
+	public Teacher getTeacher() {
 		return teacher;
 	}
 
