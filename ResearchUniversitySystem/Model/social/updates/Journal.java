@@ -131,6 +131,7 @@ public class Journal implements Serializable {
      * @return	null		nothing
      */
     public void publishArticle(ResearchPaper article) {
+    	article.setPublishDate(new Date());
         articles.add(article);
         notifyAllSubscribers(article);
     }

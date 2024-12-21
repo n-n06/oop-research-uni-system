@@ -2,7 +2,6 @@ package social.messages;
 
 
 import java.util.HashMap;
-import java.util.TreeSet;
 import java.util.Vector;
 import java.io.Serializable;
 
@@ -15,16 +14,19 @@ import users.employees.Dean;
 public class RequestRepository implements Serializable  {
 	
 	private int requestId = 0;
-    /**
-     * Default constructor
-     */
-    public RequestRepository() {
-    }
 
     /**
      * 
      */
     private HashMap<School, Vector<Request>> requests;
+    
+    /**
+     * Default constructor
+     */
+    public RequestRepository() {
+    	requests = new HashMap<>();
+    }
+
 
     /**
      * @param req 
