@@ -1,6 +1,7 @@
 package courses;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import courses.TimeWindow;
 import database.Database;
@@ -29,22 +30,18 @@ public class Lesson {
     private int lessonRoom;
     private LessonType lessonType;
 	
+    private HashMap<Student, Boolean> attendanceList = new HashMap<>();
     
-    {
-//    	lessonID = Database.generateLessonId();
-    } 
-    
-    public Lesson(int id, Course course, int lessonRoom, TimeWindow lessonTime, LessonType lessonType) {
-    	this.lessonID = id;
+   
+    public Lesson(Course course, int lessonRoom, TimeWindow lessonTime, LessonType lessonType) {
     	this.course = course;
     	this.lessonRoom = lessonRoom;
     	this.lessonTime = lessonTime;
     	this.lessonType = lessonType;
-
     }
     
-    public Lesson(int id, Course course, int lessonRoom, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
-    	this(id, course, lessonRoom, lessonTime, lessonType);
+    public Lesson(Course course, int lessonRoom, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
+    	this(course, lessonRoom, lessonTime, lessonType);
     	this.teacher = teacher;
     }
     
@@ -59,9 +56,17 @@ public class Lesson {
                + this.lessonRoom
                + " " + this.lessonTime;
     }
+    
+    public void putAttendance(Student student, Boolean isPresent) {
+    	attendanceList.put(student, isPresent);
+    }
 
 	public Integer getID() {
 		return lessonID;
+	}
+	
+	public void setID(int ID) {
+		this.lessonID = ID;
 	}
 
 	public Object getTeacher() {

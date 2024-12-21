@@ -89,6 +89,7 @@ public class Course implements Serializable {
     }
      
     public void addCourseLesson(Lesson lesson) {
+    	lesson.setID(generateLessonID());
     	courseLessons.put(generateLessonID(), lesson);
     }
     
