@@ -1,16 +1,10 @@
 package users.employees;
 
+import database.Database;
 import enums.Gender;
 import users.User;
 
-/**
- * @author ExpertBook
- */
 public class Admin extends Employee {
-
-    /**
-     * Default constructor
-     */
     public Admin() {
     }
     
@@ -18,51 +12,29 @@ public class Admin extends Employee {
     	setEmail(email);
     }
     
-    
     public Admin(String firstName, String lastName, int age, Gender gender) {
     	super(firstName, lastName, age, gender);
     }
-
-    /**
-     * @param user 
-     * @return
-     */
+    
     public void addUser(User user) {
-        // TODO implement here
-        return ;
+    	Database.instance.getUsersRepo().addUser(user);
     }
 
-    /**
-     * @param user 
-     * @return
-     */
     public void updateUser(User user) {
-        // TODO implement here
-        return ;
+        Database.instance.getUsersRepo().updateUser(user);
     }
 
-    /**
-     * @param user 
-     * @return
-     */
     public void deleteUser(User user) {
-        // TODO implement here
-        return ;
+        Database.instance.getUsersRepo().removeUser(user);
     }
 
-    /**
-     * @param user 
-     * @return
-     */
-    public void viewUserInfo(User user) {
-        // TODO implement here
-    	
-        return ;
+    public void viewAllUsers() {
+    	System.out.println(Database.instance.getUsersRepo().getAllUsers());
+    }
+    public void viewUserInfo(String email) {
+        System.out.println(Database.instance.getUsersRepo().getUser(email));
     }
 
-    /**
-     * @return
-     */
     public void readLogs() {
         // TODO implement here
         return ;
