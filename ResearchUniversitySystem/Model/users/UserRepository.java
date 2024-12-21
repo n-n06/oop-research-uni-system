@@ -81,14 +81,19 @@ public class UserRepository implements Serializable {
     	return users.values();
     }
     
-    public List<User> getAllStudents() {
+    public List<Student> getAllStudents() {
     	Predicate<User> isStudent = user -> user instanceof Student;
-    	return users.values().stream().filter(isStudent).collect(Collectors.toList());
+    	return users.values().stream()
+    			.filter(isStudent)
+    			.map(user -> (Student) user)
+    			.collect(Collectors.toList());
     }
     
-    public List<User> getAllTeachers() {
+    public List<Teacher> getAllTeachers() {
     	Predicate<User> isTeacher = user -> user instanceof Teacher;
-    	return users.values().stream().filter(isTeacher).collect(Collectors.toList());
+    	return users.values().stream().filter(isTeacher)
+    			.map(user -> (Teacher) user)
+    			.collect(Collectors.toList());
     }
     
     public User getUser(String userEmail) {
