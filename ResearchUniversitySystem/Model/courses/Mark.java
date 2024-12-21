@@ -69,6 +69,18 @@ public class Mark {
         	this.finalExam = finalExam;
         }
     }
+	
+    public double getFirstAttestation() {
+    	return firstAttestation;
+    }
+    
+    public double getSecondAttestation() {
+    	return secondAttestation;
+    }
+    
+    public double getFinalExam() {
+    	return finalExam;
+    }
 
     public double getOverallPoints() {
         return firstAttestation + secondAttestation + finalExam;
