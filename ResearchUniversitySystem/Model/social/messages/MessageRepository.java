@@ -56,6 +56,7 @@ public class MessageRepository implements Serializable{
      * @return
      */
     public void viewMessages(User user) {
+    	System.out.println("📬Inbox: ");
         for (Message m : getMessages(user)) {
         	System.out.println(m);
         };

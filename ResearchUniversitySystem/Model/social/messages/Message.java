@@ -39,22 +39,28 @@ public abstract class Message implements Comparable<Message>, Serializable {
 	
     {
     	date = new Date();
-    	messageId = Database.instance.getMessageRepo().generateMessageId();
+    	
     }
 
     /**
      * Default constructor
      */
     public Message() {
+    	messageId = Database.instance.getMessageRepo().generateMessageId();
     }
     
     public Message(User receiver) {
+    	this();
     	this.receiver = receiver;
     }
     
     public Message(User receiver, String content) {
     	this(receiver);
     	this.content = content;
+    }
+    
+    public Message(int id) {
+    	this.messageId = id;
     }
     
     /**
@@ -102,7 +108,7 @@ public abstract class Message implements Comparable<Message>, Serializable {
     
     @Override
     public String toString() {
-    	return String.format("Message №%d: \n", messageId) + content + "\nSent: " + date;
+    	return String.format("Message #%d: \n", messageId) + "\nSent: " + date + "\n";
     }
     
     @Override
