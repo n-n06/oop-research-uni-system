@@ -1,7 +1,6 @@
 package users.employees;
 
-import java.util.Comparator;
-import java.util.Vector;
+import java.util.*;
 
 import courses.Course;
 import courses.CourseRepository;
@@ -18,6 +17,8 @@ import social.messages.RequestRepository;
 import social.updates.News;
 import users.students.Student;
 import utilities.comparators.*;
+
+
 
 /**
  * @author Muslik
@@ -40,6 +41,9 @@ public class Manager extends Employee {
     }
 
     public void viewStudentsInfo(Comparator<Student> comparator) {
+    	List<Student> students = Database.instance.getUsersRepo().getAllStudents();
+    	students.sort(comparator);
+    	students.stream().forEach(s->System.out.println(s));
         return ;
     }
 
@@ -54,34 +58,34 @@ public class Manager extends Employee {
     }
     
     
-    //This is probably not the best way to do it
-    public Vector<Student> orderStudentsByGPA(Vector<Student> students) {
-    	Vector<Student> sortedStudents = new Vector<>(students); 
-        sortedStudents.sort(new StudentGpaComparator());
-        return sortedStudents;
-    	//Vector<Student> students = orderStudentsByGPA(compare);
-    	//students.sort(new StudentGpaComparator());
-       // return students;
-    }
+//    //This is probably not the best way to do it
+//    public Vector<Student> orderStudentsByGPA(Vector<Student> students) {
+//    	Vector<Student> sortedStudents = new Vector<>(students); 
+//        sortedStudents.sort(new StudentGpaComparator());
+//        return sortedStudents;
+//    	//Vector<Student> students = orderStudentsByGPA(compare);
+//    	//students.sort(new StudentGpaComparator());
+//       // return students;
+//    }
+//
+//
+//    public Vector<Student> orderStudentsAlphabetically(Vector<Student> students) {
+//    	Vector<Student> sortedStudents = new Vector<>(students); 
+//        sortedStudents.sort(new StudentAlphabetComparator());
+//        return sortedStudents;
+//    }
 
-
-    public Vector<Student> orderStudentsAlphabetically(Vector<Student> students) {
-    	Vector<Student> sortedStudents = new Vector<>(students); 
-        sortedStudents.sort(new StudentAlphabetComparator());
-        return sortedStudents;
-    }
-
-    public Vector<Teacher> orderTeachersByRate(Vector<Teacher> teachers) {
-    	Vector<Teacher> sortedTeachers = new Vector<>(teachers); 
-        sortedTeachers.sort(new TeacherRatingComparator());
-        return sortedTeachers;
-    }
-
-    public Vector<Teacher> orderTeachersAlphabetically(Vector<Teacher> teachers) {
-    	Vector<Teacher> sortedTeachers = new Vector<>(teachers); 
-        sortedTeachers.sort(new TeacherAlphabetComparator());
-        return sortedTeachers;
-    }
+//    public Vector<Teacher> orderTeachersByRate(Vector<Teacher> teachers) {
+//    	Vector<Teacher> sortedTeachers = new Vector<>(teachers); 
+//        sortedTeachers.sort(new TeacherRatingComparator());
+//        return sortedTeachers;
+//    }
+//
+//    public Vector<Teacher> orderTeachersAlphabetically(Vector<Teacher> teachers) {
+//    	Vector<Teacher> sortedTeachers = new Vector<>(teachers); 
+//        sortedTeachers.sort(new TeacherAlphabetComparator());
+//        return sortedTeachers;
+//    }
 
  
     public void postNews(News n) {

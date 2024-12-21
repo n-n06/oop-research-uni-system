@@ -13,6 +13,7 @@ public class LoggerProvider {
 	 */
 	private static final Logger logger = RotatingFileHandler.setupLogging();
 	
+	
 	public static Logger getLogger() {
 		return logger;
 	}

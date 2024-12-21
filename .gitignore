@@ -5,6 +5,11 @@
 .settings/
 
 # Other
-out/
+out/g
+*.log.*
 *.log
 /bin/
+
+data
+Test*.java
+

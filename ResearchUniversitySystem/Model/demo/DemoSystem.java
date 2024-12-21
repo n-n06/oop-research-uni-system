@@ -13,6 +13,7 @@ import users.UserFactory;
 import users.User;
 
 import users.employees.*;
+import utilities.logging.LoggerProvider;
 
 public class DemoSystem {
 
@@ -27,6 +28,7 @@ public class DemoSystem {
 		
 		try {
 			Database.instance.getNewsRepo().addNews(new News("Test News", NewsType.GENERAL, "This is a test uwu"));
+			LoggerProvider.getLogger().info("Test news were added");
 			
 			System.out.println("🏛Welcome!🏛");	
 			while (true) {
@@ -121,7 +123,7 @@ public class DemoSystem {
 		
 			
 		}
-		catch(Exception e) {
+		catch(IOException e) {
 			System.out.println(e.getMessage());
 		}finally {
 			Database.write();

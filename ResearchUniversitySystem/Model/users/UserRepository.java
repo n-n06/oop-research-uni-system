@@ -1,8 +1,6 @@
 package users;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.io.Serializable;
 
 import users.employees.Admin;
@@ -49,6 +47,10 @@ public class UserRepository implements Serializable {
     	};
     }
 
+    public Collection<User> get() {
+    	return users.values();
+    }
+    
     public User getUser(String userEmail) {
         return users.get(userEmail);
     }

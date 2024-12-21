@@ -74,7 +74,6 @@ public class Teacher extends Employee {
     }
 
     public void putAttendance(Lesson lesson, Student student, Mark mark) {
-        // TODO implement here
         return ;
     }
 

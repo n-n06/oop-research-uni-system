@@ -4,6 +4,7 @@ import java.security.SecureRandom;
 
 import enums.*;
 import users.students.*;
+import utilities.logging.LoggerProvider;
 import users.employees.*;
 
 public class UserFactory {
@@ -19,7 +20,8 @@ public class UserFactory {
     public BaseUser makeUser(String firstName, String lastName, String email, int age, Gender gender, UserType type) {
         switch (type) {
             case ADMIN:
-            	return new Admin(firstName, lastName, email, age, gender);
+            	
+            	return new Admin(firstName, lastName, age, gender);
             case DEAN:
             	return new Dean();
             case MANAGER:

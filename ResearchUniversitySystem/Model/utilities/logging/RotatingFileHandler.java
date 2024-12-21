@@ -32,6 +32,7 @@ public class RotatingFileHandler {
 			);
 			rotatingFileHandler.setFormatter(new CustomLoggingFormatter());
 			logger.addHandler(rotatingFileHandler);
+			logger.setUseParentHandlers(false);
 			
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
