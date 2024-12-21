@@ -110,9 +110,7 @@ public abstract class BaseUser implements User, Serializable {
     
 
     public void changePassword(String password) {
-    	if (isActive) {
-    		this.password = password;
-    	}
+    	this.password = Database.instance.getUsersRepo().hashPassword(password);
     }
 
     public void viewPersonalProfile() {

@@ -1,19 +1,46 @@
 package users;
 
 import java.util.*;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
 import java.io.Serializable;
+import java.security.SecureRandom;
 
 import users.employees.Admin;
 
 public class UserRepository implements Serializable {
+	private HashMap<String, User> users;
 	private int userId;
+	private byte[] passwordHashingSalt;
 	
     public UserRepository() {
     	users = new HashMap<>();
     	userId = 0;
+    	passwordHashingSalt = generateSalt();
     }
 
-    private HashMap<String, User> users;
+    private byte[] generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] salt = new byte[16];
+        random.nextBytes(salt);
+        return salt;
+    }
+    
+    String hashPassword(String password) {
+    	try {
+            PBEKeySpec spec = new PBEKeySpec(password.toCharArray(), passwordHashingSalt, 1024, 256);
+            SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            byte[] hashedPassword = keyFactory.generateSecret(spec).getEncoded();
+            System.out.println(Base64.getEncoder().encodeToString(hashedPassword));
+            return Base64.getEncoder().encodeToString(hashedPassword);
+    	} catch (Exception e) {
+    		System.err.println(e.getMessage());
+    		return "";
+    	}
+
+    }
 
     public void addUser(User user) {
     	if (user == null) throw new IllegalArgumentException("User cannot be null");
@@ -47,7 +74,7 @@ public class UserRepository implements Serializable {
     	};
     }
 
-    public Collection<User> get() {
+    public Collection<User> getAllUsers() {
     	return users.values();
     }
     
@@ -55,6 +82,8 @@ public class UserRepository implements Serializable {
         return users.get(userEmail);
     }
 
+    
+    //Login
     public boolean checkIsActiveUser(String userEmail) {
         return getUser(userEmail).getIsActive();
     }
@@ -62,7 +91,7 @@ public class UserRepository implements Serializable {
     public boolean login(String email, String password) {
         User user = getUser(email);  
         if (user != null) {
-            return user.getPassword().equals(password);
+            return user.getPassword().equals(hashPassword(password));
         }
         return false; 
     }
@@ -80,7 +109,9 @@ public class UserRepository implements Serializable {
     }
     
     public void addRootAdmin() {
-    	addUser(new Admin("admin@admin.com"));
+    	Admin root = new Admin("admin@admin.com");
+    	root.changePassword("rootPass1234");
+    	addUser(root);
     }
     
     @Override

@@ -3,7 +3,7 @@ package enums;
 /**
  * 
  */
-public enum Managers {
+public enum ManagerType {
 	OFFICEREGISTRATOR,
 	DEPARTMENT
 }

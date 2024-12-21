@@ -28,7 +28,7 @@ public class RotatingFileHandler {
 			rootLogger.setUseParentHandlers(false);
 			
 			FileHandler rotatingFileHandler = new FileHandler(
-					"app.%g.log", 1024*1024*5, 5, true
+					"app.%u.%g.log", 1024*1024*5, 5, true
 			);
 			rotatingFileHandler.setFormatter(new CustomLoggingFormatter());
 			logger.addHandler(rotatingFileHandler);
