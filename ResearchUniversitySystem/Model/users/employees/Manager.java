@@ -37,14 +37,14 @@ public class Manager extends Employee {
 
 
     public void viewStudentsInfo() {
-        ;
+        
     }
 
     public void viewStudentsInfo(Comparator<Student> comparator) {
     	List<Student> students = Database.instance.getUsersRepo().getAllStudents();
     	students.sort(comparator);
     	students.stream().forEach(s->System.out.println(s));
-        return ;
+        //return ;
     }
 
     public void viewTeachersInfo(Teacher teacher) {
@@ -53,8 +53,10 @@ public class Manager extends Employee {
     }
 
     public void viewTeachersInfo(Comparator<Teacher> comparator) {
-        // TODO implement here
-        return ;
+    	List<Teacher> teachers = Database.instance.getUsersRepo().getAllTeachers();
+    	teachers.sort(comparator);
+    	teachers.stream().forEach(t->System.out.println(t));
+        //return ;
     }
     
     
@@ -104,22 +106,26 @@ public class Manager extends Employee {
     }
 
 
-    public void addCourse(CourseRepository courseRepo, Course course) {
-        courseRepo.addCourse(course);
+    public void addCourse(Course course) {
+    	Database.instance.getCourseRepo().addCourse(course);
+        //courseRepo.addCourse(course);
     }
 
-    public void deleteCourse(CourseRepository courseRepo, Course course) {
-        courseRepo.removeCourse(course);
+    public void deleteCourse(Course course) {
+    	Database.instance.getCourseRepo().removeCourse(course);
+        //courseRepo.removeCourse(course);
     }
     
     
     //Registration
     public void openRegistration(CourseRegistrationService crs) {
-        crs.openRegistration();
+    	Database.instance.getRegistration().openRegistration();
+        //crs.openRegistration();
     }
     
     public void closeRegistration(CourseRegistrationService crs) {
-        crs.closeRegistration();
+    	Database.instance.getRegistration().closeRegistration();
+        //crs.closeRegistration();
     }
 
     public void verifyRegistration(CourseRegistrationService crs, Integer id) {
@@ -140,7 +146,8 @@ public class Manager extends Employee {
     }
 
     public void viewRegRequest(CourseRegistrationService crs, Integer id) {
-        System.out.println(crs.getRegRequest(id));
+        Database.instance.getRegistration().getRegRequest(id);
+    	//System.out.println(crs.getRegRequest(id));
     }
     
     public void viewAllRegRequest(CourseRegistrationService crs) {
@@ -153,16 +160,16 @@ public class Manager extends Employee {
     
     
     //Requests - general ones
-    public void viewRequest(RequestRepository requestRepo, Request request) {
+    public void viewRequest(Request request) {
         Database.instance.getReqeustRepo().getRequest(request);
     }
 
-    public void acceptRequest(RequestRepository requestRepo) {
+    public void acceptRequest() {
     	Database.instance.getReqeustRepo().acceptRequest();
     }
 
 
-    public void declineRequest(RequestRepository requestRepo) {
+    public void declineRequest() {
     	Database.instance.getReqeustRepo().declineRequest();
     }
 
