@@ -111,7 +111,7 @@ public class Database implements Serializable {
     		}
     	} else {
     		instance = new Database();
-    		instance.usersRepo.addRootAdmin();
+    		instance.getUsersRepo().addRootAdmin();
     	}
     }
     

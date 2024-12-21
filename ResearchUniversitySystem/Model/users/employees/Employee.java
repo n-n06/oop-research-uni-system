@@ -4,6 +4,7 @@ import users.BaseUser;
 
 import java.util.TreeSet;
 
+import database.Database;
 import enums.Gender;
 import research.CanBecomeResearcher;
 import social.messages.Message;
@@ -15,7 +16,6 @@ import social.messages.WorkMessage;
  * @author yasmin
  */
 public class Employee extends BaseUser {
-	private MessageRepository messageRepo;
 
     public Employee() {
     }
@@ -29,7 +29,7 @@ public class Employee extends BaseUser {
     public void sendWorkMessage(Employee employee, Message message) {
         try {
         	message.setReceiver(employee);
-        	messageRepo.addMessage(employee, message);
+        	Database.instance.getMessageRepo().addMessage(employee, message);
         	System.out.println("Message sent to "+ employee.getFirstName() + " " + employee.getLastName());
         } catch (Exception e) {
         	System.out.println("Fail!");
@@ -39,7 +39,7 @@ public class Employee extends BaseUser {
     public void readWorkMessage() {
     	try {
     		System.out.println("Work Messages for "+ this.getFirstName() + " " + this.getLastName());
-    		TreeSet<Message> messages = messageRepo.getMessages(this);
+    		TreeSet<Message> messages = Database.instance.getMessageRepo().getMessages(this);
     		if (messages == null || messages.isEmpty()) {
     			System.out.println("No messages available");
     			return;

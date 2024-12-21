@@ -91,19 +91,18 @@ public class DemoSystem {
 						break;
 					case 4:
 						UserFactory uf = new UserFactory();
-						String firstName, lastName, email, genderInput;
+						String firstName, lastName;
 						int age;
 						Gender gender;
 						System.out.println("First name: ");
 						firstName = br.readLine();
 						System.out.println("Last name: ");
 						lastName = br.readLine();
-						email = firstName.toLowerCase() + lastName.toLowerCase() + "@kbtu.kz";
 						System.out.println("Age: ");
 						age = Integer.parseInt(br.readLine());
 						System.out.println("Gender (Type M for male and F for female): ");
 						gender = br.readLine().equalsIgnoreCase("F") ? Gender.FEMALE : Gender.MALE;
-						Database.instance.getUsersRepo().addUser(uf.makeUser(firstName, lastName, email, age, gender, UserType.ADMIN));
+						Database.instance.getUsersRepo().addUser(uf.makeUser(firstName, lastName, age, gender, UserType.ADMIN));
 						break;
 					
 					case 5:

@@ -3,6 +3,8 @@ package users.employees;
 import java.io.*;
 import java.util.*;
 
+import enums.Gender;
+import enums.UserType;
 import social.messages.Request;
 import social.messages.RequestRepository;
 
@@ -15,6 +17,10 @@ public class Dean extends Employee {
      * Default constructor
      */
     public Dean() {
+    }
+    
+    public Dean(String firstName, String lastName, int age, Gender gender) {
+    	super(firstName, lastName, age, gender);
     }
 
     /**

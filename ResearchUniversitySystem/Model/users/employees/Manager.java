@@ -25,12 +25,12 @@ import utilities.comparators.*;
  */
 public class Manager extends Employee {
 	
-	private Managers managerType;
+	private ManagerType managerType;
 
 	public Manager() {
 		
 	}
-    public Manager(String firstName, String lastName, int age, Gender gender, Managers managerType) {
+    public Manager(String firstName, String lastName, int age, Gender gender, ManagerType managerType) {
     	super(firstName, lastName, age, gender);
     	this.managerType = managerType;
     }

@@ -9,6 +9,7 @@ import courses.*;
 
 public class Teacher extends Employee {
 	private TeacherType teacherType;
+	private School school;
 	private double rating;
 	private Vector<Integer> ratingMarks = new Vector<>();
 	
@@ -19,9 +20,10 @@ public class Teacher extends Employee {
     	super();
     }
     
-    public Teacher(String firstName, String lastName, int age, Gender gender, TeacherType teacherType) {
+    public Teacher(String firstName, String lastName, int age, Gender gender, TeacherType teacherType, School school) {
     	super(firstName, lastName, age, gender);
     	this.teacherType = teacherType;
+    	this.school = school;
     	if(teacherType == TeacherType.PROFESSOR) {
     		becomeResearcher();
     	}
