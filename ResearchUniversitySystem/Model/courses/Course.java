@@ -24,12 +24,17 @@ public class Course implements Serializable {
     private EnumMap<LessonType, Integer> credits = new EnumMap<>(LessonType.class);   // its like (2/0/1 - 2 lectures, 0 labs, 1 practice)
     private HashSet<Course> prerequesites = new HashSet<>();
     private HashMap<Integer, Lesson> courseLessons = new HashMap<>();
+    private int lessonID;
     private Vector<Teacher> courseTeachers = new Vector<>();
     private Semester semester;
     private CourseType courseType;
     
     private HashMap<Student,Mark> gradeBook;
 
+    {
+    	lessonID = 0;
+    }
+    
     public Course(String courseID, String courseName) {
     	this.courseID = courseID;
     	this.courseName = courseName;
@@ -84,10 +89,14 @@ public class Course implements Serializable {
     }
      
     public void addCourseLesson(Lesson lesson) {
-    	courseLessons.put(lesson.getID(), lesson);
+    	courseLessons.put(generateLessonID(), lesson);
     }
     
-    public HashMap<Integer, Lesson> getCourseLessons() {
+    private Integer generateLessonID() {
+		return lessonID++;
+	}
+
+	public HashMap<Integer, Lesson> getCourseLessons() {
     	return courseLessons;
     }
     
