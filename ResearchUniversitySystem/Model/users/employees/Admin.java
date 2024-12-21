@@ -19,8 +19,8 @@ public class Admin extends Employee {
     }
     
     
-    public Admin(String firstName, String lastName, String email, int age, Gender gender) {
-    	super(firstName, lastName, email, age, gender);
+    public Admin(String firstName, String lastName, int age, Gender gender) {
+    	super(firstName, lastName, age, gender);
     }
 
     /**

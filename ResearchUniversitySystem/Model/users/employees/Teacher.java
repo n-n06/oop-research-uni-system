@@ -19,8 +19,8 @@ public class Teacher extends Employee {
     	super();
     }
     
-    public Teacher(String firstName, String lastName, String email, int age, Gender gender, TeacherType teacherType) {
-    	super(firstName, lastName, email, age, gender);
+    public Teacher(String firstName, String lastName, int age, Gender gender, TeacherType teacherType) {
+    	super(firstName, lastName, age, gender);
     	this.teacherType = teacherType;
     	if(teacherType == TeacherType.PROFESSOR) {
     		becomeResearcher();
