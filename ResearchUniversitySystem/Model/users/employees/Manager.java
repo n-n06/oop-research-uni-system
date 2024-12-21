@@ -140,7 +140,8 @@ public class Manager extends Employee {
     }
 
     public void viewRegRequest(CourseRegistrationService crs, Integer id) {
-        System.out.println(crs.getRegRequest(id));
+        Database.instance.getRegistration().getRegRequest(id);
+    	//System.out.println(crs.getRegRequest(id));
     }
     
     public void viewAllRegRequest(CourseRegistrationService crs) {
