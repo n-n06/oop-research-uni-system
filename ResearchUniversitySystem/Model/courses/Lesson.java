@@ -10,16 +10,7 @@ import enums.LessonType;
 import users.employees.Teacher;
 import users.students.Student;
 
-// need to ensure one teacher can have only one lesson at time
-// need to ensure we have two lectures that go together as a two pack
-// need to ensure we cant have two lessons in the same room (maybe having a vector with room nums that are already assigned in the specific timewindow)
-// need to ensure a student cant have two lessons at the same time 
-// mark attendance
-// have a single grade for a student per lesson
 
-/**
- * @author eva
- */
 public class Lesson {
 	private int lessonID;
     public LessonType type;
@@ -31,6 +22,7 @@ public class Lesson {
     private LessonType lessonType;
 	
     private HashMap<Student, Boolean> attendanceList = new HashMap<>();
+    private HashMap<Student, Double> markOfLesson = new HashMap<>();
     
    
     public Lesson(Course course, int lessonRoom, TimeWindow lessonTime, LessonType lessonType) {
@@ -59,6 +51,10 @@ public class Lesson {
     
     public void putAttendance(Student student, Boolean isPresent) {
     	attendanceList.put(student, isPresent);
+    }
+    
+    public void putMark(Student student, Double point) {
+    	markOfLesson.put(student, point);
     }
 
 	public Integer getID() {

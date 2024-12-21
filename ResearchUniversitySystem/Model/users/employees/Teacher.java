@@ -72,12 +72,12 @@ public class Teacher extends Employee {
     	Database.instance.getComplaints().add(complaint);
     }
 
-    public void putMarkToStudent(Course course, Student s, Mark m) {
-        course.assignMark(s, m);
+    public void putMarkToLesson(Lesson lesson, Student student, Double point) {
+        lesson.putMark(student, point);
     }
 
-    public void putAttendance(Lesson lesson, Student student, Mark mark) {
-        return ;
+    public void putAttendance(Lesson lesson, Student student, Boolean isPresent) {
+        lesson.putAttendance(student, isPresent);
     }
 
     public void checkRating() {

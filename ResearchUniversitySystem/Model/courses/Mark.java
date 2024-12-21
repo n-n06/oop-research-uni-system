@@ -55,10 +55,6 @@ public class Mark {
 	        secondAttestation = sumSecondAttestation();
 	    }
     }
-    
-    public double getFinalExamMark() {
-		return finalExam;
-	}
 
     public void setFinalExamMark(double finalExam) {
     	checkValidMark(finalExam);
@@ -68,6 +64,18 @@ public class Mark {
         else {
         	this.finalExam = finalExam;
         }
+    }
+	
+    public double getFirstAttestation() {
+    	return firstAttestation;
+    }
+    
+    public double getSecondAttestation() {
+    	return secondAttestation;
+    }
+    
+    public double getFinalExam() {
+    	return finalExam;
     }
 
     public double getOverallPoints() {
