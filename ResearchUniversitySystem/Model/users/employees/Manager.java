@@ -150,16 +150,16 @@ public class Manager extends Employee {
     
     //Requests - general ones
     public void viewRequest(RequestRepository requestRepo, Request request) {
-        requestRepo.getRequest(request);
+        Database.instance.getReqeustRepo().getRequest(request);
     }
 
     public void acceptRequest(RequestRepository requestRepo) {
-    	requestRepo.acceptRequest();
+    	Database.instance.getReqeustRepo().acceptRequest();
     }
 
 
     public void declineRequest(RequestRepository requestRepo) {
-        requestRepo.declineRequest();
+    	Database.instance.getReqeustRepo().declineRequest();
     }
 
     
