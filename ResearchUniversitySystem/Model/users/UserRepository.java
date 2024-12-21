@@ -1,6 +1,8 @@
 package users;
 
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -8,7 +10,8 @@ import javax.crypto.spec.PBEKeySpec;
 import java.io.Serializable;
 import java.security.SecureRandom;
 
-import users.employees.Admin;
+import users.employees.*;
+import users.students.*;
 
 public class UserRepository implements Serializable {
 	private HashMap<String, User> users;
@@ -76,6 +79,16 @@ public class UserRepository implements Serializable {
 
     public Collection<User> getAllUsers() {
     	return users.values();
+    }
+    
+    public List<User> getAllStudents() {
+    	Predicate<User> isStudent = user -> user instanceof Student;
+    	return users.values().stream().filter(isStudent).collect(Collectors.toList());
+    }
+    
+    public List<User> getAllTeachers() {
+    	Predicate<User> isTeacher = user -> user instanceof Teacher;
+    	return users.values().stream().filter(isTeacher).collect(Collectors.toList());
     }
     
     public User getUser(String userEmail) {
