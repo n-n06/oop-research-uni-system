@@ -6,17 +6,12 @@ import users.BaseUser;
 import users.employees.Teacher;
 
 import enums.*;
-import courses.Course;
-import courses.CourseRegistrationService;
-import courses.Transcript;
-import courses.GPA;
-import courses.RegistrationRequest;
-import courses.Schedule;
+import courses.*;
 import research.ResearchProject;
 import social.messages.RequestRepository;
 
 /**
- * @author eva
+ *
  */
 public abstract class Student extends BaseUser {
 	// 1. FIELDS
@@ -24,8 +19,8 @@ public abstract class Student extends BaseUser {
     private Degree degree;
     private School school;
     private int credits;
-    // some field for gpa
-    
+  
+    private Transcript transcript;
     private Vector<StudentOrganization> studentOrganizations;
     private HashSet<Course> completedCourses = new HashSet<>();
     private HashSet<Course> currentCourses = new HashSet<>();
@@ -36,11 +31,11 @@ public abstract class Student extends BaseUser {
 		super();
 	}
 
-    public Student(String firstName, String lastName, int age, Gender gender, Degree degree, School school) {
+    public Student(String firstName, String lastName, int age, Gender gender, Degree degree, School school, int year) {
     	super(firstName, lastName, age, gender);
     	this.degree = degree;
     	this.school = school;
-    	this.year = 1; // by default, gonna have a method to increase a year for ALL students???? And if so we can have a Graduate() method? but it will be too overcomplicated... but then again will we need to handle transfer students??
+    	this.year = year;
     }
 
     // 3. WORKING WITH TEACHERS:
@@ -48,37 +43,37 @@ public abstract class Student extends BaseUser {
         teacher.getRatingMarks().add(rating);
     }
     
-    // 4. WORKING WITH COURSES AND GRADES: --- NOT FINISHED, gprobably gonna separate it in sections for courses/lessons and for marks and att (if its imlemented here)
+    // 4. WORKING WITH GRADES:
    
     public void viewTranscript() {
-        // TODO implement here
-        return ;
+        transcript.displayTranscript();
     }
     
     public Transcript getTranscript() {
-        // TODO implement here
-        return null;
-    }
-
-//    public void viewJournal() {
-//        // TODO implement here
-//        return ;
-//    }
-
-
-    public void makeRequest(RequestRepository reqRepo) {
-        // TODO implement here
-        return ;
-    }
-
-    public void viewMarks(Course course) {
-//        course.getGradeBook(); // нужно дописать
+        return transcript;
     }
     
-    public void getGPA() {
-        // TODO implement here
-        return ;
+    public double getGPA() {
+        return transcript.getOverallGPA();
+    }    
+    
+    public void viewMarks(Course course) {
+        Mark mark = course.getGradeBook().get(this);
+        if (!mark.getFirstAttMarks().isEmpty()) {
+        	System.out.println("FIRST ATTESTATION MARKS: ");
+        	mark.getFirstAttMarks().stream().forEach(m -> System.out.println(m));
+        } else {
+        	System.out.println("No marks for FIRST attestation!");
+        }
+        if (!mark.getSecondAttMarks().isEmpty()) {
+        	System.out.println("SECOND ATTESTATION MARKS: ");
+        	mark.getSecondAttMarks().stream().forEach(m -> System.out.println(m));
+        } else {
+        	System.out.println("No marks for SECOND atttestation!");
+        }
     }
+    
+    // 5. WORKING WITH COURSES & SCHEDULE:
     
     public void viewSchedule() {
         // TODO implement here
@@ -96,13 +91,13 @@ public abstract class Student extends BaseUser {
     public HashSet<Course> getCurrentCourses() {
     	return currentCourses;
     }
-
+    
     public void addCourse(Course course) {
     	currentCourses.add(course);
     	System.out.println("Course was added to Student's courses.");
     }
     
-    public void registerForCourse(CourseRegistrationService crs, Course course) {
+    public void registerForCourse(int id, CourseRegistrationService crs, Course course) {
     	RegistrationRequest rq = new RegistrationRequest(course, this);
         crs.addRegRequest(rq);
         System.out.println("Request for registration to " + course.getID());
@@ -115,9 +110,11 @@ public abstract class Student extends BaseUser {
     	}
     }
 
-    // 5. STUDENT ORGANIZATIONS:
+    // 6. STUDENT ORGANIZATIONS:
     public StudentOrganization startOrganization(String name) {
-        return new StudentOrganization(name, this);
+    	StudentOrganization newOrg = new StudentOrganization(name, this);
+        this.studentOrganizations.add(newOrg);
+        return newOrg;
     }
     
     public void joinOrganization(StudentOrganization org) {
@@ -129,7 +126,17 @@ public abstract class Student extends BaseUser {
     	studentOrganizations.stream().forEach(org -> System.out.println(org.getName()));
     }
 
-
+    // 7. RESEARCH & JOURNAL AND REQUESTS:
+    public void makeRequest(RequestRepository reqRepo) {
+        // TODO implement here
+        return ;
+    }
+    
+//  public void viewJournal() {
+//  // TODO implement here
+//  return ;
+// }
+    
     //TODO: Research based - nurs
     public ResearchProject getDiplomaProject() {
         return null;
@@ -138,8 +145,9 @@ public abstract class Student extends BaseUser {
 
     @Override
     public String toString() {
-    	// TODO Auto-generated method stub
-    	return super.toString();
+    	return super.toString() + "\nYear of study: " + this.year 
+    			+ "\nGPA: " + this.getGPA() + "\nSchool: " + this.school.name()
+    			+ "\nDegree: " + this.degree.name() + "\nCredits: " + this.credits;
     }
      
 }
