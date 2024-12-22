@@ -37,5 +37,11 @@ public class Dean extends Employee {
         	.sorted()
         	.forEach(c->System.out.println(c));
     }
+    
+    @Override
+    public String toString() {
+    	return "🧑‍💼Dean of " + school.toString()
+    			+ "\n" + super.toString();
+    }
 
 }

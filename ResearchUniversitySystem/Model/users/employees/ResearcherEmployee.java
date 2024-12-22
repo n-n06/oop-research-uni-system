@@ -31,4 +31,9 @@ public class ResearcherEmployee extends Employee implements CanBecomeResearcher 
 	public boolean getIsResearcher() {
 		return true;
 	}
+	
+	@Override
+	public String toString() {
+		return "👨‍🔬Researcher at " + school + "\n" + super.toString();
+	}
 }

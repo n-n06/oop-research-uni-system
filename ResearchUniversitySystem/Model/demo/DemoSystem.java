@@ -25,6 +25,7 @@ public class DemoSystem {
 		
 		
 		User currentUser = new Admin();
+		Admin a;
 		
 		try {
 			Database.instance.getNewsRepo().addNews(new News("Test News", NewsType.GENERAL, "This is a test uwu"));
@@ -50,7 +51,7 @@ public class DemoSystem {
 
 			
 			main: while (true) {
-				System.out.println("Choose you action:\n0. Quit\n1. View news\n2. View journals\n3. View Profile\n4. Add User\n5. View users");
+				System.out.println("Choose you action:\n0. Quit\n1. View news\n2. View journals\n3. View Profile\n4. Add User\n5. View users\n6. Read logs");
 				try {
 					choice = Integer.parseInt(br.readLine());
 				} catch (NumberFormatException e) {
@@ -110,10 +111,13 @@ public class DemoSystem {
 						break;
 					
 					case 5:
-						Admin a = (Admin)currentUser;
+						a = (Admin)currentUser;
 						a.viewAllUsers();
 						break;
-						
+					case 6:
+						a = (Admin)currentUser;
+						a.readLogs();
+						break;
 					case 0:
 						break main;
 					}

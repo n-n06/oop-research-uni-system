@@ -122,5 +122,13 @@ public class Teacher extends Employee implements CanBecomeResearcher {
 	public boolean getIsResearcher() {
 		return isResearcher;
 	}
+	
+	@Override
+	public String toString() {
+		return "👩‍🏫 Teacher" 
+				+ super.toString()
+				+ "\nTeacher type: " + teacherType.toString().toLowerCase().replace("_", " ")
+				+ "\nSchool" + school ;
+	}
 
 }
