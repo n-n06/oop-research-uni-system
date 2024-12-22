@@ -43,7 +43,11 @@ public class Teacher extends Employee {
     	return ratingMarks;
     }
     
-    public void addCourse(Course course) {
+    public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void addCourse(Course course) {
     	assignedCourses.add(course);
     }
     

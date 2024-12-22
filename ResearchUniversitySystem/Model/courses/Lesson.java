@@ -1,5 +1,6 @@
 package courses;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public class Lesson {
     public Course course;
     public Teacher teacher;
     public LocalDate lessonDate;
+    private DayOfWeek dayOfWeeek;
     private TimeWindow lessonTime;
     private int lessonRoom;
     private LessonType lessonType;
@@ -26,16 +28,17 @@ public class Lesson {
     private HashMap<Student, Double> marksOfLesson = new HashMap<>();
     
    
-    public Lesson(Course course, int lessonRoom, LocalDate lessonDate, TimeWindow lessonTime, LessonType lessonType) {
+    public Lesson(Course course, int lessonRoom, LocalDate lessonDate, DayOfWeek dayOfWeek, TimeWindow lessonTime, LessonType lessonType) {
     	this.course = course;
     	this.lessonRoom = lessonRoom;
     	this.lessonDate = lessonDate;
+    	this.dayOfWeeek = dayOfWeek;
     	this.lessonTime = lessonTime;
     	this.lessonType = lessonType;
     }
     
-    public Lesson(Course course, int lessonRoom, LocalDate lessonDate, TimeWindow lessonTime,  LessonType lessonType, Teacher teacher) {
-    	this(course, lessonRoom, lessonDate, lessonTime, lessonType);
+    public Lesson(Course course, int lessonRoom, LocalDate lessonDate, DayOfWeek dayOfWeek, TimeWindow lessonTime,  LessonType lessonType, Teacher teacher) {
+    	this(course, lessonRoom, lessonDate, dayOfWeek, lessonTime, lessonType);
     	this.teacher = teacher;
     }
     
@@ -106,6 +109,10 @@ public class Lesson {
 		return lessonDate;
 	}
 	
+	public DayOfWeek getDayOfWeeek() {
+		return dayOfWeeek;
+	}
+
 	public TimeWindow getLessonTime() {
 		return lessonTime;
 	}

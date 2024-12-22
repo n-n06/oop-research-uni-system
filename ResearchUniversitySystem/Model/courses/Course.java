@@ -2,6 +2,7 @@ package courses;
 
 import java.util.*;
 import java.io.Serializable;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 import enums.CourseType;
@@ -20,6 +21,8 @@ public class Course implements Serializable {
     private HashSet<Course> prerequesites = new HashSet<>();
     
     private HashMap<Integer, Lesson> courseLessons = new HashMap<>();
+    private Schedule courseSchedule = new Schedule();
+    
     private Vector<Teacher> courseTeachers = new Vector<>();
     
     // Current
@@ -80,21 +83,30 @@ public class Course implements Serializable {
     	courseLessons.put(lesson.getID(), lesson);
     }
     
-    public void fillLessons(int lessonRoom, LocalDate lessonFromDate, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
+    public void fillLessons(int lessonRoom, LocalDate lessonFromDate, DayOfWeek dayOfWeek, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
         for (int i = 0; i < 15; i++) {
             LocalDate newDate = lessonFromDate.plusWeeks(i);
-            Lesson newLesson = new Lesson(this, lessonRoom, newDate, lessonTime, lessonType, teacher);
+            Lesson newLesson = new Lesson(this, lessonRoom, newDate, dayOfWeek, lessonTime, lessonType, teacher);
 
             addCourseLesson(newLesson);
+            teacher.getSchedule().addLesson(newLesson);
+            courseSchedule.addLesson(newLesson);
         }
     }
     
     public void removeLessonFromCourseByID(Integer lessonID) {
-    	courseLessons.remove(lessonID);
+    	Lesson lesson = courseLessons.remove(lessonID);
+    	if (lesson != null) {
+            courseSchedule.removeLesson(lesson); 
+        }
     }
     
     
     // Views
+    public void viewLessonInSchedule() {
+    	courseSchedule.printSchedule();
+    }
+    
 	public void viewLessons() {
 	    courseLessons.values()
 	                 .forEach(System.out::println);
