@@ -54,6 +54,11 @@ public abstract class Message implements Comparable<Message>, Serializable {
     	this.receiver = receiver;
     }
     
+    public Message(String content) {
+    	this();
+    	setContent(content);
+    }
+    
     public Message(User receiver, String content) {
     	this(receiver);
     	this.content = content;

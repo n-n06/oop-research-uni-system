@@ -40,6 +40,13 @@ public class Complaint implements Serializable, Comparable<Complaint> {
     	this.complaintId = id;
     }
     
+    public Complaint(Teacher sender, String content, UrgencyLevel level) {
+    	this();
+    	this.sender = sender;
+    	this.content = content;
+    	this.urgencyLevel = level;
+    }
+    
     public Complaint(Teacher sender, Dean receiver, String content, UrgencyLevel level) {
     	this();
     	this.sender = sender;

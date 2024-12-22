@@ -29,8 +29,8 @@ public class Request extends Message implements Serializable {
     	requestId = Database.instance.getReqeustRepo().generateRequestId();
     }
     
-    public Request(User sender, Employee receiver, String content) {
-    	super(receiver, content);
+    public Request(User sender, String content) {
+    	super(content);
     	this.sender = sender;
     }
      
