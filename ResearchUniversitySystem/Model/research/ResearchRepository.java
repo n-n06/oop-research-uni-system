@@ -44,6 +44,8 @@ public class ResearchRepository implements Serializable {
 		return researchers.get(researchers.indexOf(r));
 	}
 	
+	//
+	
 	
 	//Projects management
 	public Vector<ResearchProject> getAllResearchProjects() {

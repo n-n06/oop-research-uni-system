@@ -19,7 +19,7 @@ public class GradeReport {
         calculateGradeStatistics();
     }
 
-    private void calculateGradeStatistics() {
+    public void calculateGradeStatistics() {
         minGrade = Double.POSITIVE_INFINITY;
         maxGrade = Double.NEGATIVE_INFINITY;
         double totalGrade = 0;

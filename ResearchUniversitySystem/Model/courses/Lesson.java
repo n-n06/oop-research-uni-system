@@ -147,6 +147,10 @@ public class Lesson {
 	public void setID(int ID) {
 		this.lessonID = ID;
 	}
+	
+	public void setTime(TimeWindow lessonTime) {
+		this.lessonTime = lessonTime;
+	}
 
     
     public String toString() {

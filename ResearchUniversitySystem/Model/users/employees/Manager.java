@@ -6,6 +6,7 @@ import java.util.*;
 
 import courses.Course;
 import courses.CourseRepository;
+import courses.GradeReport;
 import courses.Lesson;
 import courses.TimeWindow;
 import database.Database;
@@ -67,7 +68,14 @@ public class Manager extends Employee {
     }
 
     public void createStatisticalReport() {
-        // TODO implement here
+    	
+    	Database.instance.getCourseRepo().getAllCourses().forEach(c -> {
+    		GradeReport gr = c.getGradeReport();
+    		gr.displayDistribution();
+    		gr.displayReport();
+    		gr.calculateGradeStatistics();
+    		System.out.println(String.format("Max mark: %.2f\nMin mark: %.2f\nAverage mark: %.2f\n", gr.getMaxGrade(), gr.getMinGrade(), gr.getAverageGrade()));
+    	});
         return ;
     }
     
@@ -137,8 +145,8 @@ public class Manager extends Employee {
     }
         
         
-    public void putLessonTime(Course course, TimeWindow time) {
-        return ;
+    public void changeLessonTime(Course course, int id, TimeWindow time) {
+        course.getLessonByID(id).setTime(time);
     }
     
     //Here we would have to make checks for busy classrooms

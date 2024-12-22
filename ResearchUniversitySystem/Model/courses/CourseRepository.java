@@ -5,6 +5,7 @@ import users.User;
 
 import java.io.*;
 import java.util.Vector;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.TreeSet;
@@ -32,6 +33,10 @@ public class CourseRepository implements Serializable {
 
     public Course getCourseByID(String courseID) {
         return courses.get(courseID);
+    }
+    
+    public Collection<Course> getAllCourses() {
+    	return courses.values();
     }
     
     public void displayCourses() {
