@@ -41,14 +41,14 @@ public class Course implements Serializable {
     	this.courseName = courseName;
     }
     
-    public Course(String courseID, String courseName, HashSet<Course> prerequesites) {
+    public Course(String courseID, String courseName, EnumMap<LessonType, Integer> credits) {
     	this(courseID, courseName);
-    	this.prerequesites = prerequesites;
-    }
-    
-    public Course(String courseID, String courseName, HashSet<Course> prerequesites, EnumMap<LessonType, Integer> credits) {
-    	this(courseID, courseName, prerequesites);
     	this.credits = credits;
+    }
+   
+    public Course(String courseID, String courseName, HashSet<Course> prerequesites, EnumMap<LessonType, Integer> credits) {
+    	this(courseID, courseName, credits);
+    	this.prerequesites = prerequesites;
     }
  
     public boolean checkPrerequesites(Student student) {
@@ -79,6 +79,12 @@ public class Course implements Serializable {
     	courseLessons.put(lesson.getID(), lesson);
     }
     
+    public void removeLessonFromCourseByID(Integer lessonID) {
+    	courseLessons.remove(lessonID);
+    }
+    
+
+    
     // Views
 	public void viewLessons(Course course) {
 	    courseLessons.values()
@@ -100,6 +106,10 @@ public class Course implements Serializable {
 	// Getters
     public String getID() {
     	return courseID;
+    }
+    
+    public Lesson getLessonByID(Integer lessonID) {
+    	return courseLessons.get(lessonID);
     }
     
 	public HashMap<Integer, Lesson> getCourseLessons() {

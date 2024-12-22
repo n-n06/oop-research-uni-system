@@ -71,6 +71,7 @@ public abstract class Student extends BaseUser {
 
     public void viewMarks(Course course) {
 //        course.getGradeBook(); // нужно дописать
+    }
     
     public void getGPA() {
         // TODO implement here
