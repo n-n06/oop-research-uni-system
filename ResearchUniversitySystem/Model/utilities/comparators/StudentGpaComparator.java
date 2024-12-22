@@ -21,7 +21,7 @@ public class StudentGpaComparator implements Comparator<Student>  {
 	
     @Override
     public int compare(Student s1, Student s2) {
-        return Double.compare(s1.getGPA().getNumericValue(), s2.getGPA().getNumericValue()); // sorting in ascending order: 0.17, 1.15, ...
+        return Double.compare(s1.getGPA(), s2.getGPA()); // sorting in ascending order: 0.17, 1.15, ...
     }
     
 }

@@ -11,7 +11,6 @@ import database.Database;
 public class Teacher extends Employee {
 	private TeacherType teacherType;
 	private School school;
-	private double rating;
 	private Vector<Integer> ratingMarks = new Vector<>();
 	
 	HashSet<Course> assignedCourses = new HashSet<>();

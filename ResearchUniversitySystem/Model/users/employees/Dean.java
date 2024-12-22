@@ -12,15 +12,15 @@ import social.messages.RequestRepository;
 
 public class Dean extends Employee {
 
+	School school;
+	
     public Dean() {
+    	
     }
     
-    public Dean(String firstName, String lastName, int age, Gender gender) {
+    public Dean(String firstName, String lastName, int age, Gender gender, School school) {
     	super(firstName, lastName, age, gender);
-    }
-
-    public void viewEmployeeRequests(RequestRepository requests, Employee e) {
-        
+    	this.school = school;
     }
 
     public void signRequest(School school, Request request) {
@@ -31,6 +31,9 @@ public class Dean extends Employee {
         Database.instance.getReqeustRepo().declineRequest(school, request);
     }
 
+    public void viewRequests(School school) {
+    	Database.instance.getReqeustRepo().viewRequests(school);
+    }
     public void viewComplaints() {
         // TODO implement here
         return ;
