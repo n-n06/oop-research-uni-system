@@ -33,6 +33,10 @@ public class Request extends Message implements Serializable {
     	super(receiver, content);
     	this.sender = sender;
     }
+     
+    public Request(int id) {
+    	this.requestId = id;
+    }
 
     public User getSender() {
 		return sender;

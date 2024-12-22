@@ -1,8 +1,10 @@
 package users.employees;
 
+import database.Database;
 import enums.Gender;
 import enums.School;
 import research.*;
+import social.messages.Request;
 
 public class ResearcherEmployee extends Employee implements CanBecomeResearcher {
 	private School school;
@@ -16,8 +18,8 @@ public class ResearcherEmployee extends Employee implements CanBecomeResearcher 
 		this.school = school;
 	}
 	
-	public void sendRequest() {
-		
+	public void sendRequest(Request r) {
+		Database.instance.getReqeustRepo().addRequest(school, r);
 	}
 	
 	@Override
@@ -28,5 +30,10 @@ public class ResearcherEmployee extends Employee implements CanBecomeResearcher 
 	@Override
 	public boolean getIsResearcher() {
 		return true;
+	}
+	
+	@Override
+	public String toString() {
+		return "👨‍🔬Researcher at " + school + "\n" + super.toString();
 	}
 }

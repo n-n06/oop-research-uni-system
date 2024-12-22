@@ -24,11 +24,19 @@ public class RotatingFileHandler {
 		Logger logger = Logger.getLogger("SystemLogger");
 		
 		try {
+            String logsDirectory = "./logs";
+            File logDir = new File(logsDirectory);
+            if (!logDir.exists()) {
+                logDir.mkdir(); 
+            }
+			
+            
+			
 			Logger rootLogger = Logger.getLogger("");
 			rootLogger.setUseParentHandlers(false);
 			
 			FileHandler rotatingFileHandler = new FileHandler(
-					"app.%u.%g.log", 1024*1024*5, 5, true
+					logsDirectory + "/app.%u.%g.log", 1024*1024*5, 5, true
 			);
 			rotatingFileHandler.setFormatter(new CustomLoggingFormatter());
 			logger.addHandler(rotatingFileHandler);

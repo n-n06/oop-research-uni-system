@@ -113,11 +113,6 @@ public abstract class BaseDecorator implements User {
     }
     
     
-    public void becomeResearcher() {
-        user.becomeResearcher();
-    }
-    
-    
 	@Override
 	public int getAge() {
 		return user.getAge();

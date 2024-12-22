@@ -25,6 +25,10 @@ import social.updates.NewsRepository;
  */
 public class Database implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8370407402784369706L;
 	private int organizationId = 0;
 	private int complaintId;
 

@@ -31,10 +31,17 @@ public class Dean extends Employee {
     	Database.instance.getReqeustRepo().viewRequests(school);
     }
     public void viewComplaints() {
+    	System.out.println("Complaints from teachers: \n");
         Database.instance.getComplaints().stream()
         	.filter(c->c.getSchool() == this.school)
         	.sorted()
         	.forEach(c->System.out.println(c));
+    }
+    
+    @Override
+    public String toString() {
+    	return "🧑‍💼Dean of " + school.toString()
+    			+ "\n" + super.toString();
     }
 
 }

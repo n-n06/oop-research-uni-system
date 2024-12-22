@@ -54,7 +54,5 @@ public interface User extends Serializable {
     public Gender getGender();
     
     public Language getPreferredLanguage();
-    
-    
-    public void becomeResearcher();
+  
 }
