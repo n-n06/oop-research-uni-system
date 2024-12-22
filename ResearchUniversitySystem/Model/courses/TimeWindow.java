@@ -2,11 +2,8 @@ package courses;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-/**
- * @author eva
- */
-// essential class for scheduling a lesson properly (its time)
-public class TimeWindow {
+
+public class TimeWindow implements Comparable<TimeWindow> {
 	private LocalTime startTime;
 	private LocalTime endTime;
 
@@ -27,6 +24,10 @@ public class TimeWindow {
     
     public LocalTime getEndTime() {
     	return this.endTime;
+    }
+    
+    public int compareTo(TimeWindow other) {
+        return this.startTime.compareTo(other.startTime);
     }
 
     public String toString() {

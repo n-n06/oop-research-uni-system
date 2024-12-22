@@ -11,6 +11,7 @@ import courses.CourseRegistrationService;
 import courses.Transcript;
 import courses.GPA;
 import courses.RegistrationRequest;
+import courses.Schedule;
 import research.ResearchProject;
 import social.messages.RequestRepository;
 
@@ -28,6 +29,7 @@ public abstract class Student extends BaseUser {
     private Vector<StudentOrganization> studentOrganizations;
     private HashSet<Course> completedCourses = new HashSet<>();
     private HashSet<Course> currentCourses = new HashSet<>();
+    private Schedule schedule = new Schedule();
     
 	// 2. CONSTRUCTORS: 
 	public Student() {
@@ -91,6 +93,10 @@ public abstract class Student extends BaseUser {
     	return completedCourses;
     }
     
+    public HashSet<Course> getCurrentCourses() {
+    	return currentCourses;
+    }
+
     public void addCourse(Course course) {
     	currentCourses.add(course);
     	System.out.println("Course was added to Student's courses.");

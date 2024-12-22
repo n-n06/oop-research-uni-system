@@ -93,6 +93,14 @@ public class Lesson {
 	public Teacher getTeacher() {
 		return teacher;
 	}
+	
+	public Course getCourse() {
+		return course;
+	}
+	
+	public int getLessonRoom() {
+		return lessonRoom;
+	}
 
 	public LocalDate getDate() {
 		return lessonDate;
@@ -117,8 +125,11 @@ public class Lesson {
     public HashMap<Student, Double> getMarksOfLesson() {
     	return marksOfLesson;
     }
-	
     
+	public LessonType getLessonType() {
+		return lessonType;
+	}
+	
     // Setters 
 	public void setID(int ID) {
 		this.lessonID = ID;
@@ -132,5 +143,7 @@ public class Lesson {
                + this.lessonRoom
                + " " + this.lessonTime;
     }
+
+
 
 }

@@ -15,6 +15,7 @@ public class Teacher extends Employee {
 	private Vector<Integer> ratingMarks = new Vector<>();
 	
 	HashSet<Course> assignedCourses = new HashSet<>();
+	private Schedule schedule = new Schedule();
 	
 
     public Teacher() {
@@ -55,7 +56,7 @@ public class Teacher extends Employee {
     }
     
     public void viewOwnLessons(Course course) {
-    	course.viewLessons(course, this);
+    	course.viewLessons(this);
     }
     	
     public void viewStudentList(Course course) {
