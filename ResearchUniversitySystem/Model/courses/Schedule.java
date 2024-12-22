@@ -34,31 +34,39 @@ public class Schedule implements Serializable {
 
         dailySchedule.put(time, lesson);
         return true; 
-    }             
+    }  
 	
-	public boolean removeLesson(Lesson lesson) {
-	    for (Map.Entry<DayOfWeek, TreeMap<TimeWindow, Lesson>> entry : schedule.entrySet()) {
-	        DayOfWeek day = entry.getKey();
-	        TreeMap<TimeWindow, Lesson> daySchedule = entry.getValue();
+	public boolean removeLesson(DayOfWeek day, TimeWindow timeWindow) {
+        TreeMap<TimeWindow, Lesson> dailySchedule = schedule.get(day);
+        if (dailySchedule != null && dailySchedule.containsKey(timeWindow)) {
+            dailySchedule.remove(timeWindow);
+            System.out.println("Lesson removed from " + day + " at " + timeWindow);
+            return true;
+        } else {
+            System.out.println("No lesson found on " + day + " at " + timeWindow);
+            return false;
+        }
+    }
 
-	        TimeWindow timeWindowToRemove = null;
-	        for (Map.Entry<TimeWindow, Lesson> lessonEntry : daySchedule.entrySet()) {
-	            if (lessonEntry.getValue().equals(lesson)) {
-	                timeWindowToRemove = lessonEntry.getKey();
-	                break;
-	            }
-	        }
-
-	        if (timeWindowToRemove != null) {
-	            daySchedule.remove(timeWindowToRemove);
-	            if (daySchedule.isEmpty()) {
-	                schedule.remove(day);
-	            }
-	            return true; 
-	        }
-	    }
-	    return false; 
-	}
+    public boolean updateLesson(DayOfWeek day, TimeWindow oldTimeWindow, TimeWindow newTimeWindow) {
+        TreeMap<TimeWindow, Lesson> dailySchedule = schedule.get(day);
+        if (dailySchedule != null && dailySchedule.containsKey(oldTimeWindow)) {
+            if (dailySchedule.containsKey(newTimeWindow)) {
+                System.out.println("Cannot update: New time slot on " + day + " at " + newTimeWindow + " is already occupied.");
+                return false;
+            }
+            Lesson lesson = dailySchedule.remove(oldTimeWindow);
+            lesson.setTime(newTimeWindow); 
+            dailySchedule.put(newTimeWindow, lesson);
+            System.out.println("Lesson updated on " + day + " from " + oldTimeWindow + " to " + newTimeWindow);
+            return true;
+        } else {
+            System.out.println("No lesson found on " + day + " at " + oldTimeWindow);
+            return false;
+        }
+    }
+	
+	
 	
 	public Lesson getLesson(DayOfWeek day, TimeWindow timeWindow) {
 	    TreeMap<TimeWindow, Lesson> daySchedule = schedule.get(day);

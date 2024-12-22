@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import courses.TimeWindow;
 import database.Database;
@@ -14,12 +15,12 @@ import users.employees.Teacher;
 import users.students.Student;
 
 
-public class Lesson {
+public class Lesson implements Cloneable{
 	private int lessonID;
     public Course course;
     public Teacher teacher;
     public LocalDate lessonDate;
-    private DayOfWeek dayOfWeeek;
+    private DayOfWeek dayOfWeek;
     private TimeWindow lessonTime;
     private int lessonRoom;
     private LessonType lessonType;
@@ -32,7 +33,7 @@ public class Lesson {
     	this.course = course;
     	this.lessonRoom = lessonRoom;
     	this.lessonDate = lessonDate;
-    	this.dayOfWeeek = dayOfWeek;
+    	this.dayOfWeek = dayOfWeek;
     	this.lessonTime = lessonTime;
     	this.lessonType = lessonType;
         for (Student s : course.getGradeBook().keySet()) {
@@ -116,7 +117,7 @@ public class Lesson {
 	}
 	
 	public DayOfWeek getDayOfWeeek() {
-		return dayOfWeeek;
+		return dayOfWeek;
 	}
 
 	public TimeWindow getLessonTime() {
@@ -143,7 +144,7 @@ public class Lesson {
 		return lessonType;
 	}
 	
-    // Setters 
+	
 	public void setID(int ID) {
 		this.lessonID = ID;
 	}
@@ -151,10 +152,49 @@ public class Lesson {
 	public void setTime(TimeWindow lessonTime) {
 		this.lessonTime = lessonTime;
 	}
+	
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Lesson lesson = (Lesson) o;
+        return lessonRoom == lesson.lessonRoom &&
+               course.equals(lesson.course) &&
+               teacher.equals(lesson.getTeacher()) &&
+               dayOfWeek.equals(lesson.dayOfWeek) &&
+               lessonType.equals(lesson.getLessonType()) &&
+               lessonTime.equals(lesson.getLessonTime());
+    }
+    
+    @Override
+    public Lesson clone() {
+        try {
+            Lesson clonedLesson = (Lesson) super.clone();
 
+            clonedLesson.course = this.course;  
+            clonedLesson.teacher = this.teacher;  
+            clonedLesson.lessonDate = this.lessonDate;
+            clonedLesson.dayOfWeek = this.dayOfWeek;
+            clonedLesson.lessonTime = this.lessonTime;  
+            clonedLesson.lessonRoom = this.lessonRoom;
+            clonedLesson.lessonType = this.lessonType;
+
+            clonedLesson.attendanceList = this.attendanceList;
+            clonedLesson.marksOfLesson = this.marksOfLesson;
+
+            return clonedLesson;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError("Cloning not supported", e);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(course, teacher, dayOfWeek, lessonTime, lessonRoom, lessonType, lessonTime);
+    }
     
     public String toString() {
-        return this.course.getCourseName() + " "
+        return  this.course.getCourseName() + " "
         	   + (this.teacher != null ? this.teacher.getLastName() + " " + this.teacher.getFirstName().charAt(0) + "." : "Vacancy") + " "
                + this.lessonType + " "
                + this.lessonRoom
