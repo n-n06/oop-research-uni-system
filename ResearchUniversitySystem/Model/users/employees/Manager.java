@@ -20,6 +20,7 @@ import social.messages.RequestRepository;
 import social.updates.News;
 import users.students.Student;
 import utilities.comparators.*;
+import utilities.logging.LoggerProvider;
 
 public class Manager extends Employee {
 	private ManagerType managerType;
@@ -64,6 +65,7 @@ public class Manager extends Employee {
 
  
     public void postNews(News n) {
+    	LoggerProvider.getLogger().info(getEmail() + " has posted news " + n.getTitle());
     	Database.instance.getNewsRepo().addNews(n);
     }
 
@@ -80,7 +82,8 @@ public class Manager extends Employee {
     }
     
     //Courses
-    public void assignCourseToTeacher(Course course, Teacher teacher) {
+    public void assignCourseToTeacher(Course course, Teacher teacher)  {
+    	LoggerProvider.getLogger().info(getEmail() + " has assigned " + teacher.getEmail() + " as a teacher for " + course.getID());
         teacher.addCourse(course);
         course.addTeacherToCourse(teacher);
     }
@@ -90,38 +93,51 @@ public class Manager extends Employee {
     }
 
     public void addCourse(Course course) {
+    	LoggerProvider.getLogger().info(getEmail() + " has added a new course " + course.getID() + " " + course.getCourseName());
     	Database.instance.getCourseRepo().addCourse(course);
     }
 
     public void deleteCourse(Course course) {
+    	LoggerProvider.getLogger().warning(getEmail() + " has delete a course " + course.getID() + " " + course.getCourseName());
     	Database.instance.getCourseRepo().removeCourse(course);
     }
     
     
     //Registration
-    public void openRegistration(CourseRegistrationService crs) {
+    public void openRegistration() {
+    	LoggerProvider.getLogger().info(getEmail() + " has opened course registration");
     	Database.instance.getRegistration().openRegistration();
         //crs.openRegistration();
     }
     
-    public void closeRegistration(CourseRegistrationService crs) {
+    public void closeRegistration() {
+    	LoggerProvider.getLogger().info(getEmail() + " has closed course registration");
     	Database.instance.getRegistration().closeRegistration();
         //crs.closeRegistration();
     }
 
-    public void verifyRegistration(CourseRegistrationService crs, Integer id) {
-    	RegistrationRequest request = crs.getRegRequest(id);
+    public void verifyRegistration(Integer id) {
+    	RegistrationRequest request = Database.instance.getRegistration().getRegRequest(id);
     	if(request.getCourse().checkPrerequesites(request.getStudent())) {
+    		LoggerProvider.getLogger().info(getEmail() + " has verified regisration " + request.getRegRequestid() 
+    		+ " for " + request.getCourse() 
+    		+ " by " + request.getStudent().getEmail());
     		System.out.println("Success! Registration was accepted by manager");
     		request.getStudent().addCourse(request.getCourse());
     		request.setApproved(); 
     	} else {
+    		LoggerProvider.getLogger().warning(getEmail() + " has declined regisration due to prerequisite " + request.getRegRequestid() 
+    		+ " for " + request.getCourse() 
+    		+ " by " + request.getStudent().getEmail());
     		System.out.println("Registration was declined by manager because prereq");
     	}
     }
     
     public void declineRegRequest(Integer id) {
-    	Database.instance.getRegistration().getRegRequest(id);
+    	RegistrationRequest request = Database.instance.getRegistration().getRegRequest(id);
+		LoggerProvider.getLogger().warning(getEmail() + " has declined regisration due to prerequisite " + request.getRegRequestid() 
+		+ " for " + request.getCourse() 
+		+ " by " + request.getStudent().getEmail());
     	//RegistrationRequest request = crs.getRegRequest(id);
     	System.out.println("Registration was declined by manager");   
     }
@@ -142,10 +158,14 @@ public class Manager extends Employee {
     		DayOfWeek dayOfWeek, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
     	
     	course.fillLessons(lessonRoom, lessonDate, dayOfWeek, lessonTime, lessonType, teacher);
+    	LoggerProvider.getLogger().info(getEmail() + " has added lessons for " + course.getID() 
+    		+ " on " + dayOfWeek + " at "  + lessonTime);
     }
         
         
     public void changeLessonTime(Course course, int id, TimeWindow time) {
+    	LoggerProvider.getLogger().info(getEmail() + " has changed lesson number " + id + " time for course " + course.getID() 
+		+ " to " + time);
         course.getLessonByID(id).setTime(time);
     }
     
@@ -162,11 +182,13 @@ public class Manager extends Employee {
     }
 
     public void acceptRequest(Request request, School school) {
+    	LoggerProvider.getLogger().info(getEmail() + " has aceepted request sent by " + request.getReceiver().getEmail() + " on " + request.getDate());
     	Database.instance.getReqeustRepo().acceptRequest(school, request);
     }
 
 
     public void declineRequest(Request request, School school) {
+    	LoggerProvider.getLogger().warning(getEmail() + " has declined request sent by " + request.getReceiver().getEmail() + " on " + request.getDate());
     	Database.instance.getReqeustRepo().declineRequest(school, request);
     }
 

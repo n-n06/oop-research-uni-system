@@ -6,6 +6,7 @@ import users.BaseUser;
 import users.employees.Teacher;
 import utilities.exceptions.DiplomaProjectException;
 import utilities.exceptions.InvalidSupervisorException;
+import utilities.logging.LoggerProvider;
 import enums.*;
 import courses.*;
 import database.Database;
@@ -68,6 +69,7 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
 
     // 3. WORKING WITH TEACHERS:
     public void rateTeacher(Teacher teacher, int rating) {
+    	LoggerProvider.getLogger().info(getEmail() + " has rated " + teacher.getEmail());
         teacher.getRatingMarks().add(rating);
     }
     
@@ -108,6 +110,7 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     }
     
     public void addCourseToCompleted(Course course) {
+    	LoggerProvider.getLogger().info(getEmail() + " has completed " + course.getID());
     	completedCourses.add(course);
     }
     
@@ -121,12 +124,14 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     
     public void addCourse(Course course) {
     	currentCourses.add(course);
+    	LoggerProvider.getLogger().info(getEmail() + " has been added to " + course.getID());
     	System.out.println("Course was added to Student's courses.");
     }
     
-    public void registerForCourse(CourseRegistrationService crs, Course course) {
+    public void registerForCourse(Course course) {
+    	LoggerProvider.getLogger().info(getEmail() + " has added a registration request for " + course.getID());
     	RegistrationRequest rq = new RegistrationRequest(course, this);
-        crs.addRegRequest(rq);
+        Database.instance.getRegistration().addRegRequest(rq);
         System.out.println("Request for registration to " + course.getID());
     }
     
@@ -179,6 +184,7 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
 
     // 7. REQUESTS:
     public void sendRequest(Request request) {
+    	LoggerProvider.getLogger().info(getEmail() + " has sent a request ");
     	Database.instance.getReqeustRepo().addRequest(school, request);
     }
     
@@ -198,6 +204,7 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
 			System.err.println(e.getMessage());
 		}
         diplomaProject = rp;
+        LoggerProvider.getLogger().info(getEmail() + " has been assigned a diploma project for ");
     }
     
     public ResearchProject getDiplomaProject() {

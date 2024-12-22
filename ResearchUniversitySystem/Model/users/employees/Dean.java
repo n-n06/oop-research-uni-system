@@ -5,6 +5,7 @@ import database.Database;
 import enums.Gender;
 import enums.School;
 import social.messages.Request;
+import utilities.logging.LoggerProvider;
 
 public class Dean extends Employee {
 
@@ -20,10 +21,12 @@ public class Dean extends Employee {
     }
 
     public void signRequest(Request request) {
+    	LoggerProvider.getLogger().info(getEmail() + " has signed request sent by " + request.getReceiver().getEmail() + " on " + request.getDate());
         Database.instance.getReqeustRepo().acceptRequest(school, request);
     }
 
     public void rejectRequest(Request request) {
+    	LoggerProvider.getLogger().info(getEmail() + " has rejected request sent by " + request.getReceiver().getEmail() + " on " + request.getDate());
         Database.instance.getReqeustRepo().declineRequest(school, request);
     }
 

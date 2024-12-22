@@ -8,6 +8,7 @@ import java.io.*;
 
 import utilities.comparators.ResearcherCitationNumberComparator;
 import utilities.exceptions.*;
+import utilities.logging.LoggerProvider;
 
 
 /**
@@ -84,10 +85,12 @@ public class ResearchRepository implements Serializable {
 	}
 	
 	public void addResearchProject(ResearchProject project) {
+		LoggerProvider.getLogger().info("New Research project added " + project.getTopic());
 		researchProjects.add(project);
 	}
 	
 	public boolean removeResearchProject(ResearchProject project) {
+		LoggerProvider.getLogger().warning("Research project removed " + project.getTopic());
 		return researchProjects.remove(project);
 	}
 	

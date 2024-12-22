@@ -12,6 +12,7 @@ import java.security.SecureRandom;
 
 import users.employees.*;
 import users.students.*;
+import utilities.logging.LoggerProvider;
 
 public class UserRepository implements Serializable {
 	private HashMap<String, User> users;
@@ -47,6 +48,7 @@ public class UserRepository implements Serializable {
     public void addUser(User user) {
     	if (user == null) throw new IllegalArgumentException("User cannot be null");
         users.put(user.getEmail(), user);
+        LoggerProvider.getLogger().info(user.getEmail() + " was added to the system!");
     }
 
     public boolean removeUser(User user) {
@@ -54,6 +56,7 @@ public class UserRepository implements Serializable {
     	
     	String userEmail = user.getEmail();
     	if (users.remove(userEmail) != null) {
+    		LoggerProvider.getLogger().warning("User " + userEmail + " was deleted!");
             return true;
         }
         return false;
@@ -64,6 +67,7 @@ public class UserRepository implements Serializable {
         
         String userEmail = updatedUser.getEmail();
         if (users.containsKey(userEmail)) {
+        	LoggerProvider.getLogger().info(userEmail + " was updated!");
             users.put(userEmail, updatedUser); 
         } else {
             throw new IllegalArgumentException("User with Email " + userEmail + " does not exist");
@@ -106,6 +110,7 @@ public class UserRepository implements Serializable {
     }
 
     public boolean login(String email, String password) {
+    	LoggerProvider.getLogger().info(email + " logged in");
         User user = getUser(email);  
         if (user != null) {
             return user.getPassword().equals(hashPassword(password));
