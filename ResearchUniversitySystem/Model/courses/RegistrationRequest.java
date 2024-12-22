@@ -49,10 +49,10 @@ public class RegistrationRequest implements Serializable {
     
     
     public String toString() {
-    	return "Registration request №" + regRequestid + 
-    			"\nCourse: " + course.toString() + 
-    			"\nStudent: " + student + 
-    			"\nStatus: " + (approved ? "Approved" : "Not Approved");
+        return "Registration Request №" + regRequestid + "\n" +
+               "Course: " + course.toString() + "\n" +
+               "Student: " + student + "\n" +
+               "Status: " + (approved ? "Approved" : "Not Approved");
     }
 
 }
