@@ -4,16 +4,16 @@ import java.util.Objects;
 import java.util.Vector;
 
 /**
- * @author eva
+ *
  */
 
 public class Mark {
     private Vector<Double> firstAttMarks = new Vector<>();
     private Vector<Double> secondAttMarks = new Vector<>();
     
-    private double firstAttestation = 0;
-    private double secondAttestation = 0;
-    private double finalExam = 0;
+    private double firstAttestation = 0.0;
+    private double secondAttestation = 0.0;
+    private double finalExam = 0.0;
 
     public Mark() {}
 
@@ -65,7 +65,7 @@ public class Mark {
         	this.finalExam = finalExam;
         }
     }
-	
+    
     public double getFirstAttestation() {
     	return firstAttestation;
     }
@@ -77,8 +77,17 @@ public class Mark {
     public double getFinalExam() {
     	return finalExam;
     }
+    
+    public Vector<Double> getFirstAttMarks() {
+    	return firstAttMarks;
+    }
+    
+    public Vector<Double> getSecondAttMarks() {
+    	return firstAttMarks;
+    }
 
-    public double getOverallPoints() {
+
+    public Double getOverallPoints() {
         return firstAttestation + secondAttestation + finalExam;
     }
 
