@@ -80,4 +80,19 @@ public class Schedule {
 	    }
 	}
 	
+    public Lesson selectLessonByIndex(int selectedIndex) {
+        int index = 1;
+        for (Map.Entry<DayOfWeek, TreeMap<TimeWindow, Lesson>> dayEntry : schedule.entrySet()) {
+            TreeMap<TimeWindow, Lesson> dailySchedule = dayEntry.getValue();
+            for (Map.Entry<TimeWindow, Lesson> lessonEntry : dailySchedule.entrySet()) {
+                if (index == selectedIndex) {
+                    System.out.println("Student selected: " + lessonEntry.getValue());
+                    return lessonEntry.getValue();
+                }
+                index++;
+            }
+        }
+        return null;
+    }
+	
 }

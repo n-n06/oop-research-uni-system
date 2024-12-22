@@ -22,7 +22,7 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     private int credits;
     private boolean isResearcher;
   
-    private Transcript transcript;
+    private Transcript transcript = new Transcript(this);
     private Vector<StudentOrganization> studentOrganizations;
     private HashSet<Course> completedCourses = new HashSet<>();
     private HashSet<Course> currentCourses = new HashSet<>();
@@ -137,8 +137,14 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     	course.viewLessonInSchedule();
     }
     
-    public void pickLessonToSchedule(int index) {
-    	
+    public void pickLessonToSchedule(int index, Course course) {
+    	Lesson lesson = course.getCourseSchedule().selectLessonByIndex(index);
+    	if (lesson != null) {
+    		schedule.addLesson(lesson);
+    	}
+    	else {
+    		System.out.println("Invalid selection. Please choose a valid index.");
+    	}
     }
 
     // 6. STUDENT ORGANIZATIONS:

@@ -136,6 +136,10 @@ public class Course implements Serializable {
 	public HashMap<Integer, Lesson> getCourseLessons() {
     	return courseLessons;
     }
+	
+	public Schedule getCourseSchedule() {
+		return courseSchedule;
+	}
     
     public EnumMap<LessonType, Integer> getCredits() {
     	return credits;

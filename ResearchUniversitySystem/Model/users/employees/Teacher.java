@@ -28,7 +28,7 @@ public class Teacher extends Employee {
     	if(teacherType == TeacherType.PROFESSOR) {
     		becomeResearcher();
     	}
-    	TeacherRating.addTeacherToRating(this);//changed addTeacherToRating into 'static' or create new instance of teacher everytime
+    	TeacherRating.addTeacherToRating(this);
     }
     
     public void setTeacherType(TeacherType teacherType) {
