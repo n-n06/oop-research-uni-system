@@ -164,6 +164,10 @@ public class Database implements Serializable {
     public Vector<Complaint> getComplaints() {
 		return complaints;
 	}
+    
+    public Vector<StudentOrganization> getOrganizations() {
+		return organizations;
+	}
 
     /**
      * Deserializes a database from a 'data' file

@@ -1,14 +1,10 @@
 package users.employees;
 
-import java.io.*;
-import java.util.*;
 
 import database.Database;
 import enums.Gender;
 import enums.School;
-import enums.UserType;
 import social.messages.Request;
-import social.messages.RequestRepository;
 
 public class Dean extends Employee {
 
@@ -23,20 +19,22 @@ public class Dean extends Employee {
     	this.school = school;
     }
 
-    public void signRequest(School school, Request request) {
+    public void signRequest(Request request) {
         Database.instance.getReqeustRepo().acceptRequest(school, request);
     }
 
-    public void rejectRequest(School school, Request request) {
+    public void rejectRequest(Request request) {
         Database.instance.getReqeustRepo().declineRequest(school, request);
     }
 
-    public void viewRequests(School school) {
+    public void viewRequests() {
     	Database.instance.getReqeustRepo().viewRequests(school);
     }
     public void viewComplaints() {
-        // TODO implement here
-        return ;
+        Database.instance.getComplaints().stream()
+        	.filter(c->c.getSchool() == this.school)
+        	.sorted()
+        	.forEach(c->System.out.println(c));
     }
 
 }

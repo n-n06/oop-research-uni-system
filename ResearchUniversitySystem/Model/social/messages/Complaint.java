@@ -1,6 +1,7 @@
 package social.messages;
 
 import enums.UrgencyLevel;
+import enums.School;
 import users.User;
 import users.students.Student;
 import users.employees.*;
@@ -52,6 +53,9 @@ public class Complaint implements Serializable, Comparable<Complaint> {
     	this.reason = reason;
     }
     
+    public School getSchool() {
+    	return reason.getSchool();
+    }
     
     @Override
     public boolean equals(Object obj) {

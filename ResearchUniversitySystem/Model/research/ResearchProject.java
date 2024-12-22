@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Objects;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 import users.employees.*;
 import utilities.exceptions.InvalidSupervisorException;
@@ -32,6 +33,8 @@ public class ResearchProject implements Serializable, Comparable<ResearchProject
     
     public ResearchProject() {
     	researchProjectId = Database.instance.getResearchRepo().generateResearchProjectId();
+    	team = new Vector<>();
+    	publishedPapers = new Vector<>();
     }
     
     public ResearchProject(int id) {
@@ -51,6 +54,10 @@ public class ResearchProject implements Serializable, Comparable<ResearchProject
     
     public String getTopic() {
 		return topic;
+	}
+    
+    public void setTopic(String topic) {
+		this.topic = topic;
 	}
 
 
@@ -146,7 +153,13 @@ public class ResearchProject implements Serializable, Comparable<ResearchProject
     
     @Override
     public String toString() {
-    	return "🔬";
+    	return "🔬Research project: \n" 
+    			+ "Topic: " + topic + "\n"
+    			+ "Members: " + team.stream().map(m->m.getFullName()).collect(Collectors.toList()) + "\n"
+    			+ "Supervisor: " + (hasSupervisor ? supervisor.getFullName() : "Not assigned") + "\n"
+    			+ "Papers: " + publishedPapers.stream()
+    			.map(p->p.getCitation(CitationFormat.PLAIN_TEXT))
+    			.collect(Collectors.joining("; ")); 
     }
     
     @Override

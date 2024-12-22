@@ -35,6 +35,8 @@ public class ResearchPaper implements Comparable<ResearchPaper> {
     
     public ResearchPaper() {
     	doi = UUID.randomUUID().toString().substring(0,8);
+    	authors = new Vector<>();
+    	references = new Vector<>();
     } 
     
     public ResearchPaper(String doi) {

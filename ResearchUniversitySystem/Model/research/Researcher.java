@@ -16,13 +16,13 @@ import users.User;
 public class Researcher extends BaseDecorator implements Comparable<Researcher> {
 	
 	private CanBecomeResearcher user;
-
+	
 
     /**
      * Default constructor
      */
     public Researcher() {
-    	
+    	Database.instance.getResearchRepo().addResearcher(this);
     }
     
     /**

@@ -7,6 +7,7 @@ import users.employees.Teacher;
 
 import enums.*;
 import courses.*;
+import database.Database;
 import research.ResearchProject;
 import social.messages.RequestRepository;
 
@@ -26,7 +27,7 @@ public abstract class Student extends BaseUser {
     private HashSet<Course> currentCourses = new HashSet<>();
     private Schedule schedule = new Schedule();
     
-	// 2. CONSTRUCTORS: 
+	// 2. CONSTRUCTORS AND BASE GETTERS: 
 	public Student() {
 		super();
 	}
@@ -37,6 +38,22 @@ public abstract class Student extends BaseUser {
     	this.school = school;
     	this.year = year;
     }
+    
+    public School getSchool() {
+		return school;
+	}
+    
+    public Degree getDegree() {
+		return degree;
+	}
+    
+    public int getCredits() {
+		return credits;
+	}
+    
+    public int getYear() {
+		return year;
+	}
 
     // 3. WORKING WITH TEACHERS:
     public void rateTeacher(Teacher teacher, int rating) {
@@ -122,7 +139,12 @@ public abstract class Student extends BaseUser {
         this.studentOrganizations.add(org);
     }
     
-    public void listAllOrganizations() {
+    public void viewOrganzations() {
+    	System.out.println("All Student organizations: \n");
+    	Database.instance.getOrganizations().stream().forEach(o->System.out.println(o));
+    }
+    
+    public void viewOwnOrganizations() {
     	studentOrganizations.stream().forEach(org -> System.out.println(org.getName()));
     }
 
@@ -131,11 +153,7 @@ public abstract class Student extends BaseUser {
         // TODO implement here
         return ;
     }
-    
-//  public void viewJournal() {
-//  // TODO implement here
-//  return ;
-// }
+   
     
     //TODO: Research based - nurs
     public ResearchProject getDiplomaProject() {
