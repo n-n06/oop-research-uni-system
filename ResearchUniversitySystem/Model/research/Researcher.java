@@ -37,6 +37,10 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
     public School getSchool() {
     	return user.getSchool();
     }
+    
+    public void setSchool(School s) {
+    	user.setSchool(s);
+    }
 
 
     /**

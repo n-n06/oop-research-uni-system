@@ -13,5 +13,7 @@ public interface CanBecomeResearcher extends User {
     public boolean getIsResearcher();
     
     public School getSchool();
+    
+    public void setSchool(School s);
 
 }

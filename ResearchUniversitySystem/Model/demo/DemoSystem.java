@@ -13,6 +13,7 @@ import users.UserFactory;
 import users.User;
 
 import users.employees.*;
+import utilities.exceptions.NoDataException;
 import utilities.logging.LoggerProvider;
 
 public class DemoSystem {
@@ -41,7 +42,12 @@ public class DemoSystem {
 				
 				if (Database.instance.getUsersRepo().login(stringInput1, stringInput2)) {
 					System.out.println("You've logged succesfully");
-					currentUser = Database.instance.getUsersRepo().getUser(stringInput1);
+					try {
+						currentUser = Database.instance.getUsersRepo().getUser(stringInput1);
+					} catch (NoDataException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					break;
 				}else {
 					System.out.println("Incorrect username of password. Please, try again.");

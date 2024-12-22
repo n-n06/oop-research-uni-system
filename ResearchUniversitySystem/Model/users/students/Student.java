@@ -55,8 +55,17 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
 		return school;
 	}
     
+    @Override
+    public void setSchool(School s) {
+    	this.school = s;
+    }
+    
     public Degree getDegree() {
 		return degree;
+	}
+    
+    public void setDegree(Degree degree) {
+		this.degree = degree;
 	}
     
     public int getCredits() {

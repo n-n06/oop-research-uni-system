@@ -39,6 +39,14 @@ public class Manager extends Employee {
     	return UserType.MANAGER;
     }
     
+    public ManagerType getManagerType() {
+		return managerType;
+	}
+    
+    public void setManagerType(ManagerType managerType) {
+		this.managerType = managerType;
+	}
+    
     public void viewUserInfo(String email) throws NoDataException {
     	System.out.println(Database.instance.getUsersRepo().getUser(email));
     }
@@ -166,16 +174,16 @@ public class Manager extends Employee {
         
         
     public void changeLessonTimeInSchedule(Course course, Integer index, TimeWindow newTimeWindow) {
-		LoggerProvider.getLogger().info(getEmail() + " has changed lesson number " + id + " time for course " + course.getID() 
-		+ " to " + time);
+		LoggerProvider.getLogger().info(getEmail() + " has changed lesson number " + index + " time for course " + course.getID() 
+		+ " to " + newTimeWindow);
         Lesson lessonToUpdate = course.getCourseSchedule().selectLessonByIndex(index);
         course.getCourseSchedule().updateLesson(lessonToUpdate.getDayOfWeeek(), lessonToUpdate.getLessonTime(), newTimeWindow);
         changeLessonTime(course, lessonToUpdate.getID(), newTimeWindow);
 	}
     
     public void changeLessonTime(Course course, Integer lessonID, TimeWindow newTimeWindow) {
-		LoggerProvider.getLogger().info(getEmail() + " has changed lesson number " + id + " time for course " + course.getID() 
-		+ " to " + time);
+		LoggerProvider.getLogger().info(getEmail() + " has changed lesson number " + lessonID + " time for course " + course.getID() 
+		+ " to " + newTimeWindow);
     	Lesson lessonToUpdate = course.getLessonByID(lessonID).clone();
     	
     	for (Lesson lesson : course.getCourseLessons().values()) {

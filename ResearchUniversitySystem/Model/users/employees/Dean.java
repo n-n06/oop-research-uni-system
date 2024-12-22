@@ -10,16 +10,20 @@ import utilities.logging.LoggerProvider;
 
 public class Dean extends Employee {
 
-	School school;
+	private School school;
 	
     public Dean() {
     	
     }
     
-    public Dean(String firstName, String lastName, int age, Gender gender, School school) {
+    public Dean(String firstName, String lastName, int age, Gender gender, UserType ut, School school) {
     	super(firstName, lastName, age, gender);
     	this.school = school;
     }
+    
+    public void setSchool(School school) {
+		this.school = school;
+	}
 
     @Override
     public UserType getUserType() {

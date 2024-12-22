@@ -24,9 +24,17 @@ public class UserFactory {
         return e;
     }
 
-    public Dean makeUser(String firstName, String lastName, int age, Gender gender, School school) {
+    public ResearcherEmployee makeUser(String firstName, String lastName, int age, Gender gender, School school) {
     	String pass = generatePassword();
-    	Dean e = new Dean(firstName, lastName, age, gender, school);
+    	ResearcherEmployee e = new ResearcherEmployee(firstName, lastName, age, gender, school);
+
+        e.changePassword(pass);
+        LoggerProvider.getLogger().info("Created new Researcher Employee: " + e.getEmail() + " with pass: " + pass);
+        return e;
+    }
+    public Dean makeUser(String firstName, String lastName, int age, Gender gender, UserType userType, School school) {
+    	String pass = generatePassword();
+    	Dean e = new Dean(firstName, lastName, age, gender, userType, school);
 
         e.changePassword(pass);
         LoggerProvider.getLogger().info("Created new Dean: " + e.getEmail() + " with pass: " + pass);

@@ -31,6 +31,11 @@ public class ResearcherEmployee extends Employee implements CanBecomeResearcher 
 		return school;
 	}
 	
+    @Override
+    public void setSchool(School s) {
+    	this.school = s;
+    }
+	
 	public void sendRequest(Request r) {
 		LoggerProvider.getLogger().info(getEmail() + " has sent a request ");
 		Database.instance.getReqeustRepo().addRequest(school, r);

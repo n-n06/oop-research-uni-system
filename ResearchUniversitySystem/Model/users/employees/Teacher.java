@@ -64,6 +64,11 @@ public class Teacher extends Employee implements CanBecomeResearcher {
 		return school;
 	}
     
+    @Override
+    public void setSchool(School s) {
+    	this.school = s;
+    }
+    
     //Courses 
     public void addCourse(Course course) {
     	assignedCourses.add(course);
