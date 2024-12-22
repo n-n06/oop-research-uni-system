@@ -99,7 +99,7 @@ public class Course implements Serializable {
     public void removeLessonFromCourseByID(Integer lessonID) {
     	Lesson lesson = courseLessons.remove(lessonID);
     	if (lesson != null) {
-            courseSchedule.removeLesson(lesson); 
+            courseSchedule.removeLesson(lesson.getDayOfWeeek(), lesson.getLessonTime());
         }
     }
     
@@ -212,10 +212,31 @@ public class Course implements Serializable {
 		return courseName;
 	}
 	
+
 	// ID generation for Lessons in this course
     private Integer generateLessonID() {
-		return lessonID++;
+		return ++lessonID;
 	}
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Course other = (Course) obj;
+
+        return courseID.equals(other.getID()) &&
+               courseName.equals(other.getCourseName());
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(courseID, courseName);
+    }
     
     public String toString() {
         return "Course:\n" +

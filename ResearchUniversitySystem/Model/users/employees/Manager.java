@@ -113,13 +113,11 @@ public class Manager extends Employee {
     public void openRegistration() {
     	LoggerProvider.getLogger().info(getEmail() + " has opened course registration");
     	Database.instance.getRegistration().openRegistration();
-        //crs.openRegistration();
     }
     
     public void closeRegistration() {
     	LoggerProvider.getLogger().info(getEmail() + " has closed course registration");
     	Database.instance.getRegistration().closeRegistration();
-        //crs.closeRegistration();
     }
 
     public void verifyRegistration(Integer id) {
@@ -140,22 +138,20 @@ public class Manager extends Employee {
     }
     
     public void declineRegRequest(Integer id) {
+    	Database.instance.getRegistration().getRegRequest(id);
     	RegistrationRequest request = Database.instance.getRegistration().getRegRequest(id);
 		LoggerProvider.getLogger().warning(getEmail() + " has declined regisration due to prerequisite " + request.getRegRequestid() 
 		+ " for " + request.getCourse() 
 		+ " by " + request.getStudent().getEmail());
-    	//RegistrationRequest request = crs.getRegRequest(id);
     	System.out.println("Registration was declined by manager");   
     }
 
     public void viewRegRequest(Integer id) {
-        Database.instance.getRegistration().getRegRequest(id);
-    	//System.out.println(crs.getRegRequest(id));
+        Database.instance.getRegistration().getRegRequest(id);;
     }
     
     public void viewAllRegRequest() {
     	Database.instance.getRegistration().displayRegRequests();
-        //crs.displayRegRequests();
     }
     
     
@@ -169,18 +165,28 @@ public class Manager extends Employee {
     }
         
         
-    public void changeLessonTime(Course course, int id, TimeWindow time) {
-    	LoggerProvider.getLogger().info(getEmail() + " has changed lesson number " + id + " time for course " + course.getID() 
+    public void changeLessonTimeInSchedule(Course course, Integer index, TimeWindow newTimeWindow) {
+		LoggerProvider.getLogger().info(getEmail() + " has changed lesson number " + id + " time for course " + course.getID() 
 		+ " to " + time);
-        course.getLessonByID(id).setTime(time);
+        Lesson lessonToUpdate = course.getCourseSchedule().selectLessonByIndex(index);
+        course.getCourseSchedule().updateLesson(lessonToUpdate.getDayOfWeeek(), lessonToUpdate.getLessonTime(), newTimeWindow);
+        changeLessonTime(course, lessonToUpdate.getID(), newTimeWindow);
+	}
+    
+    public void changeLessonTime(Course course, Integer lessonID, TimeWindow newTimeWindow) {
+		LoggerProvider.getLogger().info(getEmail() + " has changed lesson number " + id + " time for course " + course.getID() 
+		+ " to " + time);
+    	Lesson lessonToUpdate = course.getLessonByID(lessonID).clone();
+    	
+    	for (Lesson lesson : course.getCourseLessons().values()) {
+    		if (lesson.equals(lessonToUpdate)) {
+    			lesson.setTime(newTimeWindow);
+    		}
+    	}
+    	course.getCourseSchedule().updateLesson(lessonToUpdate.getDayOfWeeek(), lessonToUpdate.getLessonTime(), newTimeWindow);
     }
     
-    //Here we would have to make checks for busy classrooms
-    public void putLessonClassroom(Course course, int room) {
-        // TODO implement here
-        return ;
-    }
-    
+
     
     //Requests - general ones
     public void viewRequest(Request request, School school) {
