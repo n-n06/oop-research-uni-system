@@ -2,6 +2,7 @@ package courses;
 
 import java.util.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import enums.CourseType;
 import enums.LessonType;
@@ -79,11 +80,19 @@ public class Course implements Serializable {
     	courseLessons.put(lesson.getID(), lesson);
     }
     
+    public void fillLessons(int lessonRoom, LocalDate lessonFromDate, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
+        for (int i = 0; i < 15; i++) {
+            LocalDate newDate = lessonFromDate.plusWeeks(i);
+            Lesson newLesson = new Lesson(this, lessonRoom, newDate, lessonTime, lessonType, teacher);
+
+            addCourseLesson(newLesson);
+        }
+    }
+    
     public void removeLessonFromCourseByID(Integer lessonID) {
     	courseLessons.remove(lessonID);
     }
     
-
     
     // Views
 	public void viewLessons() {
