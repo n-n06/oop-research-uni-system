@@ -8,6 +8,7 @@ import research.ResearchPaper;
 import social.messages.JournalNotification;
 //import research.Researcher;
 import users.User;
+import utilities.logging.LoggerProvider;
 import enums.Language;
 
 /**
@@ -144,6 +145,7 @@ public class Journal implements Serializable {
      * 			false 		if not found and not removed
      */
     public boolean removeArticle(ResearchPaper article) {
+    	LoggerProvider.getLogger().warning("Article removed " + article.getDoi());
         return articles.remove(article);
     }
 
@@ -177,6 +179,7 @@ public class Journal implements Serializable {
      * @return	null		nothing
      */
     public void notifyAllSubscribers(ResearchPaper article) {
+    	LoggerProvider.getLogger().info("New Article published " + article.getDoi());
     	for (User subscriber: subscribers) {
     		Database.instance
     			.getMessageRepo()

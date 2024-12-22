@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.Vector;
 
 import database.Database;
+import utilities.logging.LoggerProvider;
 
 /**
  * @author eva
@@ -23,6 +24,7 @@ public class StudentOrganization implements Comparable<StudentOrganization> {
      * Default constructor
      */
     public StudentOrganization(String name, Student head) {
+    	LoggerProvider.getLogger().info("New ord was created: " + getName());
     	this.name = name;
     	this.head = head;
     }
@@ -32,10 +34,12 @@ public class StudentOrganization implements Comparable<StudentOrganization> {
     }
     
     public void addStudent(Student s) {
+    	LoggerProvider.getLogger().info(getName() + " has added a new member " + s.getEmail());
     	members.add(s);
     }
     
     public void removeStudent(Student s) {
+    	LoggerProvider.getLogger().info(getName() + " has removed a member " + s.getEmail());
     	members.remove(s);
     }
     

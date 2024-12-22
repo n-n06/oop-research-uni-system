@@ -7,6 +7,7 @@ import research.CanBecomeResearcher;
 import research.Researcher;
 import social.messages.*;
 import users.students.*;
+import utilities.logging.LoggerProvider;
 import courses.*;
 import database.Database;
 
@@ -107,10 +108,12 @@ public class Teacher extends Employee implements CanBecomeResearcher {
     
     //Social
     public void sendComplaint(Complaint complaint) {
+    	LoggerProvider.getLogger().info(getEmail() + " has sent a complaint ");
     	Database.instance.getComplaints().add(complaint);
     }
     
     public void sendRequest(Request request) {
+    	LoggerProvider.getLogger().info(getEmail() + " has sent a request ");
     	Database.instance.getReqeustRepo().addRequest(school, request);
     }
     

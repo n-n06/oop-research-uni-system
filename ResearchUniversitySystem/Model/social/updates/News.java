@@ -1,6 +1,7 @@
 package social.updates;
 
 import java.util.Vector;
+import java.util.stream.Collectors;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -143,7 +144,8 @@ public class News implements Comparable<News>, Serializable {
     
     @Override
     public String toString() {
-    	return String.format("📰News №%d: %s\nType: %s\n%s", newsId, title, newsType, content);
+    	return String.format("📰News №%d: %s\nType: %s\n%s\n\n", newsId, title, newsType, content)
+    			+ comments.stream().map(c->c.toString()).collect(Collectors.joining("\n"));
     }
 
     @Override

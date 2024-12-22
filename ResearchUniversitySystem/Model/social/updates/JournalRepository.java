@@ -1,6 +1,9 @@
 package social.updates;
 
 import java.util.Vector;
+
+import utilities.logging.LoggerProvider;
+
 import java.io.Serializable;
 
 /**
@@ -39,6 +42,7 @@ public class JournalRepository implements Serializable {
      * @return
      */
     public void addJournal(Journal journal) {
+    	LoggerProvider.getLogger().info("New journal added " + journal.getName());
     	journals.add(journal);;
     }
 
@@ -51,6 +55,7 @@ public class JournalRepository implements Serializable {
      * 			false	if not remove
      */
     public boolean removeJournal(Journal journal) {
+    	LoggerProvider.getLogger().warning("Journal removed " + journal.getName());
         return journals.add(journal);
     }
 

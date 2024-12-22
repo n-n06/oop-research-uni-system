@@ -7,7 +7,7 @@ import database.Database;
 import enums.Gender;
 import enums.Language;
 import social.updates.*;
-
+import utilities.logging.LoggerProvider;
 import research.ResearchProject;
 import research.Researcher;
 import research.CanBecomeResearcher;
@@ -109,6 +109,7 @@ public abstract class BaseUser implements User, Serializable {
     
 
     public void changePassword(String password) {
+    	LoggerProvider.getLogger().info(getEmail() + " has updated their password!");
     	this.password = Database.instance.getUsersRepo().hashPassword(password);
     }
 
@@ -123,6 +124,7 @@ public abstract class BaseUser implements User, Serializable {
     }
 
     public void addComment(NewsRepository newsRepo, Comment comment, int newsID) {
+    	LoggerProvider.getLogger().info(getEmail() + " left a comment under news with id: " + newsID);
         newsRepo.getNews(new News(newsID)).addComment(comment);
     }
 
@@ -132,10 +134,12 @@ public abstract class BaseUser implements User, Serializable {
     }
 
     public void subscribeToJournal(Journal journal) {
+    	LoggerProvider.getLogger().info(getEmail() + " has subscribed to " + journal.getName());
         journal.addSubscriber(this);
     }
 
     public void unsubscribeFromJournal(Journal journal) {
+    	LoggerProvider.getLogger().info(getEmail() + " has unsubscribed from " + journal.getName());
         journal.removeSubscriber(this);
     }
 

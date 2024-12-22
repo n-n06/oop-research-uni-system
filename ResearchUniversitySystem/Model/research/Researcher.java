@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import database.Database;
+import enums.School;
 import social.updates.Journal;
 import users.BaseDecorator;
 import users.User;
@@ -32,6 +33,10 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
     	this();
         this.user = user;
     }
+    
+    public School getSchool() {
+    	return user.getSchool();
+    }
 
 
     /**
@@ -48,11 +53,7 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
         		.filter(rp -> rp.getResearchTeam().contains(this))
         		.collect(Collectors.toList());
     }
-    
-    /**
-     * 
-     * 
-     */
+
     public void viewOwnResearchProjects() {
     	List<ResearchProject> projects = getOwnResearchProjects();
     	System.out.println("🗃Projects:");
@@ -71,9 +72,14 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
         		);
     }
     
+    public List<ResearchPaper> getAllResearchPapers() {
+    	List<ResearchPaper> papers = new ArrayList<>();
+    	getOwnResearchProjects().stream().forEach(rp->rp.getResearchPapers().forEach(paper->papers.add(paper)));
+    	return papers;
+    }
+    
     public void printAllResearchPapers() {
-    	getOwnResearchProjects().stream()
-        	.flatMap(rp -> rp.getResearchPapers().stream())
+    	getAllResearchPapers().stream()
         	.forEach(System.out::println);
     }
 
@@ -82,10 +88,15 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
      * @return
      */
     public void printAllResearchPapers(Comparator<ResearchPaper> comparator) {
-    	getOwnResearchProjects().stream()
-        	.flatMap(rp -> rp.getResearchPapers().stream())
+    	getAllResearchPapers().stream()
         	.sorted(comparator)
         	.forEach(System.out::println);
+    }
+    
+    public int getNumOfCitations() {
+    	return getAllResearchPapers().stream()
+    		.mapToInt(rp->rp.getNumOfCitations())
+    		.sum();
     }
 
     /**

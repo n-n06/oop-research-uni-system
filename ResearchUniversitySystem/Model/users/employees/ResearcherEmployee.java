@@ -5,6 +5,7 @@ import enums.Gender;
 import enums.School;
 import research.*;
 import social.messages.Request;
+import utilities.logging.LoggerProvider;
 
 public class ResearcherEmployee extends Employee implements CanBecomeResearcher {
 	private School school;
@@ -25,6 +26,7 @@ public class ResearcherEmployee extends Employee implements CanBecomeResearcher 
 	}
 	
 	public void sendRequest(Request r) {
+		LoggerProvider.getLogger().info(getEmail() + " has sent a request ");
 		Database.instance.getReqeustRepo().addRequest(school, r);
 	}
 	

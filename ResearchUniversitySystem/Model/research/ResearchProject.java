@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import users.employees.*;
 import utilities.exceptions.InvalidSupervisorException;
 import utilities.exceptions.NotASupervisorException;
+import utilities.logging.LoggerProvider;
 import enums.*;
 import database.Database;
 
@@ -109,6 +110,7 @@ public class ResearchProject implements Serializable, Comparable<ResearchProject
     		throw new NotASupervisorException(supervisor.getFullName() + " is not a supervisor and cannot manage the research team");
     	}
     	team.add(member);
+    	LoggerProvider.getLogger().info("Research project " + getTopic() + " has added a new researcher " + member.getEmail());
     }
     
     
@@ -144,6 +146,7 @@ public class ResearchProject implements Serializable, Comparable<ResearchProject
     	}
     	this.hasSupervisor = true;
         this.supervisor = supervisor;
+        LoggerProvider.getLogger().info("Research project " + getTopic() + " was assigned a supervisor " + supervisor.getEmail());
     }
     
     

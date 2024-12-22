@@ -1,6 +1,7 @@
 package users.employees;
 
 import users.BaseUser;
+import utilities.logging.LoggerProvider;
 
 import java.util.TreeSet;
 
@@ -27,6 +28,7 @@ public abstract class Employee extends BaseUser {
 
   
     public void sendWorkMessage(Employee employee, Message message) {
+    	LoggerProvider.getLogger().info(this.getEmail() + " sent message to " + employee.getEmail());
         try {
         	message.setReceiver(employee);
         	Database.instance.getMessageRepo().addMessage(employee, message);
