@@ -15,7 +15,6 @@ import users.students.Student;
 
 public class Lesson {
 	private int lessonID;
-    public LessonType type;
     public Course course;
     public Teacher teacher;
     public LocalDate lessonDate;
@@ -44,14 +43,6 @@ public class Lesson {
     	this.teacher = newTeacher;
     }
     
-    public String toString() {
-        return this.course.getCourseName() + " "
-        	   + (this.teacher != null ? this.teacher.getLastName() + " " + this.teacher.getFirstName().charAt(0) + "." : "Vacancy") + " "
-               + this.lessonType + " "
-               + this.lessonRoom
-               + " " + this.lessonTime;
-    }
-    
     public void putAttendance(Student student, Boolean isPresent) {
     	attendanceList.put(student, isPresent);
     }
@@ -60,24 +51,9 @@ public class Lesson {
     	marksOfLesson.put(student, point);
 //    	course.addMarkForStudent(student, point, attestation);    /// IT WILL WORK WHEN STUDENT WILL PICK LESSONS TO SCHEDULE
     }
-
-	public Integer getID() {
-		return lessonID;
-	}
-	
-	public void setID(int ID) {
-		this.lessonID = ID;
-	}
-
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public LocalDate getDate() {
-		return lessonDate;
-	}
-	
-	
+   
+    
+	// Views
     public void viewAttendanceList() {
         if (attendanceList.isEmpty()) {
             System.out.println("Attendance list is empty.");
@@ -98,6 +74,63 @@ public class Lesson {
                 System.out.println(entry.getKey().getFullName() + " - Mark: " + entry.getValue());
             }
         }
+    }
+
+    // Checkers
+	public Boolean checkStudentAttendance(Student student) {
+		 return attendanceList.get(student);
+	}
+	
+	public Double checkStudentMark(Student student) {
+		 return marksOfLesson.get(student);
+	}
+	
+	// Getters
+	public Integer getID() {
+		return lessonID;
+	}
+	
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public LocalDate getDate() {
+		return lessonDate;
+	}
+	
+	public TimeWindow getLessonTime() {
+		return lessonTime;
+	}
+	
+	public LocalDate getLessonDate() {
+		return lessonDate;
+	}
+	
+	public Course getLessonCourse() {
+		return course;
+	}
+	
+    public HashMap<Student, Boolean> getAttendanceList() {
+    	return attendanceList;
+    }
+    
+    public HashMap<Student, Double> getMarksOfLesson() {
+    	return marksOfLesson;
+    }
+	
+    
+    // Setters 
+	public void setID(int ID) {
+		this.lessonID = ID;
+	}
+
+    
+    public String toString() {
+        return this.course.getCourseName() + " "
+        	   + (this.teacher != null ? this.teacher.getLastName() + " " + this.teacher.getFirstName().charAt(0) + "." : "Vacancy") + " "
+               + this.lessonType + " "
+               + this.lessonRoom
+               + " " + this.lessonTime;
     }
 
 }

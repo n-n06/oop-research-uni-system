@@ -70,9 +70,7 @@ public abstract class Student extends BaseUser {
     }
 
     public void viewMarks(Course course) {
-        // TODO implement here
-        return;
-    }
+//        course.getGradeBook(); // нужно дописать
     
     public void getGPA() {
         // TODO implement here
