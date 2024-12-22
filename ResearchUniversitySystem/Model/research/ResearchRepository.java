@@ -66,16 +66,6 @@ public class ResearchRepository implements Serializable {
 		return researchProjects.remove(project);
 	}
 	
-	
-	//Team management
-	public void assignSupervisor(ResearchProject project, Researcher r) throws InvalidSupervisorException {
-		if (r.calculateHIndex() < 3) {
-			throw new InvalidSupervisorException(r.getFirstName() + " " + r.getLastName() + " cannot be assigned as a supervisor.");
-		}
-		project.setSupervisor(r);
-	}
-	
-	
     /**
      * Produces an id for a new research project instance based on 
      * the current number of research projects in the system

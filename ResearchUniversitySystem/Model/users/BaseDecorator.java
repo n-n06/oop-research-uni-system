@@ -25,6 +25,10 @@ public abstract class BaseDecorator implements User {
     	this.user = user;
     }
     
+    public User getUser() {
+		return user;
+	}
+    
     @Override
     public String getFirstName() {
     	return user.getFirstName();
@@ -38,6 +42,11 @@ public abstract class BaseDecorator implements User {
     @Override
     public String getFullName() {
     	return user.getFullName();
+    }
+    
+    @Override
+    public int getUserId() {
+    	return user.getUserId();
     }
     
     @Override
