@@ -100,8 +100,7 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     // 5. WORKING WITH COURSES & SCHEDULE:
     
     public void viewSchedule() {
-        // TODO implement here
-        return ;
+        schedule.printSchedule();
     }
     
     public void addCourseToCompleted(Course course) {
@@ -121,7 +120,7 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     	System.out.println("Course was added to Student's courses.");
     }
     
-    public void registerForCourse(int id, CourseRegistrationService crs, Course course) {
+    public void registerForCourse(CourseRegistrationService crs, Course course) {
     	RegistrationRequest rq = new RegistrationRequest(course, this);
         crs.addRegRequest(rq);
         System.out.println("Request for registration to " + course.getID());
@@ -132,6 +131,14 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     	for (Course c : currentCourses) {
     		System.out.println(c);
     	}
+    }
+    
+    public void displayLessonsForScheduling(Course course) {
+    	course.viewLessonInSchedule();
+    }
+    
+    public void pickLessonToSchedule(int index) {
+    	
     }
 
     // 6. STUDENT ORGANIZATIONS:

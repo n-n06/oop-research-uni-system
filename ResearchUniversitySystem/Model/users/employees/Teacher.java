@@ -46,6 +46,10 @@ public class Teacher extends Employee implements CanBecomeResearcher {
     	return ratingMarks;
     }
     
+    public Schedule getSchedule() {
+		return schedule;
+	}
+
     public HashSet<Course> getAssignedCourses() {
 		return assignedCourses;
 	}
