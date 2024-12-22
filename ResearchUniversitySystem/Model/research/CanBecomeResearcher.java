@@ -14,5 +14,7 @@ public interface CanBecomeResearcher extends User {
      * @return
      */
     public void becomeResearcher();
+    
+    public boolean getIsResearcher();
 
 }

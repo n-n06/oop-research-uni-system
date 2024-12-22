@@ -33,6 +33,7 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
         this.user = user;
     }
 
+
     /**
      * @param researchProject 
      * @return

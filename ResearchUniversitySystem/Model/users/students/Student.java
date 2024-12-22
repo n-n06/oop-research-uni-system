@@ -8,18 +8,19 @@ import users.employees.Teacher;
 import enums.*;
 import courses.*;
 import database.Database;
-import research.ResearchProject;
-import social.messages.RequestRepository;
+import research.*;
+import social.messages.Request;
 
 /**
  *
  */
-public abstract class Student extends BaseUser {
+public abstract class Student extends BaseUser implements CanBecomeResearcher {
 	// 1. FIELDS
     private int year;
     private Degree degree;
     private School school;
     private int credits;
+    private boolean isResearcher;
   
     private Transcript transcript;
     private Vector<StudentOrganization> studentOrganizations;
@@ -36,7 +37,7 @@ public abstract class Student extends BaseUser {
     	super(firstName, lastName, age, gender);
     	this.degree = degree;
     	this.school = school;
-    	this.year = year;
+    	this.setYear(year);
     }
     
     public School getSchool() {
@@ -53,6 +54,12 @@ public abstract class Student extends BaseUser {
     
     public int getYear() {
 		return year;
+	}
+    
+    public void setYear(int year) {
+    	if (year > 0 && year < 5) {
+    		this.year = year;
+    	}
 	}
 
     // 3. WORKING WITH TEACHERS:
@@ -148,13 +155,12 @@ public abstract class Student extends BaseUser {
     	studentOrganizations.stream().forEach(org -> System.out.println(org.getName()));
     }
 
-    // 7. RESEARCH & JOURNAL AND REQUESTS:
-    public void makeRequest(RequestRepository reqRepo) {
-        // TODO implement here
-        return ;
+    // 7. REQUESTS:
+    public void sendRequest(Request request) {
+    	Database.instance.getReqeustRepo().addRequest(school, request);
     }
    
-    
+    // 8. Diploma project
     //TODO: Research based - nurs
     public ResearchProject getDiplomaProject() {
         return null;
@@ -166,6 +172,17 @@ public abstract class Student extends BaseUser {
     	return super.toString() + "\nYear of study: " + this.year 
     			+ "\nGPA: " + this.getGPA() + "\nSchool: " + this.school.name()
     			+ "\nDegree: " + this.degree.name() + "\nCredits: " + this.credits;
+    }
+    
+    @Override
+    public void becomeResearcher() {
+    	isResearcher = true;
+    	Researcher r = new Researcher(this);
+    }
+    
+    @Override
+    public boolean getIsResearcher() {
+    	return isResearcher;
     }
      
 }
