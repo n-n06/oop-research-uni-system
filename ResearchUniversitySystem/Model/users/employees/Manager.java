@@ -20,6 +20,7 @@ import social.messages.RequestRepository;
 import social.updates.News;
 import users.students.Student;
 import utilities.comparators.*;
+import utilities.exceptions.NoDataException;
 import utilities.logging.LoggerProvider;
 
 public class Manager extends Employee {
@@ -33,7 +34,12 @@ public class Manager extends Employee {
     	this.managerType = managerType;
     }
     
-    public void viewUserInfo(String email) {
+    @Override
+    public UserType getUserType() {
+    	return UserType.MANAGER;
+    }
+    
+    public void viewUserInfo(String email) throws NoDataException {
     	System.out.println(Database.instance.getUsersRepo().getUser(email));
     }
 

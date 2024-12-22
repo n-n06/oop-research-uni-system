@@ -3,6 +3,7 @@ package users.employees;
 import database.Database;
 import enums.Gender;
 import enums.School;
+import enums.UserType;
 import research.*;
 import social.messages.Request;
 import utilities.logging.LoggerProvider;
@@ -19,6 +20,11 @@ public class ResearcherEmployee extends Employee implements CanBecomeResearcher 
 		super(firstName, lastName, age, gender);
 		this.school = school;
 	}
+	
+    @Override
+    public UserType getUserType() {
+    	return UserType.RESEARCHER;
+    }
 	
 	@Override
 	public School getSchool() {

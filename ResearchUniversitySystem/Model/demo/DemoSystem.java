@@ -107,7 +107,7 @@ public class DemoSystem {
 						age = Integer.parseInt(br.readLine());
 						System.out.println("Gender (Type M for male and F for female): ");
 						gender = br.readLine().equalsIgnoreCase("F") ? Gender.FEMALE : Gender.MALE;
-						Database.instance.getUsersRepo().addUser(uf.makeUser(firstName, lastName, age, gender, UserType.ADMIN));
+						Database.instance.getUsersRepo().addUser(uf.makeUser(firstName, lastName, age, gender));
 						break;
 					
 					case 5:

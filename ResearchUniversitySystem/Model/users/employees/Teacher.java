@@ -35,6 +35,11 @@ public class Teacher extends Employee implements CanBecomeResearcher {
     	TeacherRating.addTeacherToRating(this);
     }
     
+    @Override
+    public UserType getUserType() {
+    	return UserType.TEACHER;
+    }
+    
     public void setTeacherType(TeacherType teacherType) {
     	this.teacherType = teacherType;
     }

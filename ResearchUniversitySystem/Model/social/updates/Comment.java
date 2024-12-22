@@ -48,7 +48,7 @@ public class Comment implements Comparable<Comment> {
     
     @Override
     public String toString() {
-    	return "💭 Comment " + date + " " +  author + ":\n" + text;
+    	return "💭 Comment " + date + " " +  author.getFullName() + ":\n" + text;
     }
 
 	@Override

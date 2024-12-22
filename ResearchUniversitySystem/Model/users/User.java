@@ -5,6 +5,7 @@ import java.io.Serializable;
 import social.updates.*;
 import enums.Gender;
 import enums.Language;
+import enums.UserType;
 
 
 public interface User extends Serializable {
@@ -42,6 +43,8 @@ public interface User extends Serializable {
     public String getFullName();
     
     public int getUserId();
+    
+    public UserType getUserType();
 
     public String getEmail();
     

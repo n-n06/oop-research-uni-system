@@ -16,7 +16,7 @@ public class UserFactory {
     }
     
     //Overloaded makeUser methods
-    public Admin makeUser(String firstName, String lastName, int age, Gender gender, UserType type) {
+    public Admin makeUser(String firstName, String lastName, int age, Gender gender) {
     	String pass = generatePassword();
     	Admin e = new Admin(firstName, lastName, age, gender);
     	e.changePassword(pass);

@@ -11,6 +11,7 @@ import social.updates.JournalRepository;
 import social.updates.NewsRepository;
 import enums.Gender;
 import enums.Language;
+import enums.UserType;
 
 
 public abstract class BaseDecorator implements User {
@@ -28,6 +29,11 @@ public abstract class BaseDecorator implements User {
     public User getUser() {
 		return user;
 	}
+    
+    @Override
+    public UserType getUserType() {
+    	return user.getUserType();
+    }
     
     @Override
     public String getFirstName() {

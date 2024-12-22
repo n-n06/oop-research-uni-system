@@ -8,7 +8,9 @@ import java.nio.file.Paths;
 
 import database.Database;
 import enums.Gender;
+import enums.UserType;
 import users.User;
+import utilities.exceptions.NoDataException;
 
 public class Admin extends Employee {
     public Admin() {
@@ -20,6 +22,12 @@ public class Admin extends Employee {
     
     public Admin(String firstName, String lastName, int age, Gender gender) {
     	super(firstName, lastName, age, gender);
+    }
+    
+
+    @Override
+    public UserType getUserType() {
+    	return UserType.ADMIN;
     }
     
     public void addUser(User user) {
@@ -37,7 +45,7 @@ public class Admin extends Employee {
     public void viewAllUsers() {
     	Database.instance.getUsersRepo().getAllUsers().forEach(u->System.out.println(u + "\n"));
     }
-    public void viewUserInfo(String email) {
+    public void viewUserInfo(String email) throws NoDataException {
         System.out.println(Database.instance.getUsersRepo().getUser(email));
     }
 

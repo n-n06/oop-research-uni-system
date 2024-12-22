@@ -7,6 +7,7 @@ package database;
 import java.io.*;
 import java.util.Vector;
 
+import users.UserFactory;
 import users.UserRepository;
 import users.students.StudentOrganization;
 import courses.CourseRepository;
@@ -37,6 +38,7 @@ public class Database implements Serializable {
      */
     public static Database instance;
 
+    
     /**
      * Repository to interact (CRUD operations) with the storage of All Users
      */

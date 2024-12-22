@@ -4,6 +4,7 @@ package users.employees;
 import database.Database;
 import enums.Gender;
 import enums.School;
+import enums.UserType;
 import social.messages.Request;
 import utilities.logging.LoggerProvider;
 
@@ -20,6 +21,11 @@ public class Dean extends Employee {
     	this.school = school;
     }
 
+    @Override
+    public UserType getUserType() {
+    	return UserType.DEAN;
+    }
+    
     public void signRequest(Request request) {
     	LoggerProvider.getLogger().info(getEmail() + " has signed request sent by " + request.getReceiver().getEmail() + " on " + request.getDate());
         Database.instance.getReqeustRepo().acceptRequest(school, request);

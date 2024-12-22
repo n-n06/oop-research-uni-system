@@ -45,6 +45,12 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     	this.setYear(year);
     }
     
+	
+    @Override
+    public UserType getUserType() {
+    	return UserType.STUDENT;
+    }
+    
     public School getSchool() {
 		return school;
 	}

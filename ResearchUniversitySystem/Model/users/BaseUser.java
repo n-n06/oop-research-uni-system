@@ -6,6 +6,7 @@ import java.util.*;
 import database.Database;
 import enums.Gender;
 import enums.Language;
+import enums.UserType;
 import social.updates.*;
 import utilities.logging.LoggerProvider;
 import research.ResearchProject;
@@ -23,14 +24,11 @@ public abstract class BaseUser implements User, Serializable {
     private Gender gender;
     private int age;
     private Language preferredLanguage;
-    
 
     
     public BaseUser() {
     	userId = Database.instance.getUsersRepo().generateUserId();
     }
-
-    
     
 	public BaseUser(String firstName, String lastName, int age, Gender gender) {
 		this();
@@ -59,7 +57,7 @@ public abstract class BaseUser implements User, Serializable {
     
     public int getUserId() {
 		return userId;
-	}
+    }
     
     public boolean getIsActive() {
         return isActive;
@@ -165,7 +163,7 @@ public abstract class BaseUser implements User, Serializable {
     	if (this.getClass() != obj.getClass()) return false;
     	
     	BaseUser u = (BaseUser) obj;
-    	return this.userId == u.userId;
+    	return this.email == u.email;
     }
     
     @Override

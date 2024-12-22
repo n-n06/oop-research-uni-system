@@ -12,6 +12,7 @@ import java.security.SecureRandom;
 
 import users.employees.*;
 import users.students.*;
+import utilities.exceptions.NoDataException;
 import utilities.logging.LoggerProvider;
 
 public class UserRepository implements Serializable {
@@ -99,22 +100,28 @@ public class UserRepository implements Serializable {
     			.collect(Collectors.toList());
     }
     
-    public User getUser(String userEmail) {
+    public User getUser(String userEmail) throws NoDataException{
+        if (users.get(userEmail) == null) {
+        	throw new NoDataException("No such user found");
+        }
         return users.get(userEmail);
     }
 
     
     //Login
-    public boolean checkIsActiveUser(String userEmail) {
+    public boolean checkIsActiveUser(String userEmail) throws NoDataException {
         return getUser(userEmail).getIsActive();
     }
 
     public boolean login(String email, String password) {
     	LoggerProvider.getLogger().info(email + " logged in");
-        User user = getUser(email);  
-        if (user != null) {
-            return user.getPassword().equals(hashPassword(password));
-        }
+        User user;
+		try {
+			user = getUser(email);
+			user.getPassword().equals(hashPassword(password));
+		} catch (NoDataException e) {
+			e.printStackTrace();
+		} 
         return false; 
     }
     
