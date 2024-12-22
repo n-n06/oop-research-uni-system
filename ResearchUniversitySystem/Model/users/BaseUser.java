@@ -23,7 +23,6 @@ public abstract class BaseUser implements User, Serializable {
     private Gender gender;
     private int age;
     private Language preferredLanguage;
-    private boolean isResearcher;
     
 
     
@@ -148,11 +147,6 @@ public abstract class BaseUser implements User, Serializable {
     
 
 
-    //Researcher stuff
-    public void becomeResearcher() {
-        this.isResearcher = true;
-        
-    }
     
     @Override
     public String toString() {

@@ -15,7 +15,7 @@ import social.messages.WorkMessage;
 /**
  * @author yasmin
  */
-public class Employee extends BaseUser {
+public abstract class Employee extends BaseUser {
 
     public Employee() {
     }

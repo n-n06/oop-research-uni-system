@@ -3,7 +3,7 @@ package users.employees;
 import java.util.*;
 
 import enums.*;
-import social.messages.Complaint;
+import social.messages.*;
 import users.students.*;
 import courses.*;
 import database.Database;
@@ -47,7 +47,16 @@ public class Teacher extends Employee {
 		return schedule;
 	}
 
-	public void addCourse(Course course) {
+    public HashSet<Course> getAssignedCourses() {
+		return assignedCourses;
+	}
+    
+    public School getSchool() {
+		return school;
+	}
+    
+    //Courses 
+    public void addCourse(Course course) {
     	assignedCourses.add(course);
     }
     
@@ -58,6 +67,7 @@ public class Teacher extends Employee {
     	}
     }
     
+    //Lesson 
     public void viewOwnLessons(Course course) {
     	course.viewLessons(this);
     }
@@ -72,10 +82,9 @@ public class Teacher extends Employee {
         student.viewMarks(course);
     }
 
-    public void sendComplaint(Complaint complaint) {
-    	Database.instance.getComplaints().add(complaint);
-    }
 
+    
+    //Marks
     public void putMarkToLesson(Lesson lesson, Student student, Double point, int attestation) {
         lesson.putMark(student, point, attestation);
     }
@@ -87,6 +96,15 @@ public class Teacher extends Employee {
     public void checkRating() {
     	double rating = TeacherRating.getRating(this);
         System.out.println("Current average rating: " + rating);
+    }
+    
+    //Social
+    public void sendComplaint(Complaint complaint) {
+    	Database.instance.getComplaints().add(complaint);
+    }
+    
+    public void sendRequest(Request request) {
+    	Database.instance.getReqeustRepo().addRequest(school, request);
     }
 
 }

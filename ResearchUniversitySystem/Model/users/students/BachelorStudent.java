@@ -14,7 +14,7 @@ public class BachelorStudent extends Student {
 
  
     public BachelorStudent(String firstName, String lastName, int age, Gender gender, School school) {
-    	super(firstName, lastName, age, gender, Degree.BACHELOR, school);
+    	super(firstName, lastName, age, gender, Degree.BACHELOR, school, 1);
     }
     
 
