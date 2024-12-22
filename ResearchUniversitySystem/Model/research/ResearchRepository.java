@@ -1,9 +1,13 @@
 package research;
 
 import java.util.Vector;
+
+import enums.School;
+
 import java.io.*;
 
-import utilities.exceptions.InvalidSupervisorException;
+import utilities.comparators.ResearcherCitationNumberComparator;
+import utilities.exceptions.*;
 
 
 /**
@@ -44,7 +48,26 @@ public class ResearchRepository implements Serializable {
 		return researchers.get(researchers.indexOf(r));
 	}
 	
-	//
+	//Cumulative methods
+	public void viewAllResearchers() {
+		System.out.println("All Researchers: ");
+		researchers.stream().forEach(r->System.out.println(r + "\n"));
+	}
+	
+	public Researcher getTopCitedResearcher() throws NoResearchersException {
+		ResearcherCitationNumberComparator comp = new ResearcherCitationNumberComparator();
+		return researchers.stream()
+				.max(comp)
+				.orElseThrow(() -> new NoResearchersException("No researchers found"));
+	}
+	
+	public Researcher getTopCitedResearcher(School school) throws NoResearchersException {
+		ResearcherCitationNumberComparator comp = new ResearcherCitationNumberComparator();
+		return researchers.stream()
+				.filter(r->r.getSchool() == school)
+				.max(comp)
+				.orElseThrow(() -> new NoResearchersException("No researchers found"));
+	}
 	
 	
 	//Projects management
@@ -67,6 +90,8 @@ public class ResearchRepository implements Serializable {
 	public boolean removeResearchProject(ResearchProject project) {
 		return researchProjects.remove(project);
 	}
+	
+
 	
     /**
      * Produces an id for a new research project instance based on 

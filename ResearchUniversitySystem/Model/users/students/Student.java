@@ -4,7 +4,8 @@ import java.util.*;
 
 import users.BaseUser;
 import users.employees.Teacher;
-
+import utilities.exceptions.DiplomaProjectException;
+import utilities.exceptions.InvalidSupervisorException;
 import enums.*;
 import courses.*;
 import database.Database;
@@ -20,13 +21,16 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     private Degree degree;
     private School school;
     private int credits;
+    
     private boolean isResearcher;
+    private ResearchProject diplomaProject;
   
     private Transcript transcript = new Transcript(this);
     private Vector<StudentOrganization> studentOrganizations;
     private HashSet<Course> completedCourses = new HashSet<>();
     private HashSet<Course> currentCourses = new HashSet<>();
     private Schedule schedule = new Schedule();
+   
     
 	// 2. CONSTRUCTORS AND BASE GETTERS: 
 	public Student() {
@@ -177,12 +181,30 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     public void sendRequest(Request request) {
     	Database.instance.getReqeustRepo().addRequest(school, request);
     }
+    
+    abstract boolean checkLastYear();
    
     // 8. Diploma project
     //TODO: Research based - nurs
-    public ResearchProject getDiplomaProject() {
-        return null;
+    public void assignDiplomaProject(Researcher teacher) throws DiplomaProjectException {
+    	if (!checkLastYear()) {
+    		throw new DiplomaProjectException("Cannot get diploma project yet");
+    	}
+        becomeResearcher();
+        ResearchProject rp = new ResearchProject();
+        try {
+			rp.setSupervisor(teacher);
+		} catch (InvalidSupervisorException e) {
+			System.err.println(e.getMessage());
+		}
+        diplomaProject = rp;
     }
+    
+    public ResearchProject getDiplomaProject() {
+		return diplomaProject;
+	}
+    
+    
 
 
     @Override

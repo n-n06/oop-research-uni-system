@@ -26,6 +26,11 @@ public class GraduateStudent extends Student {
     		this.year = year;
     	};
     }
+    
+    @Override
+    boolean checkLastYear() {
+    	return this.year == 2;
+    }
 
 
 }
