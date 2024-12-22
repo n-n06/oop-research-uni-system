@@ -86,18 +86,18 @@ public class Course implements Serializable {
 
     
     // Views
-	public void viewLessons(Course course) {
+	public void viewLessons() {
 	    courseLessons.values()
 	                 .forEach(System.out::println);
 	}
 
-	public void viewLessons(Course course, Teacher teacher) {
+	public void viewLessons(Teacher teacher) {
 	    courseLessons.values().stream()
 	                 .filter(lesson -> lesson.getTeacher().equals(teacher))
 	                 .forEach(System.out::println);
 	}
 
-	public void viewLessons(Course course, Date date) {
+	public void viewLessons(Date date) {
 	    courseLessons.values().stream()
 	                 .filter(lesson -> lesson.getDate().equals(date))
 	                 .forEach(System.out::println);

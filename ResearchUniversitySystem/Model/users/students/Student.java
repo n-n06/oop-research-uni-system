@@ -96,7 +96,7 @@ public abstract class Student extends BaseUser {
     	System.out.println("Course was added to Student's courses.");
     }
     
-    public void registerForCourse(int id, CourseRegistrationService crs, Course course) {
+    public void registerForCourse(CourseRegistrationService crs, Course course) {
     	RegistrationRequest rq = new RegistrationRequest(course, this);
         crs.addRegRequest(rq);
         System.out.println("Request for registration to " + course.getID());
