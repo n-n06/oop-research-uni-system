@@ -157,7 +157,7 @@ public abstract class BaseUser implements User, Serializable {
     @Override
     public String toString() {
     	return "Email: " + email + "\nFirst name: " + firstName + "\nLast name: " + lastName 
-    			+ "\nGender: " + gender + "\nAge: " + age + "\n";
+    			+ "\nGender: " + gender + "\nAge: " + age;
     }
     
     @Override
