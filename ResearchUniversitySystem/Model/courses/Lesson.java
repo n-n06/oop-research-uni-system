@@ -35,6 +35,12 @@ public class Lesson {
     	this.dayOfWeeek = dayOfWeek;
     	this.lessonTime = lessonTime;
     	this.lessonType = lessonType;
+        for (Student s : course.getGradeBook().keySet()) {
+            marksOfLesson.put(s, 0.0);
+        }
+        for (Student s : course.getGradeBook().keySet()) {
+            attendanceList.put(s, false);
+        } 
     }
     
     public Lesson(Course course, int lessonRoom, LocalDate lessonDate, DayOfWeek dayOfWeek, TimeWindow lessonTime,  LessonType lessonType, Teacher teacher) {
@@ -52,7 +58,7 @@ public class Lesson {
     
     public void putMark(Student student, Double point, int attestation) {
     	marksOfLesson.put(student, point);
-//    	course.addMarkForStudent(student, point, attestation);    /// IT WILL WORK WHEN STUDENT WILL PICK LESSONS TO SCHEDULE
+    	course.addMarkForStudent(student, point, attestation);
     }
    
     

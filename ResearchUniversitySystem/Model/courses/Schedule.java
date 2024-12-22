@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+
+import users.employees.Teacher;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -76,6 +79,23 @@ public class Schedule {
 	        for (Map.Entry<TimeWindow, Lesson> lessonEntry : dailySchedule.entrySet()) {
 	            System.out.println(index + ". " + lessonEntry.getValue()); 
 	            index++; 
+	        }
+	    }
+	}
+	
+	public void printSchedule(Teacher teacher) {
+	    int index = 1; 
+	    for (Map.Entry<DayOfWeek, TreeMap<TimeWindow, Lesson>> dayEntry : schedule.entrySet()) {
+	        System.out.println(dayEntry.getKey() + ":"); 
+	        TreeMap<TimeWindow, Lesson> dailySchedule = dayEntry.getValue();
+	        
+	        for (Map.Entry<TimeWindow, Lesson> lessonEntry : dailySchedule.entrySet()) {
+	            Lesson lesson = lessonEntry.getValue();
+
+	            if (lesson.getTeacher().equals(teacher)) {
+	                System.out.println(index + ". " + lesson); 
+	                index++; 
+	            }
 	        }
 	    }
 	}

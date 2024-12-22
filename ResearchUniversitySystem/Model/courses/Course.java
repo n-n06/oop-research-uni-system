@@ -83,15 +83,17 @@ public class Course implements Serializable {
     	courseLessons.put(lesson.getID(), lesson);
     }
     
-    public void fillLessons(int lessonRoom, LocalDate lessonFromDate, DayOfWeek dayOfWeek, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
+    public void fillLessons(int lessonRoom, LocalDate lessonFromDate, DayOfWeek dayOfWeek, TimeWindow lessonTime, 
+    		LessonType lessonType, Teacher teacher) {
+    	Lesson newLesson = null;
         for (int i = 0; i < 15; i++) {
             LocalDate newDate = lessonFromDate.plusWeeks(i);
-            Lesson newLesson = new Lesson(this, lessonRoom, newDate, dayOfWeek, lessonTime, lessonType, teacher);
+            newLesson = new Lesson(this, lessonRoom, newDate, dayOfWeek, lessonTime, lessonType, teacher);
 
             addCourseLesson(newLesson);
-            teacher.getSchedule().addLesson(newLesson);
-            courseSchedule.addLesson(newLesson);
         }
+        teacher.getSchedule().addLesson(newLesson); 
+        courseSchedule.addLesson(newLesson);
     }
     
     public void removeLessonFromCourseByID(Integer lessonID) {
@@ -105,6 +107,10 @@ public class Course implements Serializable {
     // Views
     public void viewLessonInSchedule() {
     	courseSchedule.printSchedule();
+    }
+    
+    public void viewLessonInSchedule(Teacher teacher) {
+    	courseSchedule.printSchedule(teacher);
     }
     
 	public void viewLessons() {

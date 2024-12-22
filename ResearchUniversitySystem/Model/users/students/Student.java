@@ -137,10 +137,15 @@ public abstract class Student extends BaseUser implements CanBecomeResearcher {
     	course.viewLessonInSchedule();
     }
     
+    public void displayLessonsForScheduling(Course course, Teacher teacher) {
+    	course.viewLessonInSchedule();
+    }
+    
     public void pickLessonToSchedule(int index, Course course) {
     	Lesson lesson = course.getCourseSchedule().selectLessonByIndex(index);
     	if (lesson != null) {
     		schedule.addLesson(lesson);
+    		course.getGradeBook().put(this, new Mark());
     	}
     	else {
     		System.out.println("Invalid selection. Please choose a valid index.");

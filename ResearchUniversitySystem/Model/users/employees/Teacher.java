@@ -84,6 +84,10 @@ public class Teacher extends Employee implements CanBecomeResearcher {
         System.out.println(student.toString());
         student.viewMarks(course);
     }
+    
+    public void viewSchedule() {
+    	schedule.printSchedule();
+    }
 
 
     
