@@ -29,14 +29,26 @@ public class Admin extends Employee {
     }
 
     public void viewAllUsers() {
-    	System.out.println(Database.instance.getUsersRepo().getAllUsers());
+    	Database.instance.getUsersRepo().getAllUsers().forEach(u->System.out.println(u + "\n"));
     }
     public void viewUserInfo(String email) {
         System.out.println(Database.instance.getUsersRepo().getUser(email));
     }
 
+    private void processLogFile() {
+        System.out.println("🗒Reading log file: " + logFile.getName());
+        try (BufferedReader reader = new BufferedReader(new FileReader(logFile))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line); // Process the log line
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void readLogs() {
-        // TODO implement here
+    	
         return ;
     }
 

@@ -16,22 +16,20 @@ public class UserFactory {
     }
     
     //Overloaded makeUser methods
-
-    public Employee makeUser(String firstName, String lastName, int age, Gender gender, UserType type, School school) {
+    public Admin makeUser(String firstName, String lastName, int age, Gender gender, UserType type) {
     	String pass = generatePassword();
-    	Employee e;
-        switch (type) {
-            case ADMIN:
-            	e = new Admin(firstName, lastName, age, gender);
-            	break;
-            case DEAN:
-            	e = new Dean(firstName, lastName, age, gender, school);
-            	break;
-            default:
-                throw new IllegalArgumentException("Could not create user of type: " + type);
-        }
+    	Admin e = new Admin(firstName, lastName, age, gender);
+    	e.changePassword(pass);
+        LoggerProvider.getLogger().info("Created new Admin: " + e.getEmail() + " with pass: " + pass);
+        return e;
+    }
+
+    public Dean makeUser(String firstName, String lastName, int age, Gender gender, School school) {
+    	String pass = generatePassword();
+    	Dean e = new Dean(firstName, lastName, age, gender, school);
+
         e.changePassword(pass);
-        LoggerProvider.getLogger().info("Created new " + type.toString().toLowerCase() +  ": " + e.getEmail() + " with pass: " + pass);
+        LoggerProvider.getLogger().info("Created new Dean: " + e.getEmail() + " with pass: " + pass);
         return e;
     }
     

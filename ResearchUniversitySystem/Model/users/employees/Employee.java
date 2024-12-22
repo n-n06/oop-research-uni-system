@@ -30,18 +30,19 @@ public abstract class Employee extends BaseUser {
         try {
         	message.setReceiver(employee);
         	Database.instance.getMessageRepo().addMessage(employee, message);
-        	System.out.println("Message sent to "+ employee.getFirstName() + " " + employee.getLastName());
+        	System.out.println("Message sent to "+ employee.getFullName());
         } catch (Exception e) {
         	System.out.println("Fail!");
         }
         return ;
     }
+    
     public void readWorkMessage() {
     	try {
-    		System.out.println("Work Messages for "+ this.getFirstName() + " " + this.getLastName());
+    		System.out.println("📬Work Messages for "+ this.getFullName());
     		TreeSet<Message> messages = Database.instance.getMessageRepo().getMessages(this);
     		if (messages == null || messages.isEmpty()) {
-    			System.out.println("No messages available");
+    			System.out.println("📭No messages available");
     			return;
             }
     		for (Message message : messages) {
@@ -52,11 +53,6 @@ public abstract class Employee extends BaseUser {
     	} catch (Exception e) {
              System.out.println("Failed to read " + e.getMessage());
          }
-    }
-    
-    
-    public void sendRequest(Request request) {
-        // TODO implement here
     }
 
 

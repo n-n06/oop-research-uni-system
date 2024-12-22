@@ -3,15 +3,18 @@ package users.employees;
 import java.util.*;
 
 import enums.*;
+import research.CanBecomeResearcher;
+import research.Researcher;
 import social.messages.*;
 import users.students.*;
 import courses.*;
 import database.Database;
 
-public class Teacher extends Employee {
+public class Teacher extends Employee implements CanBecomeResearcher {
 	private TeacherType teacherType;
 	private School school;
 	private Vector<Integer> ratingMarks = new Vector<>();
+	private boolean isResearcher = false;
 	
 	HashSet<Course> assignedCourses = new HashSet<>();
 	private Schedule schedule = new Schedule();
@@ -102,5 +105,18 @@ public class Teacher extends Employee {
     public void sendRequest(Request request) {
     	Database.instance.getReqeustRepo().addRequest(school, request);
     }
+    
+    
+    //Researcher
+	@Override
+	public void becomeResearcher() {
+		isResearcher = true;
+		Researcher r = new Researcher(this);
+	}
+
+	@Override
+	public boolean getIsResearcher() {
+		return isResearcher;
+	}
 
 }

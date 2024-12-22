@@ -19,7 +19,7 @@ public class DemoSystem {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int choice;
+		int choice = 0;
 		String stringInput1;
 		String stringInput2;
 		
@@ -50,8 +50,12 @@ public class DemoSystem {
 
 			
 			main: while (true) {
-				System.out.println("Choose you action:\n0. Quit\n1. View news\n2. View journals\n3. ViewProfile\n4. Add User\n5. View users");
-				choice = Integer.parseInt(br.readLine());
+				System.out.println("Choose you action:\n0. Quit\n1. View news\n2. View journals\n3. View Profile\n4. Add User\n5. View users");
+				try {
+					choice = Integer.parseInt(br.readLine());
+				} catch (NumberFormatException e) {
+					System.err.println("Please, input a valid number");
+				}
 				
 				try {
 					switch (choice) {
@@ -106,7 +110,8 @@ public class DemoSystem {
 						break;
 					
 					case 5:
-						Database.instance.getUsersRepo().viewAllUsers((Admin)currentUser);
+						Admin a = (Admin)currentUser;
+						a.viewAllUsers();
 						break;
 						
 					case 0:

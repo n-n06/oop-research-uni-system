@@ -113,7 +113,7 @@ public abstract class BaseUser implements User, Serializable {
     }
 
     public void viewPersonalProfile() {
-        System.out.println(toString());
+        System.out.println(toString() + "\n");
     }
     
     //News stuff
