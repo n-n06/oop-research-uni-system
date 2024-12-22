@@ -3,19 +3,15 @@ package users.employees;
 import java.io.*;
 import java.util.*;
 
+import database.Database;
 import enums.Gender;
+import enums.School;
 import enums.UserType;
 import social.messages.Request;
 import social.messages.RequestRepository;
 
-/**
- * 
- */
 public class Dean extends Employee {
 
-    /**
-     * Default constructor
-     */
     public Dean() {
     }
     
@@ -24,27 +20,17 @@ public class Dean extends Employee {
     }
 
     public void viewEmployeeRequests(RequestRepository requests, Employee e) {
-        // TODO implement here
-        return;
+        
     }
 
-    public void signRequest(Request request) {
-        // TODO implement here
-        return ;
+    public void signRequest(School school, Request request) {
+        Database.instance.getReqeustRepo().acceptRequest(school, request);
     }
 
-    /**
-     * @param request 
-     * @return
-     */
-    public void rejectRequest(Request request) {
-        // TODO implement here
-        return ;
+    public void rejectRequest(School school, Request request) {
+        Database.instance.getReqeustRepo().declineRequest(school, request);
     }
 
-    /**
-     * @return
-     */
     public void viewComplaints() {
         // TODO implement here
         return ;
