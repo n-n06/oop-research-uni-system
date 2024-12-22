@@ -16,11 +16,7 @@ import users.User;
 public class Researcher extends BaseDecorator implements Comparable<Researcher> {
 	
 	private CanBecomeResearcher user;
-	
-//    /**
-//     * 
-//     */
-//    private Vector<ResearchProject> researchProjects;
+
 
     /**
      * Default constructor
@@ -44,6 +40,23 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
     public void createResearchProject(ResearchProject researchProject) {
     	Database.instance.getResearchRepo().addResearchProject(researchProject);
     }
+    
+    private List<ResearchProject> getOwnResearchProjects() {
+    	return Database.instance.getResearchRepo().getAllResearchProjects()
+        		.stream()
+        		.filter(rp -> rp.getResearchTeam().contains(this))
+        		.collect(Collectors.toList());
+    }
+    
+    /**
+     * 
+     * 
+     */
+    public void viewOwnResearchProjects() {
+    	List<ResearchProject> projects = getOwnResearchProjects();
+    	System.out.println("🗃Your projects:");
+    	projects.stream().forEach(p->System.out.println(p));
+    }
 
     /**
      * @param project 
@@ -52,7 +65,15 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
      * @return
      */
     public void publishResearchPaper(ResearchProject project, ResearchPaper paper, Journal journal) {
-        journal.publishArticle(project.getResearchPapers().get(project.getResearchPapers().indexOf(journal)));
+        journal.publishArticle(
+        		project.getResearchPapers().get(project.getResearchPapers().indexOf(paper))
+        		);
+    }
+    
+    public void printAllResearchPapers() {
+    	getOwnResearchProjects().stream()
+        	.flatMap(rp -> rp.getResearchPapers().stream())
+        	.forEach(System.out::println);
     }
 
     /**
@@ -60,9 +81,7 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
      * @return
      */
     public void printAllResearchPapers(Comparator<ResearchPaper> comparator) {
-    	Database.instance.getResearchRepo().getAllResearchProjects()
-    		.stream()
-    		.filter(rp -> rp.getResearchTeam().contains(this))
+    	getOwnResearchProjects().stream()
         	.flatMap(rp -> rp.getResearchPapers().stream())
         	.sorted(comparator)
         	.forEach(System.out::println);
@@ -73,9 +92,7 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
      */
     public int calculateHIndex() {
     	List<Integer> citationList = 
-    			Database.instance.getResearchRepo().getAllResearchProjects()
-        		.stream()
-        		.filter(rp -> rp.getResearchTeam().contains(this))
+    			getOwnResearchProjects().stream()
     			.flatMap(rp->rp.getResearchPapers().stream())
     			.map(paper -> paper.getNumOfCitations())
     			.sorted()

@@ -25,20 +25,16 @@ public abstract class BaseUser implements User, Serializable {
     private Language preferredLanguage;
     private boolean isResearcher;
     
-    {
-    	userId = Database.instance.getUsersRepo().generateUserId();
-    }
+
     
     public BaseUser() {
-    	
+    	userId = Database.instance.getUsersRepo().generateUserId();
     }
-    
-    public BaseUser(int id) {
-    	this.userId = id;
-    }
+
     
     
 	public BaseUser(String firstName, String lastName, int age, Gender gender) {
+		this();
 	    this.firstName = firstName;
 	    this.lastName = lastName;
 	    this.email = generateEmail(firstName, lastName);
@@ -61,6 +57,10 @@ public abstract class BaseUser implements User, Serializable {
     public void logout() {
     	this.isActive = false;
     }
+    
+    public int getUserId() {
+		return userId;
+	}
     
     public boolean getIsActive() {
         return isActive;
@@ -145,10 +145,13 @@ public abstract class BaseUser implements User, Serializable {
     public void viewMessages() {
     	Database.instance.getMessageRepo().viewMessages(this);
     }
+    
+
 
     //Researcher stuff
     public void becomeResearcher() {
         this.isResearcher = true;
+        
     }
     
     @Override

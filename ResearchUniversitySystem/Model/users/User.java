@@ -40,6 +40,8 @@ public interface User extends Serializable {
     public String getLastName();
 
     public String getFullName();
+    
+    public int getUserId();
 
     public String getEmail();
     
