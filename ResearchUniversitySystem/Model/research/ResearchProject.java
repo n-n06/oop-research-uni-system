@@ -29,12 +29,13 @@ public class ResearchProject implements Serializable, Comparable<ResearchProject
     
     private boolean hasSupervisor = false;
 	
-
+    {
+    	team = new Vector<>();
+    	publishedPapers = new Vector<>();
+    }
     
     public ResearchProject() {
     	researchProjectId = Database.instance.getResearchRepo().generateResearchProjectId();
-    	team = new Vector<>();
-    	publishedPapers = new Vector<>();
     }
     
     public ResearchProject(int id) {

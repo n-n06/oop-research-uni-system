@@ -1,20 +1,17 @@
 package research;
 
-import java.io.*;
-import java.util.*;
-
 import users.User;
+import enums.School;
 
 /**
  * 
  */
 public interface CanBecomeResearcher extends User {
 
-    /**
-     * @return
-     */
     public void becomeResearcher();
     
     public boolean getIsResearcher();
+    
+    public School getSchool();
 
 }

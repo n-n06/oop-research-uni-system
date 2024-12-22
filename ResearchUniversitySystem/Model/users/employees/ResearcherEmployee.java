@@ -8,6 +8,7 @@ import social.messages.Request;
 
 public class ResearcherEmployee extends Employee implements CanBecomeResearcher {
 	private School school;
+	private Researcher resAccount;
 	
 	public ResearcherEmployee() {
 		becomeResearcher();
@@ -18,13 +19,18 @@ public class ResearcherEmployee extends Employee implements CanBecomeResearcher 
 		this.school = school;
 	}
 	
+	@Override
+	public School getSchool() {
+		return school;
+	}
+	
 	public void sendRequest(Request r) {
 		Database.instance.getReqeustRepo().addRequest(school, r);
 	}
 	
 	@Override
 	public void becomeResearcher() {
-		Researcher r = new Researcher(this);;
+		Researcher resAccount = new Researcher(this);;
 	}
 
 	@Override
@@ -34,6 +40,6 @@ public class ResearcherEmployee extends Employee implements CanBecomeResearcher 
 	
 	@Override
 	public String toString() {
-		return "👨‍🔬Researcher at " + school + "\n" + super.toString();
+		return resAccount.toString();
 	}
 }

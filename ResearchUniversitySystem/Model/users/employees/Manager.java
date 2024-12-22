@@ -1,5 +1,7 @@
 package users.employees;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.*;
 
 import courses.Course;
@@ -28,60 +30,36 @@ public class Manager extends Employee {
     	super(firstName, lastName, age, gender);
     	this.managerType = managerType;
     }
-
+    
+    public void viewUserInfo(String email) {
+    	System.out.println(Database.instance.getUsersRepo().getUser(email));
+    }
 
     public void viewStudentsInfo() {
-        
+    	List<Student> students = Database.instance.getUsersRepo().getAllStudents();
+    	System.out.println("All students: \n");
+    	students.stream().forEach(s->System.out.println(s));
     }
 
     public void viewStudentsInfo(Comparator<Student> comparator) {
     	List<Student> students = Database.instance.getUsersRepo().getAllStudents();
     	students.sort(comparator);
     	students.stream().forEach(s->System.out.println(s));
-        //return ;
     }
 
-    public void viewTeachersInfo(Teacher teacher) {
-        // TODO implement here
-        return;
+    public void viewTeachersInfo() {
+    	List<Teacher> teachers = Database.instance.getUsersRepo().getAllTeachers();
+    	System.out.println("All teachers: \n");
+    	teachers.stream().forEach(t->System.out.println(t));
     }
 
     public void viewTeachersInfo(Comparator<Teacher> comparator) {
     	List<Teacher> teachers = Database.instance.getUsersRepo().getAllTeachers();
     	teachers.sort(comparator);
     	teachers.stream().forEach(t->System.out.println(t));
-        //return ;
     }
     
     
-//    //This is probably not the best way to do it
-//    public Vector<Student> orderStudentsByGPA(Vector<Student> students) {
-//    	Vector<Student> sortedStudents = new Vector<>(students); 
-//        sortedStudents.sort(new StudentGpaComparator());
-//        return sortedStudents;
-//    	//Vector<Student> students = orderStudentsByGPA(compare);
-//    	//students.sort(new StudentGpaComparator());
-//       // return students;
-//    }
-//
-//
-//    public Vector<Student> orderStudentsAlphabetically(Vector<Student> students) {
-//    	Vector<Student> sortedStudents = new Vector<>(students); 
-//        sortedStudents.sort(new StudentAlphabetComparator());
-//        return sortedStudents;
-//    }
-
-//    public Vector<Teacher> orderTeachersByRate(Vector<Teacher> teachers) {
-//    	Vector<Teacher> sortedTeachers = new Vector<>(teachers); 
-//        sortedTeachers.sort(new TeacherRatingComparator());
-//        return sortedTeachers;
-//    }
-//
-//    public Vector<Teacher> orderTeachersAlphabetically(Vector<Teacher> teachers) {
-//    	Vector<Teacher> sortedTeachers = new Vector<>(teachers); 
-//        sortedTeachers.sort(new TeacherAlphabetComparator());
-//        return sortedTeachers;
-//    }
 
  
     public void postNews(News n) {
@@ -98,16 +76,17 @@ public class Manager extends Employee {
         teacher.addCourse(course);
         course.addTeacherToCourse(teacher);
     }
-
+    
+    public void viewCourse(String id) {
+    	Database.instance.getCourseRepo().getCourseByID(id);
+    }
 
     public void addCourse(Course course) {
     	Database.instance.getCourseRepo().addCourse(course);
-        //courseRepo.addCourse(course);
     }
 
     public void deleteCourse(Course course) {
     	Database.instance.getCourseRepo().removeCourse(course);
-        //courseRepo.removeCourse(course);
     }
     
     
@@ -149,8 +128,23 @@ public class Manager extends Employee {
         //crs.displayRegRequests();
     }
     
-    public void addLessonToCourse(Lesson lesson, Course course) {
-    	course.addCourseLesson(lesson);
+    
+    //Lesson management
+    public void addLessonToCourse(Course course, int lessonRoom, LocalDate lessonDate, 
+    		DayOfWeek dayOfWeek, TimeWindow lessonTime, LessonType lessonType, Teacher teacher) {
+    	
+    	course.fillLessons(lessonRoom, lessonDate, dayOfWeek, lessonTime, lessonType, teacher);
+    }
+        
+        
+    public void putLessonTime(Course course, TimeWindow time) {
+        return ;
+    }
+    
+    //Here we would have to make checks for busy classrooms
+    public void putLessonClassroom(Course course, int room) {
+        // TODO implement here
+        return ;
     }
     
     
@@ -168,17 +162,10 @@ public class Manager extends Employee {
     	Database.instance.getReqeustRepo().declineRequest(school, request);
     }
 
+
     
-    //Course's Lesson management
-    //Here we would have to make the checks for busy time windows
-    public void putLessonTime(Course course, TimeWindow time) {
-    	
-        return ;
-    }
-    
-    //Here we would have to make checks for busy classrooms
-    public void putLessonClassroom(Course course, int room) {
-        // TODO implement here
-        return ;
+    @Override
+    public String toString() {
+    	return "👩‍💼Manager\n" + super.toString();
     }
 }

@@ -55,7 +55,7 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
      */
     public void viewOwnResearchProjects() {
     	List<ResearchProject> projects = getOwnResearchProjects();
-    	System.out.println("🗃Your projects:");
+    	System.out.println("🗃Projects:");
     	projects.stream().forEach(p->System.out.println(p));
     }
 
@@ -113,14 +113,17 @@ public class Researcher extends BaseDecorator implements Comparable<Researcher> 
 
 	@Override
 	public int compareTo(Researcher o) {
-		return 0;
+		return -1 * Integer.compare(this.calculateHIndex(), o.calculateHIndex());
 	}
 
 
-
-
-
-
+	@Override
+	public String toString() {
+		return "🧑‍🔬Researcher at " + user.getSchool() + "\n"
+				+ super.toString()
+				+ String.format("\nTakes part in %d research projects", getOwnResearchProjects().size())
+				+ "\nH-index: " + calculateHIndex();
+	}
 
 
 }

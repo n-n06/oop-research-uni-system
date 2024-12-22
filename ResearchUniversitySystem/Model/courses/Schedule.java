@@ -11,7 +11,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Schedule {
+public class Schedule implements Serializable {
 	
     private Map<DayOfWeek, TreeMap<TimeWindow, Lesson>> schedule = new TreeMap<>();
     

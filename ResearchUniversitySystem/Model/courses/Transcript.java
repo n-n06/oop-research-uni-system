@@ -36,7 +36,7 @@ public class Transcript {
     }
     
     public void displayTranscript() { // print overall credits (taken and counted), completed courses + gpa, and courses in progress
-        System.out.println("Transcript for " + student.getFullName() + " " + student.getID());
+        System.out.println("Transcript for " + student.getFullName() + " " + student.getUserId());
         System.out.println("----------------------------------");
 
         int courseCount = 0;
