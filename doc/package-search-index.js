@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"app"},{"l":"courses"},{"l":"database"},{"l":"demo"},{"l":"enums"},{"l":"research"},{"l":"social.messages"},{"l":"social.updates"},{"l":"users"},{"l":"users.employees"},{"l":"users.students"},{"l":"utilities.comparators"},{"l":"utilities.exceptions"},{"l":"utilities.logging"}];updateSearchResults();
