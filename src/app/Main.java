@@ -13,6 +13,10 @@ import social.messages.*;
 import users.*;
 import users.employees.*;
 import users.students.*;
+import utilities.comparators.StudentAlphabetComparator;
+import utilities.comparators.StudentGpaComparator;
+import utilities.comparators.TeacherAlphabetComparator;
+import utilities.comparators.TeacherRatingComparator;
 
 public class Main {
 	public static BufferedReader br;
@@ -1125,7 +1129,309 @@ public class Main {
 	}
 	
 	private void managerMain(Manager m) throws IOException  {
-		
+
+		int choice = 0;
+		String stringInput;
+		managermain: while (true) {
+			try {
+				System.out.println("Choose your action:\n0. Quit\n1. View news\n2. View journals\n3. View messages and notifications\n4. View Profile\n5. View Student info\n6. View Teacher info\n7. Manage requests\n8. Manage courses");
+				choice = Integer.parseInt(br.readLine());
+				switch (choice) {
+				case 0:
+					break managermain;
+				
+				case 1:
+					Database.instance.getNewsRepo().displayAllNews();
+					news: while (true) {
+						try {
+							System.out.println("Choose action with news:\n0. Go back\n1. Add comment\n2. Add news");
+							choice = Integer.parseInt(br.readLine());
+
+							int id;
+							
+							switch (choice) {
+							case 0:
+								break news;
+							case 1:
+								System.out.println("ID of the news you would like to comment: ");
+								id = Integer.parseInt(br.readLine());
+								System.out.println("Text of your comment: ");
+								stringInput = br.readLine();
+								Database.instance.getNewsRepo().getNews(new News(id)).addComment(new Comment(m, stringInput));
+								break;
+							case 2:
+								String s1, s2, s3;
+								NewsType nt;
+								System.out.println("Title: ");
+								s1= br.readLine();
+								System.out.println("Type (R for research, G - general): ");
+								s2 = br.readLine();
+								nt = (s2.equalsIgnoreCase("R") ? NewsType.RESEARCH : NewsType.GENERAL);
+								System.out.println("Content: ");
+								s3 = br.readLine();
+								m.postNews(new News(s1, nt, s3));
+								break;
+							}
+						} catch (NumberFormatException e) {
+							System.err.println("Please input a valid number " + e.getMessage());
+							continue;
+						}
+						
+					}
+					break;
+				case 2:
+					Journal journal;
+					Database.instance.getJournalRepo().displayJournals();
+					
+					journals: while (true) {
+						try {
+							System.out.println("Choose action with journals:\n0. Go back\n1. Read journal\n2. Toggle subscription to journal\n3. Add journal");
+							choice = Integer.parseInt(br.readLine());
+
+							int id;
+							
+							switch (choice) {
+							case 0:
+								break journals;
+							case 1:
+								System.out.println("ID of the journal you would like to read: ");
+								id = Integer.parseInt(br.readLine());
+								Database.instance.getJournalRepo().getJournal(new Journal(id)).displayArticles();
+								break;
+							case 2:
+								System.out.println("ID of the journal you would like to subscribe/unsubsribe to: ");
+								id = Integer.parseInt(br.readLine());
+								journal = Database.instance.getJournalRepo().getJournal(new Journal(id));
+								if (journal.getSubscribers().contains(m)) {
+									journal.removeSubscriber(m);
+									System.out.println("You have unsubscribed from " + journal.getName());
+								} else {
+									System.out.println("You have subscribed to " + journal.getName());
+									journal.addSubscriber(m);
+								}
+								break;
+							
+							case 3:
+								String s1,s2,s3;
+								System.out.println("Name: ");
+								s1 = br.readLine();
+								System.out.println("Topic: ");
+								s2 = br.readLine();
+								System.out.println("Description: ");
+								s3 = br.readLine();
+								Database.instance.getJournalRepo().addJournal(new Journal(s1,s2,s3, Language.ENGLISH));
+								break;
+							}
+						} catch (NumberFormatException e) {
+							System.err.println("Please input a valid number " + e.getMessage());
+							continue;
+						}
+
+					}
+					break;
+				
+				case 3:
+					msg: while (true) {
+						try {
+							System.out.println("Choose action with messages:\n0. Go back\n1. View all notifications\n2. View work messages only\n3. Send work message");
+							choice = Integer.parseInt(br.readLine());
+							int id;
+							
+							switch (choice) {
+							case 0:
+								break msg;
+							case 1:
+								m.viewMessages();
+								break;
+							case 2:
+								m.readWorkMessage();
+								break;
+							case 3:
+								System.out.println("Email of the employee to send a work message to: ");
+								stringInput = br.readLine();
+								User u = Database.instance.getUsersRepo().getUser(stringInput);
+								if (!(u instanceof Employee)) {
+									throw new Exception("Cannot write work messages to non-employees");
+								}
+								Employee e = (Employee) u;
+								System.out.println("Message: ");
+								stringInput = br.readLine();
+								m.sendWorkMessage(e, new WorkMessage(m, e, stringInput));
+								break;
+							}
+						} catch (NumberFormatException e) {
+							System.err.println("Please input a valid number " + e.getMessage());
+							continue;
+						} catch (Exception e) {
+							System.err.println(e.getMessage());
+							continue;
+						}
+
+					}
+					break;
+				case 4:
+					m.viewPersonalProfile();
+					pf: while (true) {
+						try {
+							System.out.println("Choose action with profile:\n0. Go back\n1. Change password");
+							choice = Integer.parseInt(br.readLine());
+							int id;
+							
+							switch (choice) {
+							case 0:
+								break pf;
+							case 1:
+								System.out.println("Input your new password: ");
+								stringInput=br.readLine();
+								if (stringInput.length() < 7) {
+									throw new IllegalArgumentException("Password too short!");
+								}
+								m.changePassword(stringInput);
+								break;
+							}
+						} catch (NumberFormatException e) {
+							System.err.println("Please input a valid number " + e.getMessage());
+							continue;
+						} catch (Exception e) {
+							System.err.println(e.getMessage());
+							continue;
+						}
+
+					}
+					break;
+				case 5:
+					studinfo: while(true) {
+						try {
+					
+							System.out.println("View Student info: \n0. Go back\n1. Default\n2. GPA comparator\n3. Alphabetical comparator");
+							choice = Integer.parseInt(br.readLine());
+							if (choice == 0) {
+								break studinfo;
+							} else if (choice == 1) {
+								m.viewStudentsInfo();
+							} else if (choice == 2) {
+								m.viewStudentsInfo(new StudentGpaComparator());
+							} else if (choice == 3) {
+								m.viewStudentsInfo(new StudentAlphabetComparator());
+							} else {
+								System.out.println("Input valid option");
+								continue;
+							}
+						} catch (NumberFormatException e) {
+							System.err.println("Please input a valid number " + e.getMessage());
+							continue;
+						} catch (Exception e) {
+							System.err.println(e.getMessage());
+							continue;
+						}
+					}
+					break;
+				case 6:
+					teacherinfo: while(true) {
+						try {
+							System.out.println("View Teacher info: \n0. Go back\n1. Default\n2. GPA comparator\n3. Alphabetical comparator");
+							choice = Integer.parseInt(br.readLine());
+							if (choice == 0) {
+								break teacherinfo;
+							} else if (choice == 1) {
+								m.viewTeachersInfo();
+							} else if (choice == 2) {
+								m.viewTeachersInfo(new TeacherRatingComparator());
+							} else if (choice == 3) {
+								m.viewTeachersInfo(new TeacherAlphabetComparator());
+							} else {
+								System.out.println("Input valid option");
+								continue;
+							}
+						} catch (NumberFormatException e) {
+							System.err.println("Please input a valid number " + e.getMessage());
+							continue;
+						} catch (Exception e) {
+							System.err.println(e.getMessage());
+							continue;
+						}
+					}
+					break;
+				case 7:
+					reqs: while (true) {
+						try {
+							System.out.println("Manage requests: \n0. Go back\n1. View all requests\n2. View request\n3. Accept request\n4. Decline request");
+							choice = Integer.parseInt(br.readLine());
+							Request r = null;
+							School sc = null;
+							if (choice == 0) {
+								break reqs;
+							} else if (choice == 1) {
+								int school;
+								System.out.println("Choose school:");
+								int schoolId = 1;
+								for (School s : School.values()) {
+									System.out.println("" + schoolId + ". " + s);
+									schoolId++;
+								}
+								school = Integer.parseInt(br.readLine());
+								m.viewAllRequests(School.values()[school-1]);
+							} else if (choice == 2) {
+								
+								int school;
+								System.out.println("Choose school:");
+								int schoolId = 1;
+								for (School s : School.values()) {
+									System.out.println("" + schoolId + ". " + s);
+									schoolId++;
+								}
+								school = Integer.parseInt(br.readLine());
+								System.out.println("Pick an id:");
+								choice = Integer.parseInt(br.readLine());
+								sc = School.values()[school-1];
+								r = Database.instance.getReqeustRepo().getRequest(sc, new Request(choice));
+								m.viewRequest(new Request(choice),School.values()[school-1]);
+							} else if (choice == 3) {
+								if (r == null) {
+									System.out.println("Select a request first");
+									continue;
+								}
+								m.acceptRequest(r, sc);
+							} else if (choice == 4) {
+								if (r == null) {
+									System.out.println("Select a request first");
+									continue;
+								}
+								m.declineRequest(r, sc);
+							}
+						} catch (NumberFormatException e) {
+							System.err.println("Please input a valid number " + e.getMessage());
+							continue;
+						} catch (Exception e) {
+							System.err.println(e.getMessage());
+							continue;
+						}
+					}
+				case 8:
+					course: while(true) {
+						try {
+							System.out.println("Choose action: \n0. Go back\n1. Add course\n2. View course\n3. Assign course to teacher\n");
+							
+						} catch (NumberFormatException e) {
+							System.err.println("Please input a valid number " + e.getMessage());
+							continue;
+						} catch (Exception e) {
+							System.err.println(e.getMessage());
+							continue;
+						}
+					}
+					break;
+					
+				default:
+                    System.out.println("Invalid choice. Please try again.");
+                    break;
+				}
+	        } catch (NumberFormatException e) {
+	            System.err.println("Please input a valid number: " + e.getMessage());
+	        } catch (Exception e) {
+	            System.err.println(e.getMessage());
+	        } 
+	    }
 	}
 	
 	private void researcherGeneralMain() {

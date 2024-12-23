@@ -197,6 +197,10 @@ public class Manager extends Employee {
 
     
     //Requests - general ones
+    public void viewAllRequests(School school) {
+    	Database.instance.getReqeustRepo().getAllRequests(school).stream().forEach(r->System.out.println(r));
+    }
+    
     public void viewRequest(Request request, School school) {
         System.out.println(Database.instance.getReqeustRepo().getRequest(school, request));
     }

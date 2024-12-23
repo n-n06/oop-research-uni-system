@@ -54,6 +54,10 @@ public class RequestRepository implements Serializable  {
         return r.elementAt(r.indexOf(request));
     }
     
+    public Vector<Request> getAllRequests(School school) {
+    	return requests.get(school);
+    }
+    
     /**
      * @return
      */
