@@ -930,7 +930,7 @@ public class Main {
 									id = Integer.parseInt(br.readLine());
 									System.out.println("Text of your comment: ");
 									stringInput = br.readLine();
-									Database.instance.getNewsRepo().getNews(new News(id)).addComment(new Comment(t, stringInput));
+									Database.instance.getNewsRepo().getNews(new News(id)).addComment(new Comment(s, stringInput));
 									break;
 								}
 							} catch (NumberFormatException e) {
@@ -1046,6 +1046,7 @@ public class Main {
 	                    break;
 	                    
 	                	case 5:
+	                		courseRepo = Database.instance.getCourseRepo();
 		                	marks: while (true) {
 								try {
 									System.out.println("Choose action with marks:\n0. Go back\n1. View Transcript\n 2. View attestaions");
@@ -1075,6 +1076,7 @@ public class Main {
 		                    break;
 		                    
 	                	case 6:
+	                		courseRepo = Database.instance.getCourseRepo();
 	                		schedule: while (true) {
 								try {
 									System.out.println("Choose action with schedule:\n0. Go back\n1. View Schedule\n 2. Add lesson to schedule");
