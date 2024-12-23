@@ -523,6 +523,7 @@ public class Main {
 							}
 
 						}
+						break;
 					case 2:
 						Journal journal;
 						Database.instance.getJournalRepo().displayJournals();
@@ -733,6 +734,7 @@ public class Main {
 							}
 
 						}
+					break;
 					case 2:
 						Journal journal;
 						Database.instance.getJournalRepo().displayJournals();
