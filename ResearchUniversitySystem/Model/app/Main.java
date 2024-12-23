@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import courses.*;
 import database.Database;
 import enums.*;
 import research.*;
@@ -839,6 +840,226 @@ public class Main {
 	}
 	
 	private static void studentMain(Student s) {
+		int choice = 0;
+	    String stringInput;
+
+	    studentmain: while (true) {
+	        try {
+	            System.out.println("Choose your action:");
+	            System.out.println("0. Quit\n1. View news\n2. View journals\n3. View Profile");
+	            System.out.println("4. View courses");
+	            System.out.println("5. View marks");
+	            System.out.println("6. View schedule");
+
+	            choice = Integer.parseInt(br.readLine());
+
+	            switch (choice) {
+	                case 0: 
+	                    break studentmain;
+	                    
+	                case 1:
+						Database.instance.getNewsRepo().displayAllNews();
+						news: while (true) {
+							try {
+								System.out.println("Choose action with news:\n0. Go back\n1. Add comment");
+								choice = Integer.parseInt(br.readLine());
+
+								int id;
+								
+								switch (choice) {
+								case 0:
+									break news;
+								case 1:
+									System.out.println("ID of the news you would like to comment: ");
+									id = Integer.parseInt(br.readLine());
+									System.out.println("Text of your comment: ");
+									stringInput = br.readLine();
+									Database.instance.getNewsRepo().getNews(new News(id)).addComment(new Comment(t, stringInput));
+									break;
+								}
+							} catch (NumberFormatException e) {
+								System.err.println("Please input a valid number " + e.getMessage());
+								continue;
+							}
+
+						}
+					case 2:
+						Journal journal;
+						Database.instance.getJournalRepo().displayJournals();
+						
+						journals: while (true) {
+							try {
+								System.out.println("Choose action with journals:\n0. Go back\n1. Read journal\n 2. Toggle subscription to journal");
+								choice = Integer.parseInt(br.readLine());
+
+								int id;
+								
+								switch (choice) {
+								case 0:
+									break journals;
+								case 1:
+									System.out.println("ID of the journal you would like to read: ");
+									id = Integer.parseInt(br.readLine());
+									Database.instance.getJournalRepo().getJournal(new Journal(id)).displayArticles();
+									break;
+								case 2:
+									System.out.println("ID of the journal you would like to subscribe/unsubsribe to: ");
+									id = Integer.parseInt(br.readLine());
+									journal = Database.instance.getJournalRepo().getJournal(new Journal(id));
+									if (journal.getSubscribers().contains(s)) {
+										journal.removeSubscriber(s);
+										System.out.println("You have unsubscribed from " + journal.getName());
+									} else {
+										System.out.println("You have subscribed to " + journal.getName());
+										journal.addSubscriber(s);
+									}
+									break;
+								}
+							} catch (NumberFormatException e) {
+								System.err.println("Please input a valid number " + e.getMessage());
+								continue;
+							}
+
+						}
+						break;
+					
+					case 3:
+						s.viewPersonalProfile();
+						pf: while (true) {
+							try {
+								System.out.println("Choose action with profile:\n0. Go back\n1. Change password");
+								choice = Integer.parseInt(br.readLine());
+								int id;
+								
+								switch (choice) {
+								case 0:
+									break pf;
+								case 1:
+									System.out.println("Input your new password: ");
+									stringInput=br.readLine();
+									if (stringInput.length() < 7) {
+										throw new IllegalArgumentException("Password too short!");
+									}
+									s.changePassword(stringInput);
+									break;
+								}
+							} catch (NumberFormatException e) {
+								System.err.println("Please input a valid number " + e.getMessage());
+								continue;
+							} catch (Exception e) {
+								System.err.println(e.getMessage());
+								continue;
+							}
+
+						}
+						break;
+
+	                case 4:
+	                	s.displayOwnCourses();
+	                	CourseRegistrationService crs = Database.instance.getRegistration();
+	                	CourseRepository courseRepo = Database.instance.getCourseRepo();
+	                	courses: while (true) {
+							try {
+								System.out.println("Choose action with courses:\n0. Go back\n1. Register for course");
+								choice = Integer.parseInt(br.readLine());
+								
+								switch (choice) {
+								case 0:
+									break courses;
+								case 1:
+									String id;
+									if(crs.checkIsOpen()) {
+										courseRepo.displayCourses();
+										System.out.println("Write an ID of course to register: ");
+										id = br.readLine();
+										s.registerForCourse(courseRepo.getCourseByID(id));
+										System.out.println("Thank's for request! Manager will verify/decline your request");
+									}
+									else {
+										System.out.println("Registarion for courses is closed");
+									}
+									
+									break;
+								}
+							} catch (NumberFormatException e) {
+								System.err.println("Please input a valid number " + e.getMessage());
+								continue;
+							}
+
+						}
+	                    break;
+	                    
+	                	case 5:
+		                	marks: while (true) {
+								try {
+									System.out.println("Choose action with marks:\n0. Go back\n1. View Transcript\n 2. View attestaions");
+									choice = Integer.parseInt(br.readLine());
+									
+									switch (choice) {
+									case 0:
+										break marks;
+									case 1:
+										s.viewTranscript();
+										break;
+									case 2:
+										if (!s.getCurrentCourses().isEmpty()) {
+											courseRepo.displayCourses();
+											System.out.println("Write an ID of course to check marks: ");
+											String id = br.readLine();
+											s.viewMarks(courseRepo.getCourseByID(id));
+										}
+											break;
+									}
+								} catch (NumberFormatException e) {
+									System.err.println("Please input a valid number " + e.getMessage());
+									continue;
+								}
+
+							}
+		                    break;
+		                    
+	                	case 6:
+	                		schedule: while (true) {
+								try {
+									System.out.println("Choose action with schedule:\n0. Go back\n1. View Schedule\n 2. Add lesson to schedule");
+									choice = Integer.parseInt(br.readLine());
+									
+									switch (choice) {
+									case 0:
+										break schedule;
+									case 1:
+										s.viewSchedule();
+										break;
+									case 2:	
+										int index;
+										s.displayOwnCourses();
+										System.out.println("Write an ID of course to add lessons to schedule: ");
+										String id = br.readLine();
+										s.displayLessonsForScheduling(courseRepo.getCourseByID(id));
+										index = Integer.parseInt(br.readLine());
+										s.pickLessonToSchedule(index, courseRepo.getCourseByID(id));
+										
+										break;
+									}
+								} catch (NumberFormatException e) {
+									System.err.println("Please input a valid number " + e.getMessage());
+									continue;
+								}
+
+							}
+		                    break;                	      		             
+	                	
+	                default:
+	                    System.out.println("Invalid choice. Please try again.");
+	                    break;
+	            }
+	        } catch (NumberFormatException e) {
+	            System.err.println("Please input a valid number: " + e.getMessage());
+	        } catch (Exception e) {
+	            System.err.println(e.getMessage());
+	        } 
+	    
+	    }
 		
 	}
 	

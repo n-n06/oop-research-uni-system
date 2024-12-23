@@ -84,6 +84,10 @@ public class CourseRegistrationService implements Serializable {
     	}
     }
     
+    public boolean checkIsOpen() {
+    	return isOpen;
+    }
+    
     
     
     /**
