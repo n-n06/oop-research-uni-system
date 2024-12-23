@@ -54,12 +54,14 @@ public class News implements Comparable<News>, Serializable {
 //    	newsId = Database.generateNewsId();
     	newsId = Database.instance.getNewsRepo().generateNewsId();
     	date = new Date();
+    	comments = new Vector<>();
     }
     
     /**
      * Constructor for searching 
      * */
     public News(int id) {
+    	comments = new Vector<>();
     	this.newsId = id;
     }
     
@@ -145,7 +147,7 @@ public class News implements Comparable<News>, Serializable {
     @Override
     public String toString() {
     	return String.format("📰News №%d: %s\nType: %s\n%s\n\n", newsId, title, newsType, content)
-    			+ comments.stream().map(c->c.toString()).collect(Collectors.joining("\n"));
+    			+ (comments != null ? comments.stream().map(c->c.toString()).collect(Collectors.joining("\n")) : "No comments yet");
     }
 
     @Override

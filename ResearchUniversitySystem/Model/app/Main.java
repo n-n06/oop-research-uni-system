@@ -12,12 +12,84 @@ import social.messages.*;
 import users.*;
 import users.employees.*;
 import users.students.*;
-import utilities.logging.LoggerProvider;
 
 public class Main {
 	public static BufferedReader br;
+	private static Main app = new Main();
 	
-	private static void adminMain(Admin admin) {
+	private Main() {
+		
+	}
+
+	public static void main(String[] args) throws IOException {
+		
+		br = new BufferedReader(new InputStreamReader(System.in));
+		int choice = 0;
+		String stringInput1;
+		String stringInput2;
+		
+		
+		User currentUser;		
+		Researcher researcherAccount;
+		
+		try {
+			
+			System.out.println("🏛Welcome to MEYN University!🏛");	
+			main: while (true) {
+				
+				System.out.println("Enter your username:");
+				stringInput1 = br.readLine();
+				System.out.println("Enter your password:");
+				stringInput2 = br.readLine();
+				
+				if (Database.instance.getUsersRepo().login(stringInput1, stringInput2)) {
+					System.out.println("You've logged in succesfully");
+					currentUser = Database.instance.getUsersRepo().getUser(stringInput1);
+					switch (currentUser.getUserType()) {
+					case UserType.ADMIN:
+						app.adminMain((Admin) currentUser);
+						break;
+					
+					case UserType.DEAN:
+						app.deanMain((Dean) currentUser);
+						break;
+				
+					case UserType.MANAGER:
+						app.managerMain((Manager) currentUser);
+						break;
+			
+					case UserType.STUDENT:
+						app.studentMain((Student) currentUser);
+						break;
+		
+					case UserType.TEACHER:
+						app.teacherMain((Teacher) currentUser);
+						break;
+						
+					case UserType.RESEARCHER:
+						app.researcherEmployeeMain((ResearcherEmployee) currentUser);
+						break;
+					}
+					break main;
+				}else {
+					System.out.println("Incorrect username of password. Please, try again.");
+					
+				}
+			}
+
+			
+
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		} 
+	
+	
+
+	}
+	
+	private void adminMain(Admin admin) throws IOException {
+
 		int choice = 0;
 		String stringInput;
 		adminmain: while (true) {
@@ -49,15 +121,16 @@ public class Main {
 							System.err.println("Please input a valid number " + e.getMessage());
 							continue;
 						}
-
+						
 					}
+					break;
 				case 2:
 					Journal journal;
 					Database.instance.getJournalRepo().displayJournals();
 					
 					journals: while (true) {
 						try {
-							System.out.println("Choose action with journals:\n0. Go back\n1. Read journal\n 2. Toggle subscription to journal");
+							System.out.println("Choose action with journals:\n0. Go back\n1. Read journal\n2. Toggle subscription to journal");
 							choice = Integer.parseInt(br.readLine());
 
 							int id;
@@ -94,7 +167,7 @@ public class Main {
 				case 3:
 					msg: while (true) {
 						try {
-							System.out.println("Choose action with messages:\n0. Go back\n1. View all notifications\n 2. View work messages only\n3. Send work message");
+							System.out.println("Choose action with messages:\n0. Go back\n1. View all notifications\n2. View work messages only\n3. Send work message");
 							choice = Integer.parseInt(br.readLine());
 							int id;
 							
@@ -165,7 +238,7 @@ public class Main {
 					
 					user: while (true) {
 						try {
-							System.out.println("Choose action with journals:\n0. Go back\n1. View all users\n2. View particular user\n 3. Add user \n4. Update user\n5.Delete user");
+							System.out.println("Choose action with journals:\n0. Go back\n1. View all users\n2. View particular user\n3. Add user \n4. Update user\n5. Delete user");
 							choice = Integer.parseInt(br.readLine());
 
 							int id;
@@ -399,12 +472,15 @@ public class Main {
 				System.err.println("Please, input a valid number: " + e.getMessage());
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
+			} finally {
+				Database.write();
 			}
 			
 		}
 	}
 	
-	private static void deanMain(Dean dean) {
+	private void deanMain(Dean dean) throws IOException {
+
 		int choice = 0;
 	    String stringInput;
 
@@ -453,7 +529,7 @@ public class Main {
 						
 						journals: while (true) {
 							try {
-								System.out.println("Choose action with journals:\n0. Go back\n1. Read journal\n 2. Toggle subscription to journal");
+								System.out.println("Choose action with journals:\n0. Go back\n1. Read journal\n2. Toggle subscription to journal");
 								choice = Integer.parseInt(br.readLine());
 
 								int id;
@@ -490,7 +566,7 @@ public class Main {
 					case 3:
 						msg: while (true) {
 							try {
-								System.out.println("Choose action with messages:\n0. Go back\n1. View all notifications\n 2. View work messages only\n3. Send work message");
+								System.out.println("Choose action with messages:\n0. Go back\n1. View all notifications\n2. View work messages only\n3. Send work message");
 								choice = Integer.parseInt(br.readLine());
 								int id;
 								
@@ -602,13 +678,17 @@ public class Main {
 	            System.err.println("Please input a valid number: " + e.getMessage());
 	        } catch (Exception e) {
 	            System.err.println(e.getMessage());
-	        } 
+	        } finally {
+				Database.write();
+			}
 	    
 	    }
+	    
 		
 	}
 	
-	private static void teacherMain(Teacher t) {
+	private void teacherMain(Teacher t) throws IOException {
+
 		int choice = 0;
 	    String stringInput;
 
@@ -659,7 +739,7 @@ public class Main {
 						
 						journals: while (true) {
 							try {
-								System.out.println("Choose action with journals:\n0. Go back\n1. Read journal\n 2. Toggle subscription to journal");
+								System.out.println("Choose action with journals:\n0. Go back\n1. Read journal\n2. Toggle subscription to journal");
 								choice = Integer.parseInt(br.readLine());
 
 								int id;
@@ -765,36 +845,8 @@ public class Main {
 
 	                case 5:
 	                	
-	                	reqs: while (true) {
-							try {
-								System.out.println("Choose action with requests:\n0. Go back\n1. View Reqeusts\n2. Sign Request\n3. Decline Reqeust");
-								choice = Integer.parseInt(br.readLine());
-
-								int id;
-								
-								switch (choice) {
-								case 0:
-									break reqs;
-								case 1:
-									
-									break;
-								case 2:
-									System.out.println("ID of the request to sign: ");
-									choice = Integer.parseInt(br.readLine());
-									
-									break;
-								case 3:
-									System.out.println("ID of the request to reject: ");
-									choice = Integer.parseInt(br.readLine());
-									
-									break;
-								}
-							} catch (NumberFormatException e) {
-								System.err.println("Please input a valid number " + e.getMessage());
-								continue;
-							}
-
-						}
+	                	//Course management
+						
 	                    break;
 	                    
 	                case 6:
@@ -832,93 +884,29 @@ public class Main {
 	            System.err.println("Please input a valid number: " + e.getMessage());
 	        } catch (Exception e) {
 	            System.err.println(e.getMessage());
-	        } 
+	        } finally {
+				Database.write();
+			}
 	    
 	    }
 		
 	}
 	
-	private static void studentMain(Student s) {
+	private void studentMain(Student s) throws IOException {
 		
 	}
 	
-	private static void researcherEmployeeMain(ResearcherEmployee r) {
+	private void researcherEmployeeMain(ResearcherEmployee r) throws IOException  {
 		
 	}
 	
-	private static void managerMain(Manager m) {
+	private void managerMain(Manager m) throws IOException  {
 		
 	}
 	
-	private static void researcherGeneralMain() {
+	private void researcherGeneralMain() {
 		
 	}
 
-	public static void main(String[] args) throws IOException {
-		br = new BufferedReader(new InputStreamReader(System.in));
-		int choice = 0;
-		String stringInput1;
-		String stringInput2;
-		
-		
-		User currentUser;		
-		Researcher researcherAccount;
-		
-		try {
-			
-			System.out.println("🏛Welcome to MEYN University!🏛");	
-			main: while (true) {
-				
-				System.out.println("Enter your username:");
-				stringInput1 = br.readLine();
-				System.out.println("Enter your password:");
-				stringInput2 = br.readLine();
-				
-				if (Database.instance.getUsersRepo().login(stringInput1, stringInput2)) {
-					System.out.println("You've logged in succesfully");
-					currentUser = Database.instance.getUsersRepo().getUser(stringInput1);
-					switch (currentUser.getUserType()) {
-					case UserType.ADMIN:
-						adminMain((Admin) currentUser);
-						break;
-					
-					case UserType.DEAN:
-						deanMain((Dean) currentUser);
-						break;
-				
-					case UserType.MANAGER:
-						managerMain((Manager) currentUser);
-						break;
-			
-					case UserType.STUDENT:
-						studentMain((Student) currentUser);
-						break;
-		
-					case UserType.TEACHER:
-						teacherMain((Teacher) currentUser);
-						break;
-						
-					case UserType.RESEARCHER:
-						researcherEmployeeMain((ResearcherEmployee) currentUser);
-						break;
-					}
-					break main;
-				}else {
-					System.out.println("Incorrect username of password. Please, try again.");
-					
-				}
-			}
-
-			
-
-
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		} finally {
-			Database.write();
-		}
 	
-	
-
-	}
 }

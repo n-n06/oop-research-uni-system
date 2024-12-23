@@ -27,9 +27,7 @@ public class NewsRepository  implements Serializable {
      */
     public NewsRepository() {
     	news = new Vector<>();
-    	autoNews = new News(
-    			"Top Cited Researchers!", 
-    			NewsType.RESEARCH);
+    	autoNews = new News(1);
     	addNews(autoNews);
     	newsId = 0;
     }
@@ -40,6 +38,10 @@ public class NewsRepository  implements Serializable {
      * @return
      */
     public void displayAllNews() {
+    	if (news.size() < 1) {
+    		System.out.println("No news yet");
+    		return;
+    	}
         for (News n : news) {
         	System.out.println(n + "\n");
         }

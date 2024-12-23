@@ -6,10 +6,12 @@ package database;
 
 import java.io.*;
 import java.util.Vector;
+import java.util.logging.Level;
 
 import users.UserFactory;
 import users.UserRepository;
 import users.students.StudentOrganization;
+import utilities.logging.LoggerProvider;
 import courses.CourseRepository;
 import courses.CourseRegistrationService;
 
@@ -29,7 +31,6 @@ public class Database implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8370407402784369706L;
 	private int organizationId = 0;
 	private int complaintId;
 
@@ -112,20 +113,31 @@ public class Database implements Serializable {
     /**
      *Static init block to create the instance on load 
      */
-    static {
-    	if (new File("data").exists()) {
-    		System.out.println("Savepoint!");
-    		try {
-    			instance = read();
-    		} catch (Exception e) {
-    			System.err.println(e.getMessage());;
-    		}
-    	} else {
-    		instance = new Database();
-    		instance.getUsersRepo().addRootAdmin();
-    	}
-    }
     
+
+    
+    static {
+        try {
+            if (new File("data").exists()) {
+                System.out.println("Savepoint!");
+                instance = read();
+                if (instance == null) {
+                	LoggerProvider.getLogger().log(Level.OFF, "Failed to load database from file. Creating a new instance.");
+                    System.out.println("Failed to load database from file. Creating a new instance.");
+                    instance = new Database();
+                    instance.getUsersRepo().addRootAdmin();
+                }
+            } else {
+                instance = new Database();
+                instance.getUsersRepo().addRootAdmin();
+            }
+        } catch (Exception e) {
+            System.err.println("Error during Database initialization: " + e.getMessage());
+            LoggerProvider.getLogger().log(Level.OFF, "Error during Database initialization: " + e.getMessage());
+            instance = new Database();
+            instance.getUsersRepo().addRootAdmin();
+        }
+    }
     /**
      * 
      * Getters
