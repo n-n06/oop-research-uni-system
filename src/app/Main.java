@@ -846,11 +846,62 @@ public class Main {
 						}
 						break;
 
-	                case 5:
-	                	
-	                	//Course management
-						
-	                    break;
+	                case 5:;
+						courses: while (true) {
+							try {
+								System.out.println("Choose action with profile:\n0. Go back\n1. View Own Courses.\n2.View lessons of course \n3. View schedule. ");
+								choice = Integer.parseInt(br.readLine());
+								int id;
+								
+								switch (choice) {
+								case 0:
+									break courses;
+								case 1:
+									t.viewOwnCourses();
+									break;
+								case 2:
+									put_mark : while (true) {
+										CourseRepository cr = Database.instance.getCourseRepo();
+										System.out.println("Write ID of course:");
+										String courseid = br.readLine();
+										Course course = cr.getCourseByID(courseid);
+										t.viewOwnLessons(course);
+									
+										System.out.println("Choose action with courses: \n0. Go back\n1. Put marks for lesson.");
+										Integer choice1 = Integer.parseInt(br.readLine());
+										switch(choice1) {
+										case 0:
+											break put_mark;
+										case 1:
+											System.out.println("Write lesson ID to put:");
+											Integer lessonID = Integer.parseInt(br.readLine());
+											Lesson lesson = course.getLessonByID(choice1);
+											System.out.println("Write Student email to put:");
+											String studentID = br.readLine();
+											Student s = Database.instance.userRepo().getUser(studentID);
+											System.out.println("Write point to put:");
+											Double point = Double.parseDouble(br.readLine());
+											
+											t.putMarkToLesson(lesson, s , point, 1);
+											
+											break;
+										}
+									}
+									case 3:
+										t.viewSchedule();
+										break;
+									
+								}
+							} catch (NumberFormatException e) {
+								System.err.println("Please input a valid number " + e.getMessage());
+								continue;
+							} catch (Exception e) {
+								System.err.println(e.getMessage());
+								continue;
+							}
+
+						}
+						break;
 	                    
 	                case 6:
 	                	t.checkRating();
