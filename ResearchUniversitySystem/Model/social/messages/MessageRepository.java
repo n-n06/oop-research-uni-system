@@ -19,7 +19,7 @@ public class MessageRepository implements Serializable{
      * Default constructor
      */
     public MessageRepository() {
-    	userMessages = new HashMap<>();
+    	userMessages = new HashMap<User, TreeSet<Message>>();
     	messageId = 0;
     }
 
@@ -57,6 +57,10 @@ public class MessageRepository implements Serializable{
      */
     public void viewMessages(User user) {
     	System.out.println("📬Inbox: ");
+    	if (getMessages(user) == null) {
+    		System.out.println("Inbox empty");
+    		return;
+    	}
         for (Message m : getMessages(user)) {
         	System.out.println(m);
         };

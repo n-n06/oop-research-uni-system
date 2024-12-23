@@ -118,7 +118,7 @@ public class UserRepository implements Serializable {
         User user;
 		try {
 			user = getUser(email);
-			user.getPassword().equals(hashPassword(password));
+			return user.getPassword().equals(hashPassword(password));
 		} catch (NoDataException e) {
 			e.printStackTrace();
 		} 
