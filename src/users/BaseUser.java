@@ -40,7 +40,7 @@ public abstract class BaseUser implements User, Serializable {
 	}
 	
 	private String generateEmail(String firstName, String lastName) {
-		return firstName.toLowerCase().strip().substring(0, 1) + lastName.toLowerCase().strip() + "@kbtu.kz";
+		return firstName.toLowerCase().strip().substring(0, 1) + lastName.toLowerCase().strip() + "@meyn.kz";
 	}
 	
     public boolean login(String email, String password, UserRepository userRepo) {

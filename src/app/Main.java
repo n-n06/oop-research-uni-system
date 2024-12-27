@@ -3,6 +3,9 @@ package app;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import courses.*;
 import database.Database;
@@ -87,7 +90,9 @@ public class Main {
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
-		} 
+		} finally {
+			Database.write();
+		}
 	
 	
 
@@ -253,18 +258,19 @@ public class Main {
 								break user;
 							case 1:
 								admin.viewAllUsers();
+								break;
 							case 2:
 								System.out.println("Email of the user you would like to view: ");
 								stringInput = br.readLine();
 								admin.viewUserInfo(stringInput);
 								break;
 							case 3:
-								System.out.println("Choose type of user to make: \n0. Cancel\n1. Admin\n2. Dean\n3. Manager\4. Teacher\n5. Student\n6. Researcher Employee");
-								choice = Integer.parseInt(br.readLine());
+								System.out.println("Choose type of user to make: \n0. Cancel\n1. Admin\n2. Dean\n3. Manager\n4. Teacher\n5. Student\n6. Researcher Employee");
+								id = Integer.parseInt(br.readLine());
 								String firstName, lastName;
 								int age, school, managerType, degree, teacherType;
 								Gender gender;
-								if (choice == 0) {
+								if (id == 0) {
 									continue;
 								} else {
 									System.out.println("First name: ");
@@ -275,10 +281,10 @@ public class Main {
 									age = Integer.parseInt(br.readLine());
 									System.out.println("Gender (Type M for male and F for female): ");
 									gender = br.readLine().equalsIgnoreCase("F") ? Gender.FEMALE : Gender.MALE;
-									if (choice == 1) {
+									if (id == 1) {
 										admin.addUser(uf.makeUser(firstName, lastName, age, gender));
 										
-									} else if (choice == 2) {
+									} else if (id == 2) {
 										System.out.println("Choose school:");
 										int schoolId = 1;
 										for (School s : School.values()) {
@@ -288,7 +294,7 @@ public class Main {
 										school = Integer.parseInt(br.readLine());
 										admin.addUser(uf.makeUser(firstName, lastName, age, gender, UserType.DEAN, School.values()[school-1]));
 										
-									} else if (choice == 3) {
+									} else if (id == 3) {
 										System.out.println("Choose manager type:");
 										int typeId = 1;
 										for (ManagerType m : ManagerType.values()) {
@@ -298,7 +304,7 @@ public class Main {
 										managerType = Integer.parseInt(br.readLine());
 										admin.addUser(uf.makeUser(firstName, lastName, age, gender, ManagerType.values()[managerType-1]));
 										
-									} else if (choice == 4) {
+									} else if (id == 4) {
 										System.out.println("Choose school:");
 										int schoolId = 1;
 										for (School s : School.values()) {
@@ -316,7 +322,7 @@ public class Main {
 										admin.addUser(uf.makeUser(firstName, lastName, age, gender, 
 												School.values()[school-1], TeacherType.values()[teacherType-1]));
 										
-									} else if (choice == 5) {
+									} else if (id == 5) {
 										System.out.println("Choose school:");
 										int schoolId = 1;
 										for (School s : School.values()) {
@@ -332,7 +338,7 @@ public class Main {
 										degree = Integer.parseInt(br.readLine());
 										admin.addUser(uf.makeUser(firstName, lastName, age, gender, 
 												School.values()[school-1], Degree.values()[degree-1]));
-									} else if (choice == 6) {
+									} else if (id == 6) {
 										System.out.println("Choose school:");
 										int schoolId = 1;
 										for (School s : School.values()) {
@@ -882,11 +888,13 @@ public class Main {
 											Lesson lesson = course.getLessonByID(choice1);
 											System.out.println("Write Student email to put:");
 											String studentID = br.readLine();
-											Student s = Database.instance.userRepo().getUser(studentID);
+											Student s = (Student)Database.instance.getUsersRepo().getUser(studentID);
 											System.out.println("Write point to put:");
 											Double point = Double.parseDouble(br.readLine());
-											
-											t.putMarkToLesson(lesson, s , point, 1);
+											Mark m = new Mark();
+											m.addFirstAttestationMark(point);
+											course.getGradeBook().put(s, m);
+//											t.putMarkToLesson(lesson, s , point, 1);
 											
 											break;
 										}
@@ -950,7 +958,7 @@ public class Main {
 		
 	}
 	
-	private static void studentMain(Student s) {
+	private static void studentMain(Student s) throws IOException {
 		int choice = 0;
 	    String stringInput;
 
@@ -994,6 +1002,7 @@ public class Main {
 							}
 
 						}
+						break;
 					case 2:
 						Journal journal;
 						Database.instance.getJournalRepo().displayJournals();
@@ -1170,7 +1179,9 @@ public class Main {
 	            System.err.println("Please input a valid number: " + e.getMessage());
 	        } catch (Exception e) {
 	            System.err.println(e.getMessage());
-	        } 
+	        } finally {
+				Database.write();
+			}
 	    
 	    }
 	}
@@ -1272,7 +1283,9 @@ public class Main {
 								s3 = br.readLine();
 								Database.instance.getJournalRepo().addJournal(new Journal(s1,s2,s3, Language.ENGLISH));
 								break;
+							
 							}
+							
 						} catch (NumberFormatException e) {
 							System.err.println("Please input a valid number " + e.getMessage());
 							continue;
@@ -1458,15 +1471,67 @@ public class Main {
 							continue;
 						}
 					}
+					break;
 				case 8:
 					course: while(true) {
+						String s1, s2 = "";
 						try {
-							System.out.println("Choose action: \n0. Go back\n1. Add course\n2. View course\n3. Assign course to teacher\n");
-							
+							System.out.println("Choose action: \n0. Go back\n1. Add course\n2. View course\n3. Assign course to teacher\n4. View courses\n5. Open reg\n6. Close reg\n7. Verify\n8. Fill Lessons");
+							choice = Integer.parseInt(br.readLine());
+							if (choice == 0) {
+								break course;
+							} else if (choice == 1) {
+								System.out.println("Course id: ");
+								s1 = br.readLine();
+								System.out.println("Course name: ");
+								s2 = br.readLine();
+								Course c = new Course(s1, s2);
+								m.addCourse(c);
+							} else if (choice == 2) {
+								System.out.println("Course id: ");
+								s1 = br.readLine();
+								m.viewCourse(s1);
+							} else if (choice == 3) {
+								Database.instance.getCourseRepo().displayCourses();
+								System.out.println("Course id: ");
+								s1 = br.readLine();
+								System.out.println("Teacher email: ");
+								s2 = br.readLine();
+								Course c = Database.instance.getCourseRepo().getCourseByID(s1);
+								Teacher t = (Teacher) Database.instance.getUsersRepo().getUser(s2);
+								m.assignCourseToTeacher(c, t);
+								System.out.println("course added to teacher");
+							} else if (choice == 4) {
+								Database.instance.getCourseRepo().displayCourses();
+							} else if (choice == 5) {
+								m.openRegistration();
+							} else if (choice == 6) {
+								m.closeRegistration();
+							} else if (choice == 7) {
+								m.viewAllRegRequest();
+								int reqId;
+								System.out.println("Input registration request id");
+								reqId = Integer.parseInt(br.readLine());
+								m.verifyRegistration(reqId);
+							} else if (choice == 8) {
+								Teacher t;
+								Course c1;
+								System.out.println("Id of the course: ");
+								c1 = Database.instance.getCourseRepo().getCourseByID(br.readLine());
+								System.out.println("Teacher email: ");
+								t = (Teacher) Database.instance.getUsersRepo().getUser(br.readLine());
+								LocalDate d1 = LocalDate.of(2024,12,23);
+								m.addLessonToCourse(c1, 414, d1, DayOfWeek.MONDAY, 
+										new TimeWindow(LocalTime.of(10, 0), LocalTime.of(11, 0)), LessonType.PRACTICE, t);
+							}
 						} catch (NumberFormatException e) {
 							System.err.println("Please input a valid number " + e.getMessage());
 							continue;
-						} catch (Exception e) {
+						} catch (ClassCastException e) {
+							System.err.println(s2 + " is not a teacher!");
+							continue;
+						}
+						catch (Exception e) {
 							System.err.println(e.getMessage());
 							continue;
 						}
@@ -1482,6 +1547,9 @@ public class Main {
 	        } catch (Exception e) {
 	            System.err.println(e.getMessage());
 	        } 
+			finally {
+				Database.write();
+			}
 	    }
 	}
 	

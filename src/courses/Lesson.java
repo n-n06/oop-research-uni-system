@@ -1,5 +1,6 @@
 package courses;
 
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Date;
@@ -15,7 +16,7 @@ import users.employees.Teacher;
 import users.students.Student;
 
 
-public class Lesson implements Cloneable{
+public class Lesson implements Cloneable, Serializable {
 	private int lessonID;
     public Course course;
     public Teacher teacher;

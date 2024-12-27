@@ -66,13 +66,13 @@ public class Manager extends Employee {
     public void viewTeachersInfo() {
     	List<Teacher> teachers = Database.instance.getUsersRepo().getAllTeachers();
     	System.out.println("All teachers: \n");
-    	teachers.stream().forEach(t->System.out.println(t));
+    	teachers.stream().forEach(t->{System.out.println(t); t.viewOwnCourses();});
     }
 
     public void viewTeachersInfo(Comparator<Teacher> comparator) {
     	List<Teacher> teachers = Database.instance.getUsersRepo().getAllTeachers();
     	teachers.sort(comparator);
-    	teachers.stream().forEach(t->System.out.println(t));
+    	teachers.stream().forEach(t->{System.out.println(t); t.viewOwnCourses();});
     }
     
     

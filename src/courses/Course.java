@@ -67,6 +67,7 @@ public class Course implements Serializable {
     
     public void addMarkForStudent(Student student, double mark, int attestation) {
     	if (attestation == 1) {
+    		System.out.println("Marks admasd");
     		gradeBook.get(student).addFirstAttestationMark(mark);        
     	}
     	else if (attestation == 2) {

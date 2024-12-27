@@ -1,11 +1,12 @@
 package courses;
 
+import java.io.Serializable;
 import java.util.*;
 import users.students.*;
 /**
  *
  */
-public class GradeReport {
+public class GradeReport implements Serializable {
     private final Course course;
     private double minGrade;
     private double maxGrade;

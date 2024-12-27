@@ -145,7 +145,8 @@ public class Teacher extends Employee implements CanBecomeResearcher {
 		return "👩‍🏫 Teacher" 
 				+ super.toString()
 				+ "\nTeacher type: " + teacherType.toString().toLowerCase().replace("_", " ")
-				+ "\nSchool" + school ;
+				+ "\nSchool: " + school;
+				
 	}
 
 }

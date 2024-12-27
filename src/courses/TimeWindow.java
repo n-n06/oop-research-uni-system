@@ -1,10 +1,11 @@
 package courses;
 
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-public class TimeWindow implements Comparable<TimeWindow> {
+public class TimeWindow implements Comparable<TimeWindow>, Serializable {
 	private LocalTime startTime;
 	private LocalTime endTime;
 

@@ -1,5 +1,6 @@
 package courses;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Vector;
 
@@ -7,7 +8,7 @@ import java.util.Vector;
  *
  */
 
-public class Mark {
+public class Mark implements Serializable {
     private Vector<Double> firstAttMarks = new Vector<>();
     private Vector<Double> secondAttMarks = new Vector<>();
     
@@ -67,11 +68,11 @@ public class Mark {
     }
     
     public double getFirstAttestation() {
-    	return firstAttestation;
+    	return firstAttMarks.stream().mapToDouble(p->p).sum();
     }
     
     public double getSecondAttestation() {
-    	return secondAttestation;
+    	return secondAttMarks.stream().mapToDouble(p->p).sum();
     }
     
     public double getFinalExam() {

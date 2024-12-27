@@ -18,13 +18,16 @@ import java.io.Serializable;
 public class CourseRepository implements Serializable {
 	
 	private HashMap<String, Course> courses;
+	private Vector<Course> courseBackup;
 	
     public CourseRepository() {
     	this.courses = new HashMap<>();
+    	courseBackup = new Vector<>();
     }
     
     public void addCourse(Course course) {
         courses.put(course.getID(), course);
+        courseBackup.add(course);
     }
     
     public boolean removeCourse(Course course) {
@@ -41,8 +44,8 @@ public class CourseRepository implements Serializable {
     
     public void displayCourses() {
     	System.out.println("Active courses to add:");
-    	for (Entry<String, Course> entry : courses.entrySet()) {
-    		System.out.println(entry.getValue());
+    	for (Course c: courseBackup) {
+    		System.out.println(c);
     	}
     }
 

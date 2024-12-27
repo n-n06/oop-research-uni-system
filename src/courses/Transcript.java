@@ -1,11 +1,13 @@
 package courses;
 
+import java.io.Serializable;
+
 import users.students.Student;
 
 /**
  * 
  */
-public class Transcript {
+public class Transcript implements Serializable{
 	private final Student student;
 	private double overallGPA;
 

@@ -1,13 +1,15 @@
 package courses;
 
 import enums.Grade;
+
+import java.io.Serializable;
 import java.util.*;
 
 /*
  * @author eva
  */
 
-public class GPA implements Comparable<GPA> {
+public class GPA implements Comparable<GPA>, Serializable {
     private Grade grade;
 
     public GPA(double overallPoints, double finalExam, double firstAttestation, double secondAttestation) {
